@@ -1,0 +1,40 @@
+{
+  "appName": "AiGram",
+  "contentPackName": "Deepfake Defender Core Pack",
+  "contentPackVersion": "1.0.0",
+  "language": "en",
+  "targetScore": 20,
+  "randomizePrimaryMissions": true,
+  "randomizeFeed": true,
+  "defaultTimeLimit": 180,
+  "taskTypes": {
+    "news": {
+      "label": "News Card",
+      "notificationTitle": "Community report received",
+      "notificationText": "A potentially manipulated post has been reported for review."
+    },
+    "liveCheck": {
+      "label": "Live Check",
+      "notificationTitle": "Urgent live check",
+      "notificationText": "This viral post needs an immediate visual inspection."
+    },
+    "perspective": {
+      "label": "Perspective Shift",
+      "notificationTitle": "Impact analysis requested",
+      "notificationText": "The manipulation was detected. Identify the intended effect."
+    },
+    "realityDefense": {
+      "label": "Reality Defense",
+      "notificationTitle": "Defense protocol activated",
+      "notificationText": "Develop a new agency rule to prevent this error in future."
+    }
+  },
+  "scoring": {
+    "verdict": 1,
+    "evidence": 1,
+    "reasoning": 0,
+    "guessCredit": 0,
+    "pointsWrong": -2
+  },
+  "loseScore": -10
+}

@@ -1,0 +1,1530 @@
+[
+  {
+    "id": "post_101",
+    "username": "aigram",
+    "displayName": "AiGram",
+    "verified": true,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_2_App.png",
+    "imageAlt": "Vier Jugendliche schauen auf Handys, dahinter Bildschirm mit Jugendschutz-Symbolen von AiGram",
+    "caption": "AiGram bekommt neue Jugendschutz-Funktionen 🛡️ Was haltet ihr davon?",
+    "source": "aigram",
+    "likes": 1842,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_101",
+    "comments": [
+      {
+        "username": "emma.b",
+        "text": "find ich gut 👍"
+      },
+      {
+        "username": "mxxdrago",
+        "text": "endlich, brauchte eh keiner die nachtscrollerei 😂"
+      },
+      {
+        "username": "lea__",
+        "text": "muss das echt sein? 🙄"
+      },
+      {
+        "username": "frau_berger",
+        "text": "Als Mutter finde ich solche Funktionen wichtig."
+      }
+    ],
+    "profileId": "ai.news_official",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_101",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Mehr erfahren",
+      "url": "https://help.aigram.example/jugendschutz-2026",
+      "domain": "help.aigram.example",
+      "title": "Neue Schutzfunktionen für Jugendliche",
+      "imprint": "Vorhanden",
+      "author": "AiGram Safety Team",
+      "published": "12. Juli 2026",
+      "status": "official",
+      "note": "Die Seite gehört zum offiziellen Hilfebereich der Plattform.",
+      "pageType": "Offizieller Hilfebeitrag",
+      "articleHeadline": "Jugendschutzfunktionen werden schrittweise eingeführt.",
+      "articleSummary": "Offizielle Hilfeseite erklärt, welche Konten betroffen sind und wann die Funktionen starten.",
+      "keyFacts": [
+        "Private Konten für jüngere Nutzer",
+        "Zeitlimits können aktiviert werden",
+        "Einführung erfolgt schrittweise"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "find ich gut 👍",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "endlich, brauchte eh keiner die nachtscrollerei 😂",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "muss das echt sein? 🙄",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "Als Mutter finde ich solche Funktionen wichtig.",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "confirm",
+      "hits": [
+        {
+          "date": "9. Juli 2026",
+          "source": "help.aigram.example",
+          "title": "Neue Jugendschutz-Funktionen offiziell angekündigt"
+        },
+        {
+          "date": "9. Juli 2026",
+          "source": "technik-news.example",
+          "title": "AiGram führt Jugendschutz-Funktionen ein"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_102",
+    "username": "paul.erklaerts",
+    "displayName": "Paul erklärt's",
+    "verified": true,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_4_App.png",
+    "imageAlt": "Foto vor dem EU-Parlament mit einem Schild „Neue Regeln für Künstliche Intelligenz\"",
+    "caption": "Neue KI-Regeln der EU – klingt trocken, betrifft aber fast alle Apps 🤖⚖️",
+    "source": "paul.erklaerts",
+    "likes": 2389,
+    "time": "3 Std.",
+    "postType": "news",
+    "taskId": "task_post_102",
+    "comments": [
+      {
+        "username": "niko.p",
+        "text": "gut dass da mal was passiert"
+      },
+      {
+        "username": "sara2013",
+        "text": "versteh ich ehrlich gesagt nich so ganz"
+      },
+      {
+        "username": "lukas.w",
+        "text": "steht auch so im artikel, hab nachgeschaut ✅"
+      }
+    ],
+    "profileId": "weltblick.news",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_102",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Zum Bericht",
+      "url": "https://europa.example/ki-regeln",
+      "domain": "europa.example",
+      "title": "Neue europäische Regeln für KI",
+      "imprint": "Vorhanden",
+      "author": "EU-Informationsdienst",
+      "published": "8. Juli 2026",
+      "status": "reliable",
+      "note": "Die Seite nennt die zuständige Institution und verlinkt das vollständige Dokument.",
+      "pageType": "Informationsseite einer Institution",
+      "articleHeadline": "Die EU arbeitet an Regeln für KI-Systeme.",
+      "articleSummary": "Die Seite beschreibt den Stand des Gesetzgebungsverfahrens und nennt das Originaldokument.",
+      "keyFacts": [
+        "Regeln betreffen verschiedene Risikostufen",
+        "Nicht jede KI-Anwendung ist gleich geregelt",
+        "Der Text ist keine Schulregel"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "gut dass da mal was passiert",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "versteh ich ehrlich gesagt nich so ganz",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "steht auch so im artikel, hab nachgeschaut ✅",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "Hat jemand dafür noch eine zweite Quelle?",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "confirm",
+      "hits": [
+        {
+          "date": "9. Juli 2026",
+          "source": "europa.example",
+          "title": "Neue europäische Regeln für KI"
+        },
+        {
+          "date": "9. Juli 2026",
+          "source": "news360.example",
+          "title": "EU stellt KI-Regeln vor"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_103",
+    "username": "technik.tim",
+    "displayName": "Technik Tim",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_5_App.png",
+    "imageAlt": "Laptop mit Bild-Symbol und Label „KI-generiert\", davor eine EU-Flagge",
+    "caption": "KI-Bilder sollen leichter erkennbar werden. Reicht eine Kennzeichnung wirklich?",
+    "source": "technik.tim",
+    "likes": 3124,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_103",
+    "comments": [
+      {
+        "username": "mia.k",
+        "text": "endlich sieht man dann was KI ist 🙌"
+      },
+      {
+        "username": "t.o.m",
+        "text": "ob sich da echt alle dran halten? 🤔"
+      },
+      {
+        "username": "j.wagner",
+        "text": "Wichtige Regel, betrifft uns alle."
+      },
+      {
+        "username": "realtalk_99",
+        "text": "glaub ich erst wenns soweit is"
+      }
+    ],
+    "profileId": "news360_official",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_103",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Seht selbst",
+      "url": "https://news360.example/eu-kennzeichnung",
+      "domain": "news360.example",
+      "title": "Kennzeichnungspflichten für KI-Inhalte",
+      "imprint": "Vorhanden",
+      "author": "Mara Klein, Redaktion",
+      "published": "10. Juli 2026",
+      "status": "reliable",
+      "note": "Autor, Datum und weiterführende Originalquelle sind sichtbar.",
+      "pageType": "Nachrichtenartikel",
+      "articleHeadline": "Kennzeichnungspflichten gelten nicht ausnahmslos für jedes KI-Bild.",
+      "articleSummary": "Der Artikel erklärt, welche Anbieter KI-Inhalte kennzeichnen sollen und welche Ausnahmen diskutiert werden.",
+      "keyFacts": [
+        "Kennzeichnung hängt vom Nutzungskontext ab",
+        "Umsetzung erfolgt durch Plattformen und Anbieter",
+        "Der Post formuliert stärker als der Artikel"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "endlich sieht man dann was KI ist 🙌",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "ob sich da echt alle dran halten? 🤔",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "Wichtige Regel, betrifft uns alle.",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "glaub ich erst wenns soweit is",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_104",
+    "username": "schule.digital",
+    "displayName": "Schule Digital",
+    "verified": true,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_7_App.png",
+    "imageAlt": "Hände halten ein Tablet, auf dem ein digitales Zeugnis angezeigt wird",
+    "caption": "An ersten Schulen werden digitale Zeugnisse getestet. Papierzeugnisse bleiben zunächst weiterhin möglich.",
+    "source": "schule.digital",
+    "likes": 3892,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_104",
+    "comments": [
+      {
+        "username": "frau_lindner",
+        "text": "An unserer Schule läuft der Test schon, klappt gut."
+      },
+      {
+        "username": "ben_2012",
+        "text": "kein papier mehr, nice 🎉"
+      },
+      {
+        "username": "kimm",
+        "text": "gilt das jetzt für alle oder nur ein paar schulen?"
+      }
+    ],
+    "profileId": "news.update_official",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_104",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Weitere Infos",
+      "url": "https://bildung-digital.example/zeugnisse",
+      "domain": "bildung-digital.example",
+      "title": "Pilotprojekt zu digitalen Zeugnissen",
+      "imprint": "Vorhanden",
+      "author": "Redaktion Bildung Digital",
+      "published": "14. Juli 2026",
+      "status": "reliable",
+      "note": "Die verlinkte Seite bestätigt genau das, was im Beitrag steht: ein Pilotprojekt an einzelnen Schulen.",
+      "pageType": "Fachartikel",
+      "articleHeadline": "Digitale Zeugnisse werden zunächst in einem Pilotprojekt getestet.",
+      "articleSummary": "Die Seite bestätigt den Pilotversuch an ausgewählten Schulen – so wie im Beitrag beschrieben.",
+      "keyFacts": [
+        "Nur ausgewählte Schulen nehmen teil",
+        "Papierzeugnisse bleiben zunächst möglich",
+        "Noch kein bundesweiter Beschluss"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "An unserer Schule läuft der Test schon, klappt gut.",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "kein papier mehr, nice 🎉",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "gilt das jetzt für alle oder nur ein paar schulen?",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "Hat jemand dafür noch eine zweite Quelle?",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_105",
+    "username": "lea.malt",
+    "displayName": "Lea 🎨",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_10_App.png",
+    "imageAlt": "Gemälde der Mona Lisa in einem gemütlichen Innenraum mit Fenster und Pflanzen",
+    "caption": "Digga, die Mona Lisa hängt einfach in Paris 😭🎨 War da schon mal jemand?",
+    "source": "lea.malt",
+    "likes": 18700,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_105",
+    "comments": [
+      {
+        "username": "mila_6c",
+        "text": "bro die guckt einen überall an 💀"
+      },
+      {
+        "username": "jonas.kickt",
+        "text": "safe voll klein in echt"
+      },
+      {
+        "username": "kunst_ella",
+        "text": "Die hängt wirklich im Louvre."
+      },
+      {
+        "username": "noah.zockt",
+        "text": "hä warum ist die so berühmt"
+      }
+    ],
+    "profileId": "art.world",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_105",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Mehr zum Bild",
+      "url": "https://kunst-lexikon.example/mona-lisa",
+      "domain": "kunst-lexikon.example",
+      "title": "Die Mona Lisa im Louvre",
+      "imprint": "Vorhanden",
+      "author": "Kunst-Lexikon Redaktion",
+      "published": "Aktualisiert 2026",
+      "status": "reliable",
+      "note": "Ein seriöses Nachschlagewerk bestätigt: Die Mona Lisa hängt im Louvre in Paris.",
+      "pageType": "Lexikon-Artikel",
+      "articleHeadline": "Die Mona Lisa hängt im Louvre in Paris.",
+      "articleSummary": "Das Nachschlagewerk bestätigt Ort und Bedeutung des Gemäldes – die Aussage im Beitrag stimmt.",
+      "keyFacts": [
+        "Gemälde von Leonardo da Vinci",
+        "Ausgestellt im Louvre in Paris",
+        "Weltberühmtes Original"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "bro die guckt einen überall an 💀",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "safe voll klein in echt",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "Die hängt wirklich im Louvre.",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "hä warum ist die so berühmt",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "confirm",
+      "hits": [
+        {
+          "date": "2015",
+          "source": "kunst-lexikon.example",
+          "title": "Mona Lisa im Louvre"
+        },
+        {
+          "date": "2019",
+          "source": "reise-blog.example",
+          "title": "Die Mona Lisa in Paris besuchen"
+        },
+        {
+          "date": "2023",
+          "source": "museum-magazin.example",
+          "title": "Warum alle die Mona Lisa fotografieren"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_106",
+    "username": "elternrat.aktuell",
+    "displayName": "Elternrat aktuell",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/a0bb4052-68e4-42cc-bafa-837054e4780f.png",
+    "imageAlt": "Eilmeldungs-Grafik: „Eine Stadt führt Handyregeln an Schulen ein\", Klassenzimmer im Hintergrund",
+    "caption": "In unserer Stadt gelten neue Handyregeln an Schulen. Bitte prüft zusätzlich die Regelung der eigenen Schule.",
+    "source": "elternrat.aktuell",
+    "likes": 4200,
+    "time": "1 Std.",
+    "postType": "news",
+    "taskId": "task_post_106",
+    "comments": [
+      {
+        "username": "schüler_max",
+        "text": "nur in den pausen?? boah 😩"
+      },
+      {
+        "username": "frau_ott",
+        "text": "Endlich mal eine klare Regel."
+      },
+      {
+        "username": "lisa.m",
+        "text": "an welcher schule denn genau?"
+      },
+      {
+        "username": "toni_r",
+        "text": "steht im link, ist wohl offiziell von der stadt"
+      }
+    ],
+    "profileId": "stadt.news",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_106",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Regeln nachlesen",
+      "url": "https://stadt.example/handyregeln-schulen",
+      "domain": "stadt.example",
+      "title": "Neue Handyregel an städtischen Schulen",
+      "imprint": "Vorhanden",
+      "author": "Presseamt der Stadt",
+      "published": "1. Juli 2026",
+      "status": "official",
+      "note": "Die offizielle Seite beschreibt genau, für welche Schulen die Regel gilt.",
+      "pageType": "Städtische Bekanntmachung",
+      "articleHeadline": "Die Stadt führt Regeln an einigen kommunalen Schulen ein.",
+      "articleSummary": "Die Originalseite beschreibt die genaue Reichweite und den Starttermin der Maßnahme.",
+      "keyFacts": [
+        "Regel gilt nur in dieser Stadt",
+        "Schulen können Ausnahmen festlegen",
+        "Start zum kommenden Schuljahr"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "nur in den pausen?? boah 😩",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "Endlich mal eine klare Regel.",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "an welcher schule denn genau?",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "steht im link, ist wohl offiziell von der stadt",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_107",
+    "username": "noah.clips",
+    "displayName": "Clip Central",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_8_App.png",
+    "imageAlt": "Foto: Junger Mann im NoahX-Hoodie wird von zwei Polizisten festgehalten, blaue Lichter",
+    "caption": "Digga NoahX wurde angeblich verhaftet 😳 ist das echt oder nur clickbait?",
+    "source": "clip.central",
+    "likes": 25400,
+    "time": "1 Std.",
+    "postType": "news",
+    "taskId": "task_post_107",
+    "comments": [
+      {
+        "username": "benji_12",
+        "text": "niemals bro"
+      },
+      {
+        "username": "lina_x",
+        "text": "wo ist die quelle??"
+      },
+      {
+        "username": "maxplays",
+        "text": "hab das auch auf tiktok gesehen"
+      },
+      {
+        "username": "sara.6b",
+        "text": "nur weil es viele posten muss es nicht stimmen"
+      },
+      {
+        "username": "toni",
+        "text": "safe fake 😂"
+      }
+    ],
+    "profileId": "gaming.news24",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_107",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "niemals bro",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "wo ist die quelle??",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "hab das auch auf tiktok gesehen",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "nur weil es viele posten muss es nicht stimmen",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_108",
+    "username": "newsflash.clips",
+    "displayName": "NewsFlash Clips",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_9_App.png",
+    "imageAlt": "Videostandbild einer computeranimierten Moderatorin „Mira Lennox\" im Nachrichtenstudio",
+    "caption": "Mira Lennox über KI bei Prüfungen 😳 Im Clip fehlt aber ein Teil des Gesprächs.",
+    "source": "newsflash.clips",
+    "likes": 43281,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_108",
+    "comments": [
+      {
+        "username": "studygirl",
+        "text": "hat sie das echt so gesagt? quelle?"
+      },
+      {
+        "username": "ki_nerd",
+        "text": "mira ist doch ne animierte figur, kein echter mensch 🤖"
+      },
+      {
+        "username": "lauraaa",
+        "text": "wär ja cool wenn man ki benutzen dürfte 😅"
+      }
+    ],
+    "profileId": "news.flash24",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_108",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Seht selber",
+      "url": "https://newsflash-now.example/mira-ki-pruefung",
+      "domain": "newsflash-now.example",
+      "title": "Mira fordert KI bei jeder Prüfung",
+      "imprint": "Nicht auffindbar",
+      "published": "vor 2 Stunden",
+      "status": "warning",
+      "note": "Die Seite zeigt nur denselben kurzen Ausschnitt. Ein vollständiges Interview fehlt.",
+      "pageType": "Unbekannter Blog",
+      "articleHeadline": "Angebliches Interview mit Mira Lennox",
+      "articleSummary": "Die Seite nennt keine überprüfbare Originalaufnahme und übernimmt nur einen kurzen Ausschnitt.",
+      "keyFacts": [
+        "Keine vollständige Rede verlinkt",
+        "Kein eindeutiger Veranstaltungsort",
+        "Autor nur mit Kürzel angegeben"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "hat sie das echt so gesagt? quelle?",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "mira ist doch ne animierte figur, kein echter mensch 🤖",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "wär ja cool wenn man ki benutzen dürfte 😅",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "Hat jemand dafür noch eine zweite Quelle?",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_109",
+    "username": "pausenhof.memes",
+    "displayName": "Meme Kingz 👑",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_11_App.png",
+    "imageAlt": "Schwarz-weißes Foto: Der Papst mit Kopfhörern an einem DJ-Pult, jubelnde Menschen dahinter",
+    "caption": "POV: Der Papst legt auf der Klassenparty auf 💀🎧",
+    "source": "meme.kingz",
+    "likes": 24700,
+    "time": "3 Std.",
+    "postType": "news",
+    "taskId": "task_post_109",
+    "comments": [
+      {
+        "username": "jonas_6b",
+        "text": "digga hahaha"
+      },
+      {
+        "username": "mila_x",
+        "text": "das bild sieht irgendwie komisch aus"
+      },
+      {
+        "username": "noah.zockt",
+        "text": "safe echt bro 😭"
+      },
+      {
+        "username": "lea.malt",
+        "text": "guckt mal auf seine hand"
+      },
+      {
+        "username": "benji",
+        "text": "zu wild"
+      },
+      {
+        "username": "sara.2013",
+        "text": "KI kann sowas machen"
+      }
+    ],
+    "profileId": "world.news24",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_109",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "digga hahaha",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "das bild sieht irgendwie komisch aus",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "safe echt bro 😭",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "guckt mal auf seine hand",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_110",
+    "username": "lina.glow",
+    "displayName": "Lina Glow ✨",
+    "verified": true,
+    "avatar": "",
+    "location": "Gesponsert",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_12_App.png",
+    "imageAlt": "Junge Frau hält eine pinke LumiSkin-Glow-Booster-Flasche und lächelt in die Kamera",
+    "caption": "Werbung | LumiSkin Glow Booster ✨ Ich habe das Produkt zugeschickt bekommen.",
+    "source": "lina.glow",
+    "likes": 8341,
+    "time": "1 Std.",
+    "postType": "news",
+    "taskId": "task_post_110",
+    "comments": [
+      {
+        "username": "beautyqueen",
+        "text": "will ich auch haben 😍"
+      },
+      {
+        "username": "kritischer_karl",
+        "text": "amina wirbt doch sonst nie für sowas.. komisch"
+      },
+      {
+        "username": "sophie",
+        "text": "das is doch einfach werbung oder?"
+      },
+      {
+        "username": "glowgirl",
+        "text": "hab bestellt, mal sehen ✨"
+      },
+      {
+        "username": "nope_",
+        "text": "die hand am produkt sieht voll komisch aus 🤔"
+      }
+    ],
+    "profileId": "trendnow.official",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_110",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Produkt ansehen",
+      "url": "https://lumiskin-shop.example/glow",
+      "domain": "lumiskin-shop.example",
+      "title": "LumiSkin Glow Booster",
+      "imprint": "Vorhanden",
+      "author": "LumiSkin Shop",
+      "published": "Werbeseite",
+      "status": "ad",
+      "note": "Die Seite verkauft das Produkt. Sie belegt nicht, dass die Sängerin es empfohlen hat.",
+      "pageType": "Produktseite",
+      "articleHeadline": "Werbeseite für den LumiSkin Glow Booster",
+      "articleSummary": "Die Seite verkauft das Produkt. Eine unabhängige Bestätigung der angeblichen Empfehlung fehlt.",
+      "keyFacts": [
+        "Bestellbutton direkt sichtbar",
+        "Hinweis auf bezahlte Werbung im Kleingedruckten",
+        "Keine unabhängige Quelle"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "will ich auch haben 😍",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "amina wirbt doch sonst nie für sowas.. komisch",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "das is doch einfach werbung oder?",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "hab bestellt, mal sehen ✨",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_111",
+    "username": "jayden_xx",
+    "displayName": "jayden",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_13_App.png",
+    "imageAlt": "Grafik: rotes „BREAKING – CYBERATTACKE! Alle Schulen morgen geschlossen\" mit vermummter Person",
+    "caption": "BRO morgen angeblich ALLE Schulen zu wegen Cyberattacke 😳 stimmt das??",
+    "source": "jayden_xx",
+    "likes": 12400,
+    "time": "45 Min.",
+    "postType": "news",
+    "taskId": "task_post_111",
+    "comments": [
+      {
+        "username": "emma_6a",
+        "text": "bitte ja 😭"
+      },
+      {
+        "username": "tim.k",
+        "text": "meine schule hat nix gesagt"
+      },
+      {
+        "username": "leo_goat",
+        "text": "safe einfach fake"
+      },
+      {
+        "username": "mila_x",
+        "text": "woher hast du das digga"
+      },
+      {
+        "username": "ayse.6b",
+        "text": "erst bei der schule nachfragen"
+      }
+    ],
+    "profileId": "newsflash24",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_111",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "bitte ja 😭",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "meine schule hat nix gesagt",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "safe einfach fake",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "woher hast du das digga",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "mismatch",
+      "hits": [
+        {
+          "date": "Januar 2021",
+          "source": "stadt-anzeiger.example",
+          "title": "Schulen wegen Schneechaos geschlossen"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_112",
+    "username": "school.kingz",
+    "displayName": "School Kingz 👑",
+    "verified": true,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_14_App.png",
+    "imageAlt": "Grafik: rote „HACKERWARNUNG! Schulen vorübergehend geschlossen\" mit vermummter Person am Laptop",
+    "caption": "LEUTE morgen schulfrei?? 😭 Auf der Seite steht was von Hackerwarnung",
+    "source": "school.kingz",
+    "likes": 12400,
+    "time": "1 Std.",
+    "postType": "news",
+    "taskId": "task_post_112",
+    "comments": [
+      {
+        "username": "noah.zockt",
+        "text": "digga bitte"
+      },
+      {
+        "username": "lea_2013",
+        "text": "bei uns kam keine mail"
+      },
+      {
+        "username": "benji_12",
+        "text": "die seite sieht sus aus"
+      },
+      {
+        "username": "mila_x",
+        "text": "gilt das überhaupt für alle?"
+      }
+    ],
+    "profileId": "school.kingz",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_112",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Schaut selbst",
+      "url": "https://school-kingz.example/hackerwarnung",
+      "domain": "school-kingz.example",
+      "title": "Hackerwarnung an Schulen",
+      "imprint": "Nicht vorhanden",
+      "published": "vor 40 Minuten",
+      "status": "warning",
+      "note": "Die Seite nennt keine Behörde und keine betroffenen Schulen.",
+      "pageType": "Blogbeitrag",
+      "articleHeadline": "Hackerwarnung sorgt für Gerüchte über Schulschließungen",
+      "articleSummary": "Die verlinkte Seite schreibt selbst, dass keine bundesweite Schließung bestätigt ist.",
+      "keyFacts": [
+        "Nur einzelne Systeme waren gestört",
+        "Keine bundesweite Anordnung",
+        "Überschrift des Posts übertreibt"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "digga bitte",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "bei uns kam keine mail",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "die seite sieht sus aus",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "gilt das überhaupt für alle?",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_113",
+    "username": "drama.alarm",
+    "displayName": "Drama Alarm 🚨",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/Picture_15_App.png",
+    "imageAlt": "Foto: Mann im Anzug sitzt verzweifelt vor einer Bank, dahinter Absperrband und Rettungskräfte",
+    "caption": "Diese Bankenpleite geht viral. Der Artikel klingt dramatischer als die Fakten.",
+    "source": "drama.alarm",
+    "likes": 12100,
+    "time": "3 Std.",
+    "postType": "news",
+    "taskId": "task_post_113",
+    "comments": [
+      {
+        "username": "besorgt_b",
+        "text": "oh nein welche bank denn?? 😢"
+      },
+      {
+        "username": "finanzfrank",
+        "text": "steht nirgends welche bank, wann oder wo... dubios"
+      },
+      {
+        "username": "klara",
+        "text": "so traurig 😭"
+      },
+      {
+        "username": "info_leser",
+        "text": "im artikel steht was von einlagensicherung, klingt anders"
+      }
+    ],
+    "profileId": "realnews24",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_113",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Ganzer Artikel",
+      "url": "https://realnews24.example/bankenpleite",
+      "domain": "realnews24.example",
+      "title": "Bank schließt einzelne Filialen",
+      "imprint": "Unvollständig",
+      "author": "Redaktion",
+      "published": "15. Juli 2026",
+      "status": "mixed",
+      "note": "Der Artikel beschreibt Einschränkungen. Der Post macht daraus einen vollständigen Verlust für viele Menschen.",
+      "pageType": "Nachrichtenbericht",
+      "articleHeadline": "Bankenpleite betrifft Kundinnen und Kunden unterschiedlich",
+      "articleSummary": "Der Artikel erklärt Sicherungssysteme und widerspricht der Aussage, alle hätten alles verloren.",
+      "keyFacts": [
+        "Einlagensicherung wird erwähnt",
+        "Nicht alle Konten sind gleich betroffen",
+        "Post lässt wichtige Einschränkungen weg"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "oh nein welche bank denn?? 😢",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "steht nirgends welche bank, wann oder wo... dubios",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "so traurig 😭",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "im artikel steht was von einlagensicherung, klingt anders",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "mismatch",
+      "hits": [
+        {
+          "date": "März 2018",
+          "source": "finanz-archiv.example",
+          "title": "Warteschlange vor einer Bank in Athen"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_114",
+    "username": "aiapp",
+    "displayName": "AiApp",
+    "verified": true,
+    "avatar": "",
+    "location": "Gesponsert",
+    "mediaType": "image",
+    "media": "assets/posts/5dbfcd1d-c3dc-4d8d-81c0-37624cd8bbb4.png",
+    "imageAlt": "Handy-Chat-App mit einer eingeblendeten Werbeanzeige zwischen den Nachrichten",
+    "caption": "AiApp testet Werbung im Bereich „Aktuelles“ – nicht direkt in privaten Chats.",
+    "source": "aiapp",
+    "likes": 980,
+    "time": "jetzt",
+    "postType": "news",
+    "taskId": "task_post_114",
+    "comments": [
+      {
+        "username": "userxy",
+        "text": "cool, neue funktion"
+      },
+      {
+        "username": "skeptiker_s",
+        "text": "das is doch werbung, steht sogar anzeige dran 🙄"
+      }
+    ],
+    "profileId": "aiapp.ads",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_114",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Mehr zur Funktion",
+      "url": "https://aiapp.example/aktuelles-werbung",
+      "domain": "aiapp.example",
+      "title": "Werbung im Bereich Aktuelles",
+      "imprint": "Vorhanden",
+      "author": "AiApp Produktteam",
+      "published": "13. Juli 2026",
+      "status": "official",
+      "note": "Die offizielle Seite sagt, dass Werbung im Bereich „Aktuelles“ getestet wird, nicht direkt in privaten Chats.",
+      "pageType": "Offizielle Produktankündigung",
+      "articleHeadline": "AiApp testet Werbung in einem abgegrenzten Bereich",
+      "articleSummary": "Die Seite erklärt, dass Werbung nicht direkt in privaten Chats angezeigt wird.",
+      "keyFacts": [
+        "Test nur in ausgewählten Regionen",
+        "Werbung im Bereich Aktuelles",
+        "Private Nachrichten bleiben werbefrei"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "cool, neue funktion",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "das is doch werbung, steht sogar anzeige dran 🙄",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "Hat jemand dafür noch eine zweite Quelle?",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "Hat jemand dafür noch eine zweite Quelle?",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_115",
+    "username": "study.with.max",
+    "displayName": "Study with Max 📚",
+    "verified": true,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/077a1fed-38be-4dc8-838c-c65dffc181e9.png",
+    "imageAlt": "Junger Influencer zeigt nach oben, Text „Schüler dürfen KI bei Hausaufgaben offiziell nutzen\"",
+    "caption": "KI bei Hausaufgaben: erlaubt heißt nicht automatisch ohne Regeln 🙌",
+    "source": "study.with.max",
+    "likes": 12700,
+    "time": "2 Std.",
+    "postType": "news",
+    "taskId": "task_post_115",
+    "comments": [
+      {
+        "username": "schüler_tim",
+        "text": "endlich!! dann mach ich alle hausis mit ki 😎"
+      },
+      {
+        "username": "frau_schulz",
+        "text": "Wo wurde das offiziell beschlossen? Eine Quelle fehlt."
+      },
+      {
+        "username": "maxfan",
+        "text": "danke max 🙌"
+      },
+      {
+        "username": "jules",
+        "text": "klingt zu schön um wahr zu sein 🤔"
+      }
+    ],
+    "profileId": "study.with.max",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_115",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "endlich!! dann mach ich alle hausis mit ki 😎",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "Wo wurde das offiziell beschlossen? Eine Quelle fehlt.",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "danke max 🙌",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "klingt zu schön um wahr zu sein 🤔",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_116",
+    "username": "lars.2013",
+    "displayName": "Lars",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/ChatGPT_Image_Jul_15__2026__08_46_26_PM.png",
+    "imageAlt": "Foto: Mann im Anzug schüttelt einem menschenähnlichen Roboter vor Mikrofonen die Hand",
+    "caption": "Roboter klauen uns bald alle Jobs 😭🤖 oder übertreiben die wieder?",
+    "source": "lars.2013",
+    "likes": 8700,
+    "time": "4 Std.",
+    "postType": "news",
+    "taskId": "task_post_116",
+    "comments": [
+      {
+        "username": "jonas_6b",
+        "text": "mein job wird zocken bro"
+      },
+      {
+        "username": "sara.6b",
+        "text": "das bild kann KI sein"
+      },
+      {
+        "username": "maxplays",
+        "text": "roboter machen doch schon viel"
+      },
+      {
+        "username": "lea.malt",
+        "text": "aber nicht gleich alle jobs"
+      }
+    ],
+    "profileId": "robo.news",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_116",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "mein job wird zocken bro",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "das bild kann KI sein",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "roboter machen doch schon viel",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "aber nicht gleich alle jobs",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "none",
+      "hits": []
+    }
+  },
+  {
+    "id": "post_117",
+    "username": "future.hub",
+    "displayName": "Future Hub",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/ChatGPT_Image_Jul_15__2026__09_12_30_PM.png",
+    "imageAlt": "Foto: Ein menschenähnlicher Roboter unterrichtet eine Schulklasse vor einem großen Bildschirm",
+    "caption": "Bald nur noch Roboter im Klassenzimmer?! 🤖 Schau genau hin, bevor du entscheidest.",
+    "source": "future.hub",
+    "likes": 9400,
+    "time": "5 Std.",
+    "postType": "news",
+    "taskId": "task_post_117",
+    "comments": [
+      {
+        "username": "schüler_j",
+        "text": "roboter statt lehrer? nein danke 😂"
+      },
+      {
+        "username": "klara_m",
+        "text": "das bild ist doch nicht echt oder?"
+      },
+      {
+        "username": "nerd42",
+        "text": "typisches KI-render, guck mal die perspektive"
+      },
+      {
+        "username": "bored_student",
+        "text": "hauptsache keine hausaufgaben lol"
+      }
+    ],
+    "profileId": "zukunft.pur",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_117",
+    "sourceCheck": {
+      "available": false
+    },
+    "accountActivity": [
+      {
+        "text": "roboter statt lehrer? nein danke 😂",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "das bild ist doch nicht echt oder?",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "typisches KI-render, guck mal die perspektive",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "hauptsache keine hausaufgaben lol",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "mismatch",
+      "hits": [
+        {
+          "date": "Mai 2024",
+          "source": "zukunft-blog.example",
+          "title": "Gedankenexperiment: Wenn Roboter unterrichten würden"
+        }
+      ]
+    }
+  },
+  {
+    "id": "post_118",
+    "username": "pausenhof.news",
+    "displayName": "Pausenhof News",
+    "verified": false,
+    "avatar": "",
+    "location": "",
+    "mediaType": "image",
+    "media": "assets/posts/ChatGPT_Image_Jul_15__2026__09_23_36_PM.png",
+    "imageAlt": "Eilmeldungs-Grafik zu Handyregeln an Schulen, Klassenzimmer im Hintergrund",
+    "caption": "Neue Handyregeln?? Digga schaut lieber, ob das auch für eure Schule gilt 👀📱",
+    "source": "pausenhof.news",
+    "likes": 15600,
+    "time": "30 Min.",
+    "postType": "news",
+    "taskId": "task_post_118",
+    "comments": [
+      {
+        "username": "mila_6c",
+        "text": "bei uns schon seit montag"
+      },
+      {
+        "username": "benji_12",
+        "text": "unsere lehrer sagen was anderes"
+      },
+      {
+        "username": "ayse.6b",
+        "text": "im link steht nur baden-württemberg"
+      },
+      {
+        "username": "noah.zockt",
+        "text": "handy weg ist mies 😭"
+      },
+      {
+        "username": "lea_2013",
+        "text": "erst schulseite checken"
+      }
+    ],
+    "profileId": "eil.news",
+    "enabled": true,
+    "audience": "forYou",
+    "contentVersion": 1,
+    "reviewTaskId": "task_post_118",
+    "sourceCheck": {
+      "available": true,
+      "linkLabel": "Regel nachlesen",
+      "url": "https://schule-bw.example/handynutzung",
+      "domain": "schule-bw.example",
+      "title": "Hinweise zur Handynutzung an Schulen",
+      "imprint": "Vorhanden",
+      "author": "Bildungsportal",
+      "published": "9. Juli 2026",
+      "status": "reliable",
+      "note": "Die Seite erklärt regionale Empfehlungen. Der Post klingt wie eine allgemeine neue Pflicht.",
+      "pageType": "Nachrichtenartikel",
+      "articleHeadline": "Neue Handyregeln gelten regional und nicht an allen Schulen",
+      "articleSummary": "Der Artikel nennt die betroffene Stadt und erklärt die Ausnahmen.",
+      "keyFacts": [
+        "Keine bundesweite Regel",
+        "Nutzung in Pausen teilweise erlaubt",
+        "Schulen entscheiden über Details"
+      ]
+    },
+    "accountActivity": [
+      {
+        "text": "bei uns schon seit montag",
+        "context": "unter einem ähnlichen Beitrag",
+        "time": "vor 2 Tagen"
+      },
+      {
+        "text": "unsere lehrer sagen was anderes",
+        "context": "unter einem News-Post",
+        "time": "vor 5 Tagen"
+      },
+      {
+        "text": "im link steht nur baden-württemberg",
+        "context": "in einer Diskussion",
+        "time": "vor 1 Woche"
+      },
+      {
+        "text": "handy weg ist mies 😭",
+        "context": "unter einem Video",
+        "time": "vor 2 Wochen"
+      }
+    ],
+    "imageOriginCheck": {
+      "available": true,
+      "result": "mismatch",
+      "hits": [
+        {
+          "date": "September 2022",
+          "source": "schul-blog.example",
+          "title": "Handyverbot an einer Schule in Bayern"
+        }
+      ]
+    }
+  }
+]
