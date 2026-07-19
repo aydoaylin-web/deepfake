@@ -1,0 +1,28 @@
+{
+  "name": "deepfake-defender-react",
+  "private": true,
+  "version": "1.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:web": "vite",
+    "dev:api": "node server.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "validate:content": "node scripts/validate-content.mjs",
+    "check": "npm run validate:content && npm run validate:mechanics && npm run build",
+    "dev:full": "concurrently -k \"vite\" \"node server.mjs\"",
+    "validate:mechanics": "node scripts/validate-game-mechanics.mjs"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "lucide-react": "1.24.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.0.3",
+    "concurrently": "10.0.3",
+    "vite": "8.1.4"
+  }
+}
