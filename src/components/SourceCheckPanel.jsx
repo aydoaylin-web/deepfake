@@ -2,7 +2,7 @@ import { AlertTriangle, CalendarDays, ChevronDown, ExternalLink, HelpCircle, Loc
 import { useState } from 'react';
 
 function Hint({ mode, revealed, onUse, buttonLabel, t = (x) => x }) {
-  if (!revealed) return <button type="button" className="analysis-tip-button" disabled={mode==='empty'} onClick={onUse}><HelpCircle size={16}/>{buttonLabel}</button>;
+  if (!revealed) return <button type="button" className="analysis-tip-toggle" disabled={mode==='empty'} onClick={onUse} aria-label={t('tip')} title={buttonLabel}><HelpCircle size={18}/></button>;
   return <div className="analysis-tip"><strong><HelpCircle size={16}/> {t('tip')}</strong><p>{t('srcTipQ')}</p><b>{t('whyImportant')}</b><p>{t('srcTipWhy')}</p><button type="button" className="analysis-tip-collapse" onClick={onUse}>{t('collapseTip')}</button></div>;
 }
 
