@@ -216,16 +216,28 @@ export default function App() {
       <div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('introEyebrow')}</span><h1>{t('introTitle')}</h1>
       <p>{t('introBody')}</p>
      <div className="intro-audio-wrap">
+        <button
+          type="button"
+          className="intro-audio-btn"
+          onClick={(e) => {
+            const a = e.currentTarget.parentElement.querySelector('audio');
+            if (!a) return;
+            if (a.paused) {
+              a.play().catch(() => alert('Ton konnte nicht starten. Prüfe, ob das Gerät stummgeschaltet ist.'));
+            } else {
+              a.pause();
+            }
+          }}
+        >
+          ▶︎ {t('introBody')}
+        </button>
         <audio
           className="intro-audio"
-          controls
           playsInline
-          preload="metadata"
+          preload="auto"
           src={imagePath(`assets/intro_${lang}.mp3`)}
           key={lang}
-        >
-          {t('introListen')}
-        </audio>
+        />
       </div>
       <div className="mission-rules"><strong>{t('introWinRule')}</strong><strong>{t('introLoseRule')}</strong></div>
       <button onClick={()=>setDemoStep(1)}>{t('startDemo')}</button>
