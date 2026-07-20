@@ -546,7 +546,7 @@ function reopenDemo(){
           >
             {irisListening
               ? (lang === 'de' ? 'Iris hört zu …' : 'Iris is listening …')
-              : (lang === 'de' ? '🎙️Iris wecken: "Hallo Iris"' : '🎙️Wake Iris: "Hello Iris"')}
+              : (lang === 'de' ? '🎙️Iris wecken: Sag: "Hallo Iris"' : '🎙️Wake Iris: Say: "Hello Iris"')}
           </button>
 
           {irisSpeaking && (
