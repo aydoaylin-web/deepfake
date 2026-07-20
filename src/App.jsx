@@ -376,3 +376,510 @@ export default function App() {
     setCommentsPost(current=>current?.id===postId?{...current,comments:[...(current.comments||[]),newComment]}:current);
     setSelectedPost(current=>current?.id===postId?{...current,comments:[...(current.comments||[]),newComment]}:current);
     setCommentDraft('');
+    logResearchEvent('comment_added',{postId,commentLength:text.length});
+  }
+  function openComments(postId){const post=posts.find(item=>item.id===postId);if(post){setCommentsPost(post);setCommentDraft('');}}
+  function refreshFeed(){setLoading(true);setTimeout(()=>{setPosts(items=>shuffle(items));setVisibleCount(5);setLoading(false);},650);}
+  function likePost(postId){if(!liked.includes(postId)){setLiked([...liked,postId]);setHeartBurst(postId);setTimeout(()=>setHeartBurst(null),800);}else setLiked(liked.filter(x=>x!==postId));}
+  function navigatePost(direction){if(!selectedPost)return;const i=posts.findIndex(p=>p.id===selectedPost.id);setSelectedPost(posts[(i+direction+posts.length)%posts.length]);setZoom(1);}
+  async function sharePost(post){const text=`${post.username}: ${post.caption}`;try{if(navigator.share)await navigator.share({title:'AiGram post',text});else{await navigator.clipboard.writeText(text);alert('Post copied to clipboard.');}}catch{/* user cancelled */}}
+  function openPost(post){setSelectedPost(post);setZoom(1);logResearchEvent('post_opened',{postId:post.id});}
+  function reopenIntro(){
+  setSimulationConfirmed(false);
+  setDemoStep(-1);
+  setIntro(true);
+}
+
+function reopenDemo(){
+  setDemoStep(1);
+  setIntro(true);
+}
+  function getAccountActivityComments(post){
+    if(!post)return [];
+    return (post.accountActivity||[]).slice(0,4);
+  }
+  function openNotificationItem(item){
+    const task=taskMap[item.taskId];
+    const post=posts.find(entry=>entry.id===item.postId);
+    if(task&&post&&!completed.includes(task.id))openTask(task.id,post,'push');
+    else if(post)openPost(post);
+  }
+  const demoPost=posts[0]||null;
+
+  return <div className="page"><div className="phone-shell">
+    <header className="app-header"><div className="wordmark"><span>Ai</span>Gram</div><div className="header-actions"><button type="button" onClick={reopenIntro} aria-label="Intro & Demo"><HelpCircle size={22}/></button><div className="lang-switch">{LANGUAGES.map(l => (<button key={l.code} className={lang === l.code ? 'active' : ''} onClick={() => setLang(l.code)}>{l.label}</button>))}</div><button aria-label="Activity"><Heart size={22}/></button><button aria-label="Messages"><Send size={22}/></button></div></header>
+    {activeTab==='feed'&&<div className="mission-progress"><div><span>{t('missionProgress')}</span><strong>{completed.length}/{totalMissionCount}</strong></div><div className="mission-track"><span style={{width:`${progressPercent}%`}}></span></div><small>{nextMissionId?`${t('nextCase')}: ${taskMeta[taskMap[nextMissionId]?.type]?.label||t('agencyReview')}`:t('allCasesReviewed')} · {t('target')} {targetScore} {t('pointsWord')}</small></div>}
+    {activeNotification&&<div className="agency-toast" role="status"><button className="toast-main" onClick={()=>openTask(activeNotification.task.id,activeNotification.post,'push')}><span className="toast-icon"><ShieldCheck size={22}/></span><span><strong>{t('pushTitle_'+activeNotification.task.type)}</strong><small>{t('pushText_'+activeNotification.task.type)}</small></span></button><button className="toast-close" onClick={()=>setActiveNotification(null)} aria-label="Dismiss"><X size={18}/></button></div>}
+
+    {activeTab==='feed'&&<><div className="feed-tabs"><button className={feedMode==='forYou'?'active':''} onClick={()=>setFeedMode('forYou')}>{t('forYou')}</button><button className={feedMode==='following'?'active':''} onClick={()=>setFeedMode('following')}>{t('following')}</button></div>
+      <section className="stories" aria-label="Stories">{stories.map((s,i)=><div className={`story ${storyPulse%stories.length===i?'story-active':''}`} key={s.name}><div className={`story-ring ${s.className}`}><div>{s.letter}</div><span className={`story-status ${s.status}`}></span></div><span>{s.name}</span></div>)}</section>
+      <div className="feed-toolbar"><span>{t('latestPosts')}</span><button onClick={refreshFeed}><RefreshCw size={16}/> {t('refresh')}</button></div>
+      <main className="feed">{loading&&[0,1,2].map(i=><div className="post skeleton" key={i}><div className="skeleton-head"/><div className="skeleton-media"/><div className="skeleton-lines"/></div>)}{loadingError&&<div className="load-error">{loadingError}</div>}{!loading&&visiblePosts.map(post=><article className="post" key={post.id} data-post-id={post.id} data-task-id={post.taskId||undefined}>
+        <div className="post-head"><button className="avatar" aria-label={`${post.username} profile`}>{post.username.slice(0,1).toUpperCase()}</button><div className="post-user"><strong>{post.username}</strong><span>{post.location}</span></div><button className="icon-plain" aria-label="More options"><MoreHorizontal size={22}/></button></div>
+        <button className="post-image-button" onClick={()=>openPost(post)} onDoubleClick={()=>likePost(post.id)} aria-label="Open post"><img className="post-image" src={imagePath(post.media)} alt={post.imageAlt}/><span className="expand-hint"><Maximize2 size={18}/> {t('open')}</span>{heartBurst===post.id&&<span className="heart-burst"><Heart size={82} fill="white"/></span>}</button>
+        <div className="post-actions"><button onClick={()=>likePost(post.id)} className={liked.includes(post.id)?'is-liked':''} aria-label="Like"><Heart size={25} fill={liked.includes(post.id)?'currentColor':'none'}/></button><button onClick={()=>openComments(post.id)} aria-label="Comments"><MessageCircle size={24}/></button><button onClick={()=>sharePost(post)} aria-label="Share"><Send size={24}/></button><button className="push-right" onClick={()=>toggle(savedPosts,setSavedPosts,post.id)} aria-label="Save"><Bookmark size={24} fill={savedPosts.includes(post.id)?'currentColor':'none'}/></button></div>
+        <div className="post-copy"><strong>{(post.likes+(liked.includes(post.id)?1:0)).toLocaleString('en-US')} {t('likesWord')}</strong><p><b>{post.username}</b> {post.caption}</p><button className="comment-link" onClick={()=>openComments(post.id)}>{t('viewAll')} {post.comments.length} {t('commentsWord')}</button><span className="post-time">{post.time}</span></div>
+        {post.reviewTaskId&&!completed.includes(post.reviewTaskId)&&<div className="feed-review-strip"><div><ShieldCheck size={18}/><span><strong>{t('checkThisPost')}</strong><small>{t('checkThisPostText')}</small></span></div><button onClick={()=>openTask(post.reviewTaskId,post,'feed')}>{t('review')}</button></div>}
+        {post.reviewTaskId&&completed.includes(post.reviewTaskId)&&<div className="completed-strip"><CheckCircle2 size={17}/> {t('feedReviewCompleted')}</div>}
+        {!post.reviewTaskId&&post.taskId&&completed.includes(post.taskId)&&<div className="completed-strip"><CheckCircle2 size={17}/> {t('agencyReviewCompleted')}</div>}
+      </article>)}<div ref={loaderRef} className="infinite-loader">{visibleCount<feedPosts.length?t('loadingMore'):t('allCaughtUp')}</div></main></>}
+
+    {activeTab==='cases'&&<main className="dashboard-screen"><div className="screen-heading"><span>{t('agencyDatabase')}</span><h2>{t('reviewedCases')}</h2></div>{!caseResults.length?<div className="empty-state"><ShieldCheck size={44}/><h3>{t('noCasesYet')}</h3><p>{t('reviewedWillAppear')}</p></div>:<div className="case-list">{[...caseResults].reverse().map(r=><article className="case-card" key={r.taskId}><div><small>{taskMeta[r.type]?.label||r.type}</small><h3>{r.title}</h3></div><span className={r.correct?'case-good':'case-bad'}>{r.delta>0?'+':''}{r.delta}</span><p className="case-answer">{r.reason||t('noWrittenResponse')}</p></article>)}</div>}</main>}
+    {activeTab==='agency'&&<main className="dashboard-screen"><div className="screen-heading"><span>{t('agencyCenter')}</span><h2>{t('digitalCredibility')}</h2></div><section className="notification-center"><h3><Bell size={19}/> Pushnachrichten</h3>{!notificationHistory.length?<p>Noch keine Pushnachrichten.</p>:<div className="notification-list">{notificationHistory.map(item=><button type="button" key={item.id} onClick={()=>openNotificationItem(item)}><img src={imagePath(item.media)} alt=""/><span><strong>{item.title}</strong><small>@{item.username} · {item.time}</small><p>{item.text}</p><em>{item.caption}</em></span></button>)}</div>}</section><div className="agency-stats"><div><strong>{score}</strong><span>{t('credibilityPoints')}</span></div><div><strong>{completed.length}</strong><span>{t('completedTasks')}</span></div></div><section className="rules-panel"><h3>{t('realityDefenseRules')}</h3>{!agencyRules.length?<p>{t('noRulesYet')}</p>:agencyRules.map(rule=><div className="rule" key={rule}><ShieldCheck size={18}/>{rule}</div>)}</section><section className="research-panel"><h3>{t('contentPack')}</h3><p><strong>{contentManifest?.name||contentSettings.contentPackName||'Deepfake Defender'}</strong> · {t('version')} {contentManifest?.version||contentSettings.contentPackVersion||'1.0.0'}</p><div className="content-pack-stats"><span>{posts.length} {t('postsWord')}</span><span>{tasks.length} {t('tasksWord')}</span><span>{profiles.length} {t('profilesWord')}</span><span>{guides.length} {t('guidesWord')}</span></div><small>{t('validatedAuto')}</small></section><section className="research-panel"><h3>{t('researchMode')}</h3><p>{t('researchText')}</p><div className="research-meta-grid"><div><span>{t('participantCode')}</span><strong>{participantCode}</strong></div><div><span>{t('loggedEvents')}</span><strong>{researchEvents.length}</strong></div><div><span>{t('evaluationApi')}</span><strong className={aiStatus.api==='ok'?'status-ok':'status-warn'}>{aiStatus.api==='ok'?t('online'):t('offline')}</strong></div><div><span>{t('localAi')}</span><strong className={aiStatus.ollama?'status-ok':'status-warn'}>{aiStatus.ollama?t('ready'):t('optional')}</strong></div></div><div className="research-actions"><button onClick={exportResearchJson}>{t('exportJson')}</button><button onClick={exportResearchCsv}>{t('exportCsv')}</button><button className="danger-lite" onClick={clearResearchData}>{t('deleteLocalData')}</button></div><small>{t('sessionIdLabel')}: {sessionId}</small></section><button className="secondary-action" onClick={startNewRun}><Sparkles size={18}/> {t('startNewRun')}</button></main>}
+    {activeTab==='profile'&&<main className="dashboard-screen profile-screen"><div className="profile-cover"></div><div className="profile-avatar">A</div><h2>{t('agencyTeam')}</h2><p>@digital_credibility_unit</p><div className="profile-bio">{t('profileBio')}</div><div className="profile-metrics"><div><strong>{score}</strong><span>{t('pointsWord2')}</span></div><div><strong>{completed.length}</strong><span>{t('casesWord')}</span></div><div><strong>{agencyRules.length}</strong><span>{t('rulesWord')}</span></div></div><div className="profile-help-actions"><button className="secondary-action" onClick={reopenIntro}>Intro erneut ansehen</button><button className="secondary-action" onClick={reopenDemo}>Demo erneut ansehen</button></div><div className="profile-grid">{posts.slice(0,6).map(p=><button key={p.id} onClick={()=>openPost(p)}><img src={imagePath(p.media)} alt=""/></button>)}</div></main>}
+
+    <nav className="bottom-nav"><button className={activeTab==='feed'?'active':''} onClick={()=>setActiveTab('feed')}><Home/><span>{t('feed')}</span></button><button className={activeTab==='cases'?'active':''} onClick={()=>setActiveTab('cases')}><ShieldCheck/><span>{t('cases')}</span></button><button className={activeTab==='agency'?'active':''} onClick={()=>{setActiveTab('agency');setUnreadNotificationCount(0);}} aria-label="Pushnachrichten öffnen"><span className="nav-icon-wrap"><Bell/>{unreadNotificationCount>0&&<span className="notification-badge">{unreadNotificationCount>99?'99+':unreadNotificationCount}</span>}</span><span>{t('agency')}</span></button><button className={activeTab==='profile'?'active':''} onClick={()=>setActiveTab('profile')}><UserRound/><span>{t('profile')}</span></button></nav><div className="score-chip"><ShieldCheck size={17}/><span>{score}</span></div>
+  </div>
+{intro&&
+  <div className="modal-backdrop">
+    <section className="intro-card demo-card">
+
+      {demoStep===-1&&<>
+        <div className="intro-shield">
+          <ShieldCheck size={42}/>
+        </div>
+
+        <span className="eyebrow">
+          {lang==='de' ? 'Vor dem Start' : 'Before you begin'}
+        </span>
+
+        <h1>
+          {lang==='de'
+            ? 'Sprache wählen'
+            : 'Choose your language'}
+        </h1>
+
+        <div className="lang-switch intro-language-switch">
+          {LANGUAGES.map(language=>(
+            <button
+              type="button"
+              key={language.code}
+              className={lang===language.code?'active':''}
+              onClick={()=>setLang(language.code)}
+            >
+              {language.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="simulation-notice">
+          <Info size={24}/>
+
+          <div>
+            <h2>
+              {lang==='de'
+                ? 'Hinweis zur Simulation'
+                : 'Simulation notice'}
+            </h2>
+
+            <p>
+              {lang==='de'
+                ? 'Diese Anwendung ist eine Simulation. Alle dargestellten Profile, Beiträge, Kommentare und Situationen sind fiktiv und wurden ausschließlich für Lern- und Forschungszwecke erstellt.'
+                : 'This application is a simulation. All profiles, posts, comments and situations shown are fictional and were created exclusively for learning and research purposes.'}
+            </p>
+
+            <p>
+              {lang==='de'
+                ? 'Einige Inhalte können bewusst manipulierte oder irreführende Informationen darstellen. Sie dienen dazu, den kritischen Umgang mit digitalen Inhalten zu üben.'
+                : 'Some content may intentionally contain manipulated or misleading information. It is included to practise the critical evaluation of digital content.'}
+            </p>
+          </div>
+        </div>
+
+        <label className="simulation-confirmation">
+          <input
+            type="checkbox"
+            checked={simulationConfirmed}
+            onChange={event=>setSimulationConfirmed(event.target.checked)}
+          />
+
+          <span>
+            {lang==='de'
+              ? 'Ich habe verstanden, dass es sich um eine Simulation mit fiktiven Inhalten handelt.'
+              : 'I understand that this is a simulation containing fictional content.'}
+          </span>
+        </label>
+
+        <button
+          type="button"
+          disabled={!simulationConfirmed}
+          onClick={()=>setDemoStep(0)}
+        >
+          {lang==='de' ? 'Weiter' : 'Continue'}
+        </button>
+      </>}
+
+      {demoStep===0&&<>
+        <div className="intro-shield">
+          <ShieldCheck size={42}/>
+        </div>
+
+        <span className="eyebrow">
+          {t('introEyebrow')}
+        </span>
+
+        <h1>
+          {t('introTitle')}
+        </h1>
+
+        <p>
+          {t('introBody')}
+        </p>
+
+        <div className="intro-audio-wrap">
+          <audio
+            ref={irisAudioRef}
+            src={imagePath(`assets/intro_${lang}.mp3`)}
+            preload="auto"
+            playsInline
+            key={lang}
+            onPlay={() => setIrisSpeaking(true)}
+            onPause={() => setIrisSpeaking(false)}
+            onEnded={() => setIrisSpeaking(false)}
+          />
+
+          <button
+            type="button"
+            onClick={irisListening ? stopIrisListening : activateIrisListening}
+          >
+            {irisListening
+              ? (lang === 'de' ? 'Iris hört zu …' : 'Iris is listening …')
+              : (lang === 'de' ? '🎙️Iris wecken' : '🎙️Wake Iris')}
+          </button>
+
+          {irisSpeaking && (
+            <button type="button" className="demo-skip" onClick={stopIrisAudio}>
+              {lang === 'de' ? 'Iris stoppen' : 'Stop Iris'}
+            </button>
+          )}
+
+          {speechError && <p role="alert">{speechError}</p>}
+        </div>
+
+        <div className="mission-rules">
+          <strong>{t('introWinRule')}</strong>
+          <strong>{t('introLoseRule')}</strong>
+        </div>
+
+        <button
+          type="button"
+          onClick={()=>setDemoStep(1)}
+        >
+          {t('startDemo')}
+        </button>
+
+        <button
+          type="button"
+          className="demo-skip"
+          onClick={()=>setIntro(false)}
+        >
+          {t('skipDemo')}
+        </button>
+      </>}
+
+      {demoStep===1&&<>
+        <span className="eyebrow">
+          Demo 1 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_image')}
+        </h2>
+
+        {demoPost&&
+          <article className="demo-real-post">
+            <div>
+              <b>@{demoPost.username}</b>
+              <small>{demoPost.time}</small>
+            </div>
+
+            <img
+              src={imagePath(demoPost.media)}
+              alt={demoPost.imageAlt}
+            />
+
+            <p>
+              <b>{demoPost.username}</b> {demoPost.caption}
+            </p>
+          </article>
+        }
+
+        <div className="demo-tool-preview">
+          <ScanSearch/>
+
+          <div>
+            <strong>{t('demo1Title')}</strong>
+            <p>{t('demo1Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(2)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===2&&<>
+        <span className="eyebrow">
+          Demo 2 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_source')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <Globe2/>
+
+          <div>
+            <strong>{t('demo2Title')}</strong>
+            <p>{t('demo2Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-link-example">
+          <small>{t('demo2Eyebrow')}</small>
+          <b>blitz-news.example/hitzefrei</b>
+          <span>{t('demo2Example')}</span>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(3)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===3&&<>
+        <span className="eyebrow">
+          Demo 3 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_profile')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <UserRound/>
+
+          <div>
+            <strong>{t('whyImportant')}</strong>
+            <p>{t('demo3Body1')}</p>
+            <p>{t('demo3Body2')}</p>
+          </div>
+        </div>
+
+        <div className="demo-profile-example">
+          <b>@news_update24</b>
+          <span>{t('demo3ProfileAge')}</span>
+          <span>{t('demo3ProfileResp')}</span>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(4)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===4&&<>
+        <span className="eyebrow">
+          Demo 4 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_activities')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <RefreshCw/>
+
+          <div>
+            <strong>{t('demo4Title')}</strong>
+            <p>{t('demo4Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-comments-example">
+          <p>
+            <b>@news_update24</b> {t('profileActivities')}
+          </p>
+
+          <p>
+            {t('demo4Check')}
+          </p>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(5)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===5&&<>
+        <span className="eyebrow">
+          Demo 5 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('demo5Title')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <ShieldCheck/>
+
+          <div>
+            <strong>{t('demo5Sub')}</strong>
+            <p>{t('demo5Body')}</p>
+          </div>
+        </div>
+
+        <div className="mission-rules">
+          <strong>{t('demo5WinRule')}</strong>
+          <strong>{t('demo5LoseRule')}</strong>
+        </div>
+
+        <button
+          type="button"
+          onClick={()=>setIntro(false)}
+        >
+          {t('startMission')}
+        </button>
+
+        <button
+          type="button"
+          className="demo-back"
+          onClick={()=>setDemoStep(4)}
+        >
+          {t('backWord')}
+        </button>
+      </>}
+
+    </section>
+  </div>
+}
+
+  {showResume&&!intro&&<div className="modal-backdrop">
+    <section className="intro-card resume-card">
+      <div className="intro-shield"><ShieldCheck size={42}/></div>
+      <span className="eyebrow">{lang==='de'?'Willkommen zurück':'Welcome back'}</span>
+      <h1>{lang==='de'?'Weiterspielen?':'Continue playing?'}</h1>
+      <p>{lang==='de'
+        ? 'Es gibt einen gespeicherten Spielstand. Du kannst dort weitermachen, wo du aufgehört hast, oder eine neue Mission starten.'
+        : 'You have a saved game. You can pick up where you left off, or start a new mission.'}</p>
+      <div className="resume-stats">
+        <div><strong>{saved.score??0}</strong><span>{lang==='de'?'Punkte':'Points'}</span></div>
+        <div><strong>{(saved.completed?.length)||0}</strong><span>{lang==='de'?'Fälle':'Cases'}</span></div>
+      </div>
+      <button
+        type="button"
+        className="primary"
+        onClick={()=>{setShowResume(false);setActiveTab('feed');logResearchEvent('run_resumed',{completedTasks:(saved.completed?.length)||0,score:saved.score??0});}}
+      >
+        {lang==='de'?'Weiterspielen':'Continue'}
+      </button>
+      <button
+        type="button"
+        className="secondary-action resume-restart"
+        onClick={()=>{
+          const ok=window.confirm(lang==='de'
+            ? 'Neue Mission starten? Dein gespeicherter Fortschritt geht dabei verloren.'
+            : 'Start a new mission? Your saved progress will be lost.');
+          if(!ok)return;
+          startNewRun();
+          setShowResume(false);
+        }}
+      >
+        <Sparkles size={18}/> {lang==='de'?'Neu starten':'Start new'}
+      </button>
+    </section>
+  </div>}
+
+  {selectedPost&&<div className="modal-backdrop post-modal-backdrop" onClick={()=>setSelectedPost(null)}><section className="post-modal" onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setSelectedPost(null)} aria-label="Close"><X/></button><button className="modal-nav modal-prev" onClick={()=>navigatePost(-1)} aria-label="Previous"><ChevronLeft/></button><button className="modal-nav modal-next" onClick={()=>navigatePost(1)} aria-label="Next"><ChevronRight/></button><div className="post-modal-media"><img style={{transform:`scale(${zoom})`}} src={imagePath(selectedPost.media)} alt={selectedPost.imageAlt}/><div className="zoom-controls"><button onClick={()=>setZoom(z=>Math.max(1,z-.25))}><ZoomOut/></button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(z=>Math.min(3,z+.25))}><ZoomIn/></button></div></div><div className="post-modal-info"><div className="post-head"><div className="avatar">{selectedPost.username.slice(0,1).toUpperCase()}</div><div className="post-user"><strong>{selectedPost.username}</strong><span>{selectedPost.location}</span></div></div><div className="modal-caption"><b>{selectedPost.username}</b> {selectedPost.caption}</div><div className="modal-comments">{selectedPost.comments.map((c,i)=><p key={`${c.username}-${i}`}><b>{c.username}</b> {c.text}</p>)}</div></div></section></div>}
+
+  {commentsPost&&<div className="modal-backdrop comments-backdrop" onClick={()=>setCommentsPost(null)}><section className="comments-sheet" onClick={e=>e.stopPropagation()}><div className="sheet-handle"></div><header><h2>{t('comments')}</h2><button onClick={()=>setCommentsPost(null)}><X/></button></header><div className="comments-list">{(commentsPost.comments||[]).map((c,i)=>{const id=`${commentsPost.id}-${i}`;return <article className="comment-row" key={c.id||id}><div className="comment-avatar">{c.username[0].toUpperCase()}</div><p><b>{c.username}</b> {c.text}<small>{i+1}m · {t('reply')}</small></p><button className={commentLikes.includes(id)?'is-liked':''} onClick={()=>toggle(commentLikes,setCommentLikes,id)}><Heart size={16} fill={commentLikes.includes(id)?'currentColor':'none'}/></button></article>})}</div><div className="comment-input"><div className="comment-avatar">A</div><input value={commentDraft} onChange={e=>setCommentDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter')addComment();}} placeholder={t('addComment')}/><button disabled={!commentDraft.trim()} onClick={addComment}>{t('post')}</button></div></section></div>}
+
+  {runSummary&&<div className="modal-backdrop"><section className="run-summary-card"><div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('runComplete')}</span><h2>{runSummary.targetReached?'Mission gewonnen':runSummary.lost?'Mission verloren':t('missionReviewed')}</h2><p>{runSummary.targetReached?'Du hast 20 Glaubwürdigkeitspunkte erreicht.':runSummary.lost?'Dein Punktestand ist auf −10 gefallen. Starte eine neue Mission und prüfe die Hinweise genauer.':<>Du hast {runSummary.total} Fälle mit <strong>{runSummary.score} Glaubwürdigkeitspunkten</strong> bearbeitet.</>}</p><div className="run-summary-stats"><div><strong>{runSummary.correct}</strong><span>{t('correct')}</span></div><div><strong>{runSummary.total-runSummary.correct}</strong><span>{t('needsReview')}</span></div><div><strong>{runSummary.score}</strong><span>{t('pointsWord2')}</span></div></div><button className="primary" onClick={()=>{setRunSummary(null);setActiveTab('agency');}}>{t('viewAgencyResults')}</button><button className="secondary-action" onClick={startNewRun}>{t('startAnotherRun')}</button></section></div>}
+
+  {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
+    {activeTask.type==='news' ? <>
+      <div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+<div className="analysis-tools">
+  {ANALYSIS_TOOLS.map((tool) => {
+    const Icon = tool.icon;
+    const used = usedTools.includes(tool.id);
+    const open = openTool === tool.id;
+    const sourceAvailable = activePost?.sourceCheck?.available;
+    return (
+      <div className={`analysis-tool-card ${used ? "used" : ""} ${open ? "open" : ""}`} key={tool.id}>
+        <button type="button" className="analysis-tool-toggle" onClick={() => useAnalysisTool(tool.id)}>
+          <span className="analysis-tool-title"><Icon size={19} />{t(`tool_${tool.id}`)}{tool.id==='source'&&!sourceAvailable&&<small className="tool-availability">kein Link</small>}{used && <CheckCircle2 size={18} />}</span>
+          <span className="accordion-symbol">{open?'−':'+'}</span>
+        </button>
+        {open && <div className="analysis-tool-content">
+          {tool.id === "source" ? <SourceCheckPanel data={activePost?.sourceCheck} hintMode={hintMode} hintRevealed={revealedHints.includes('source')} onUseHint={()=>useHint('source')} hintButtonLabel={hintButtonLabel} t={t} />
+          : tool.id === "image" ? <HotspotImage src={imagePath(activePost.media)} alt={activePost.imageAlt} config={IMAGE_HOTSPOTS[activePost?.id] || { inspectionOnly:true }} hintMode={hintMode} hintRevealed={revealedHints.includes('image')} onUseHint={()=>useHint('image')} hintButtonLabel={hintButtonLabel} t={t} />
+          : tool.id === "profile" ? <ProfileCheckPanel profile={profileMap[activePost?.profileId]} hintMode={hintMode} hintRevealed={revealedHints.includes('profile')} onUseHint={()=>useHint('profile')} hintButtonLabel={hintButtonLabel} t={t} />
+          : tool.id === "origin" ? <OriginCheckPanel data={activePost?.imageOriginCheck} hintMode={hintMode} hintRevealed={revealedHints.includes('origin')} onUseHint={()=>useHint('origin')} hintButtonLabel={hintButtonLabel} t={t} />
+          : <small>{t('noInfoCheck')}</small>}
+        </div>}
+      </div>
+    );
+  })}
+</div>
+      <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
+      <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/><small>{t('shortAnswerHint')}</small></div>
+      {!feedback&&<div className="confidence-control"><label>{t('confidenceRating')} <strong>{confidence}/5</strong></label><input type="range" min="1" max="5" value={confidence} onChange={e=>setConfidence(Number(e.target.value))}/></div>}
+      {feedback&&<div className={`feedback ${feedback.validation?'warning':feedback.correct?'correct':'wrong'}`}>{feedback.validation?<p>{feedback.text}</p>:<><strong>{feedback.delta>0?'+':''}{feedback.delta} {t('pointsWord3')}</strong><div className="feedback-scoreline"><span className={feedback.verdictCorrect?'ok':'no'}>{feedback.verdictCorrect?'✓':'✗'} {t('verdictWord')}</span><span className={feedback.reasonMatched?'ok':'no'}>{feedback.reasonMatched?'✓':'✗'} {t('reasonWord')}</span></div>{feedback.expired&&<p>{t('timeUp')}</p>}{!feedback.verdictCorrect&&!feedback.expired&&<p>{t('correctAssessmentWas')} {feedback.correctVerdictLabel}.</p>}{feedback.yourReason&&<div className="reason-compare"><div><b>{t('yourReasonLabel')}</b><p>{feedback.yourReason}</p></div><div><b>{t('actualReasonLabel')}</b><p>{feedback.actualReason}</p></div></div>}</>}</div>}
+      {!feedback||feedback.validation?<button className="primary" disabled={evaluating} onClick={()=>submitTask(false)}>{evaluating?t('evaluating'):t('checkAnswer')}</button>:<button className="primary" onClick={closeTask}>{t('continueWord')}</button>}
+    </> : <>
+      <p className="instruction">{activeTask.instruction}</p>{activeTask.answerMode!=='openAnalysis'&&<div className="options">{(activeTask.options||[]).map(o=>{const selected=selectedAnswers.includes(o.id);return <label className={selected?'selected':''} key={o.id}><input type={activeTask.answerMode==='multipleChoice'?'checkbox':'radio'} name="answer" checked={selected} onChange={()=>toggleAnswer(o.id)}/><span>{o.text}</span></label>})}</div>}{(activeTask.answerMode==='openAnalysis'||activeTask.answerMode==='singleChoiceWithReason')&&<div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourAnalysis')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||activeTask.reasonPrompt||t('typeAnalysis')}/>{activeTask.answerMode==='openAnalysis'&&<small>{t('shortAnswerHint')}</small>}</div>}{!feedback&&<div className="confidence-control"><label>{t('confidenceRating')} <strong>{confidence}/5</strong></label><input type="range" min="1" max="5" value={confidence} onChange={e=>setConfidence(Number(e.target.value))}/></div>}{feedback&&<div className={`feedback ${feedback.validation?'warning':feedback.correct?'correct':'wrong'}`}>{feedback.validation?<p>{feedback.text}</p>:<><strong>{feedback.delta>0?'+':''}{feedback.delta} {t('pointsWord3')}</strong><div className="feedback-scoreline"><span className={feedback.verdictCorrect?'ok':'no'}>{feedback.verdictCorrect?'✓':'✗'} {t('verdictWord')}</span><span className={feedback.reasonMatched?'ok':'no'}>{feedback.reasonMatched?'✓':'✗'} {t('reasonWord')}</span></div>{feedback.expired&&<p>{t('timeUp')}</p>}{!feedback.verdictCorrect&&!feedback.expired&&<p>{t('correctAssessmentWas')} {feedback.correctVerdictLabel}.</p>}{feedback.yourReason&&<div className="reason-compare"><div><b>{t('yourReasonLabel')}</b><p>{feedback.yourReason}</p></div><div><b>{t('actualReasonLabel')}</b><p>{feedback.actualReason}</p></div></div>}</>}</div>}{!feedback||feedback.validation?<button className="primary" disabled={evaluating} onClick={()=>submitTask(false)}>{evaluating?t('evaluating'):t('checkAnswer')}</button>:<button className="primary" onClick={closeTask}>{t('continueWord')}</button>}
+    </>}</section></div>}
+  </div>;
+}
