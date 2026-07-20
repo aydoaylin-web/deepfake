@@ -142,6 +142,10 @@ img{user-select:none;-webkit-user-drag:none}
   letter-spacing: 0.04em;
 }
 
+.tip-info-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid #cfd6e4;background:#eef2f9;color:#0d2c62;cursor:pointer;flex:0 0 auto}.tip-info-btn:hover{background:#e2e9f5}.tip-info-note{margin:8px 0 4px;padding:12px 14px;border-radius:12px;background:#eef4ff;border:1px solid #cfe0ff;color:#22314f;font-size:13px;line-height:1.45}.verdict-question{margin:14px 0 8px;font-weight:600;color:#0d2c62}
+
+
+
 .source-check-row strong {
   color: #24344b;
   font-size: 12px;
