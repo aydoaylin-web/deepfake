@@ -337,3 +337,6 @@ img{user-select:none;-webkit-user-drag:none}
   .post-media img,
   .profile-grid img { content-visibility: visible; }
 }
+
+.intro-audio-btn{width:100%;margin:12px 0 4px;padding:12px 14px;border:0;border-radius:12px;background:#092b61;color:#fff;font-weight:800;font-size:.95rem;cursor:pointer}
+.intro-audio-btn:active{opacity:.85}
