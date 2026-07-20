@@ -14,7 +14,7 @@ import OriginCheckPanel from "./components/OriginCheckPanel";
 import { matchReason } from "./data/conceptMatcher";
 const STORAGE_KEY = 'deepfake-defender-react-state-v6';
 const TARGET_SCORE = 20;
-const MAX_TIPS = 5;
+const MAX_TIPS = 6;
 const ANALYSIS_TOOLS = [
   { id: "image", label: "Bildanalyse", icon: ScanSearch },
   { id: "source", label: "Quellenprüfung", icon: Globe2 },
@@ -67,16 +67,15 @@ export default function App() {
   const [seconds,setSeconds]=useState(180);
   const [intro,setIntro]=useState(saved.introSeen!==true);
   const [demoStep,setDemoStep]=useState(-1);
-  const [showResume,setShowResume]=useState(hasSavedProgress());
+  const [showResume,setShowResume]=useState(saved.introSeen===true && (((saved.completed?.length)||0)>0 || (saved.score??0)!==0 || ((saved.caseResults?.length)||0)>0));
   const [simulationConfirmed,setSimulationConfirmed]=useState(false);
   const [selectedPost,setSelectedPost]=useState(null);
   const [commentsPost,setCommentsPost]=useState(null);  const [activeNotification,setActiveNotification]=useState(null); const [notifiedTasks,setNotifiedTasks]=useState([]); const [notificationHistory,setNotificationHistory]=useState(saved.notificationHistory||[]); const [unreadNotificationCount,setUnreadNotificationCount]=useState(saved.unreadNotificationCount||0); const [confidence,setConfidence]=useState(3); const [evaluating,setEvaluating]=useState(false);
   const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||createUuid()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${createUuid().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
   const [zoom,setZoom]=useState(1); const [heartBurst,setHeartBurst]=useState(null); const [storyPulse,setStoryPulse]=useState(0); const [commentDraft,setCommentDraft]=useState('');
   const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||createUuid()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??MAX_TIPS); const [revealedHints,setRevealedHints]=useState([]);
+  const [showTipInfo,setShowTipInfo]=useState(false);
   const notificationTimeout=useRef(null); const loaderRef=useRef(null); const taskStartedAt=useRef(null);
-
-  function hasSavedProgress(){const s=loadState();return (((s.completed?.length)||0)>0 || (s.score??0)!==0 || ((s.caseResults?.length)||0)>0);}
 
   const taskMap=useMemo(()=>Object.fromEntries(tasks.map(t=>[t.id,t])),[tasks]);
   const feedPosts=useMemo(()=>feedMode==='following'?posts.filter((_,i)=>i%2===0):posts,[posts,feedMode]);
@@ -206,6 +205,10 @@ export default function App() {
       return()=>{document.removeEventListener('visibilitychange',onReturn);window.removeEventListener('focus',onReturn);};
     },[activeTask,intro,selectedPost,commentsPost]);
 
+
+
+
+  
   function startIrisAudio() {
     const audio = irisAudioRef.current;
 
@@ -849,7 +852,8 @@ function reopenDemo(){
 
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
     {activeTask.type==='news' ? <>
-      <div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+      <div className="mechanic-step"><span>{t('openInvestigation')}</span><strong>{t('chooseYourChecks')}</strong></div>
+      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><button type="button" className="tip-info-btn" onClick={()=>setShowTipInfo(v=>!v)} aria-label={lang==='de'?'Info zu Tipps':'Tip info'}><Info size={16}/></button>{!freeHintRounds&&<span>{tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span>}</div>{showTipInfo&&<div className="tip-info-note">{t('hintInfoNote')}</div>}
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
@@ -873,7 +877,10 @@ function reopenDemo(){
     );
   })}
 </div>
+      <div className="mechanic-step decision-heading"><span>{t('yourAssessment')}</span><strong>{t('decideAndJustify')}</strong></div>
+      <p className="verdict-question">{t('verdictQuestion')}</p>
       <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
+      <p className="instruction">{activeTask.instruction}</p>
       <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/><small>{t('shortAnswerHint')}</small></div>
       {!feedback&&<div className="confidence-control"><label>{t('confidenceRating')} <strong>{confidence}/5</strong></label><input type="range" min="1" max="5" value={confidence} onChange={e=>setConfidence(Number(e.target.value))}/></div>}
       {feedback&&<div className={`feedback ${feedback.validation?'warning':feedback.correct?'correct':'wrong'}`}>{feedback.validation?<p>{feedback.text}</p>:<><strong>{feedback.delta>0?'+':''}{feedback.delta} {t('pointsWord3')}</strong><div className="feedback-scoreline"><span className={feedback.verdictCorrect?'ok':'no'}>{feedback.verdictCorrect?'✓':'✗'} {t('verdictWord')}</span><span className={feedback.reasonMatched?'ok':'no'}>{feedback.reasonMatched?'✓':'✗'} {t('reasonWord')}</span></div>{feedback.expired&&<p>{t('timeUp')}</p>}{!feedback.verdictCorrect&&!feedback.expired&&<p>{t('correctAssessmentWas')} {feedback.correctVerdictLabel}.</p>}{feedback.yourReason&&<div className="reason-compare"><div><b>{t('yourReasonLabel')}</b><p>{feedback.yourReason}</p></div><div><b>{t('actualReasonLabel')}</b><p>{feedback.actualReason}</p></div></div>}</>}</div>}
