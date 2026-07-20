@@ -257,5 +257,57 @@ img{user-select:none;-webkit-user-drag:none}
 .reason-compare{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem}
 .reason-compare>div{background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:.5rem .6rem}
 .reason-compare b{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;opacity:.7;margin-bottom:.2rem}
+
+
+/* Vollbilddarstellung auf Smartphones */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: 100%;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .phone-shell {
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
+  .app-header {
+    padding-top: env(safe-area-inset-top);
+    height: calc(62px + env(safe-area-inset-top));
+  }
+
+  .bottom-nav {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: calc(68px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    transform: none;
+    border-radius: 0;
+  }
+
+  .score-chip {
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
 .reason-compare p{margin:0;font-size:.85rem;white-space:pre-wrap}
 @media(max-width:520px){.reason-compare{grid-template-columns:1fr}}
