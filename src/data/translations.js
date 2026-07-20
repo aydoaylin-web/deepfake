@@ -136,7 +136,7 @@ const translations = {
     feed: 'Feed', cases: 'Cases', agency: 'Agency', profile: 'Profile',
     introEyebrow: 'Digital Credibility Agency',
     introTitle: 'Welcome to AiGram 👋',
-    introText: 'To get to know your mission, listen to the short introduction by tapping the playbutton ▶️.',
+    introBody: 'To get to know your mission, listen to the short introduction by tapping the playbutton ▶️.',
     startMission: 'Start Mission',
     startDemo: 'Start quick demo', skipDemo: 'Skip demo', skipWord: 'Skip', backWord: 'Back', demoOf: 'of',
     introText: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
