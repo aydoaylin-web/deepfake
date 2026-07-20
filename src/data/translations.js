@@ -25,7 +25,7 @@ const translations = {
     demo2Title: 'Nur bei Posts mit Link', demo2Body: 'Öffne die verlinkte Seite und vergleiche ihren Inhalt mit der Aussage im Post. Manche Seiten sind offiziell, andere unseriös oder der Post übertreibt den Originaltext.', demo2Eyebrow: 'SEHT SELBST', demo2Example: 'Post: „Ab morgen überall hitzefrei!“ – im Artikel steht: nur für eine einzige Schule.',
     demo3Body1: 'Ein verifiziertes Profil bedeutet, dass es geprüft wurde. Dies bedeutet aber nicht automatisch, dass der Beitrag echt ist.', demo3Body2: 'Vergleiche die Profilinformationen deshalb immer mit den anderen Hinweisen.', demo3ProfileAge: 'Profil angelegt: vor 3 Tagen', demo3ProfileResp: 'Verantwortliche Person: nicht erkennbar',
     demo4Title: 'Beiträge des Profils ansehen', demo4Body: 'Sieh dir die sichtbaren Beiträge dieses Profils an und vergleiche sie mit dem aktuellen Beitrag.', demo4Check: 'Prüfe, ob Thema und Darstellung zusammenpassen.',
-    demo5Title: 'Entscheiden und handeln', demo5Sub: 'Entwickle deine eigene Strategie', demo5Body: 'In diesem Beispiel ist das Profil zwar verifiziert und eine Quelle ist angegeben. Die Quelle ist jedoch nicht seriös. Vergleiche deshalb immer mehrere Hinweise. In den ersten drei Runden kannst du die Tipps kostenlos nutzen. Danach stehen dir für das gesamte restliche Spiel nur noch sechs Tipps zur Verfügung. Setze sie sorgfältig ein, denn falsche Entscheidungen kosten Punkte.', demo5WinRule: '20 Punkte = gewonnen', demo5LoseRule: '−10 Punkte = verloren',
+    demo5Title: 'Entscheiden und handeln', demo5Sub: 'Entwickle deine eigene Strategie', demo5Body: 'In diesem Beispiel ist das Profil zwar verifiziert und eine Quelle ist angegeben. Die Quelle ist jedoch nicht seriös. Vergleiche deshalb immer mehrere Hinweise. In den ersten drei Runden kannst du die Tipps kostenlos nutzen. Danach stehen dir für das gesamte restliche Spiel nur noch fünf Tipps zur Verfügung. Setze sie sorgfältig ein, denn falsche Entscheidungen kosten Punkte.', demo5WinRule: '20 Punkte = gewonnen', demo5LoseRule: '−10 Punkte = verloren',
     
     // Mission-Fortschritt
     missionProgress: 'Missionsfortschritt',
@@ -100,8 +100,8 @@ const translations = {
     
     // Analyse-Werkzeuge: Tipps
     hintShowFree: 'Tipp anzeigen', hintUse: 'Tipp einsetzen', hintLeft: 'übrig', hintNoneLeft: 'Keine Tipps mehr verfügbar', hintShowDefault: 'Tipp anzeigen',
-    //hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.', 
-    hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 6 Tipps verfügbar.', hintStatusEmpty: 'Alle 6 Tipps wurden eingesetzt.',
+    hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.',
+    hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 5 Tipps verfügbar.', hintStatusEmpty: 'Alle 5 Tipps wurden eingesetzt.',
     
     // Bildanalyse
     zoomOut: 'Verkleinern', zoomIn: 'Vergrößern', resetView: 'Zurücksetzen', zoomHelp: 'Doppeltippen oder doppelklicken zum Zoomen. Im vergrößerten Bild kannst du es mit Maus oder Finger verschieben.', coordHelper: 'Koordinaten-Helfer aktiv.',
@@ -132,7 +132,7 @@ const translations = {
     lensTipWhy1: 'Ein echtes Bild kann von ganz woanders kommen. Wenn es von einem anderen Ereignis oder aus einem anderen Jahr ist, beweist es diese Story hier nicht.',
     lensTipWhy2: 'Findet die Suche nichts, heißt das trotzdem nicht, dass der Beitrag nicht echt ist.',
     verdictWord: 'Einschätzung', reasonWord: 'Begründung', yourReasonLabel: 'Dein Grund', actualReasonLabel: 'Der eigentliche Grund',
-    valChooseVerdict: 'Was ist deine Einschätzung?: Echt, Manipuliert oder Irreführend.',
+    valChooseVerdict: 'Was ist deine Einschätzung?: Echt, Manipuliert oder Suspekt.',
     valSelectAnswer: 'Wähle mindestens eine Antwort.',
     valTypeClue: 'Bitte nenne den Hinweis, die Wirkung oder die Regel, die du erkannt hast.',
     evalMoreSpecific: 'Bitte formuliere deine Antwort etwas genauer und benenne den Hinweis, die Wirkung oder die Regel.',
@@ -150,7 +150,7 @@ const translations = {
     demo2Title: 'Only for posts with a link', demo2Body: 'Open the linked page and compare its content with the claim in the post. Some pages are official, others dubious, or the post exaggerates the original text.', demo2Eyebrow: 'SEE FOR YOURSELF', demo2Example: 'Post: “From tomorrow, school’s out everywhere!” – the article says: only for a single school.',
     demo3Body1: 'A verified profile means it has been checked. But that does not automatically mean the post is real.', demo3Body2: 'So always compare the profile information with the other clues.', demo3ProfileAge: 'Profile created: 3 days ago', demo3ProfileResp: 'Responsible person: not identifiable',
     demo4Title: 'View the profile’s posts', demo4Body: 'Look at this profile’s visible posts and compare them with the current post.', demo4Check: 'Check whether the topic and presentation match.',
-    demo5Title: 'Decide and act', demo5Sub: 'Develop your own strategy', demo5Body: 'In this example the profile is verified and a source is given. However, the source is not reputable. So always compare several clues. In the first three rounds you can use the tips for free. After that, only six tips are available for the rest of the game. Use them carefully, because wrong decisions cost points.', demo5WinRule: '20 points = win', demo5LoseRule: '−10 points = loss',
+    demo5Title: 'Decide and act', demo5Sub: 'Develop your own strategy', demo5Body: 'In this example the profile is verified and a source is given. However, the source is not reputable. So always compare several clues. In the first three rounds you can use the tips for free. After that, only five tips are available for the rest of the game. Use them carefully, because wrong decisions cost points.', demo5WinRule: '20 points = win', demo5LoseRule: '−10 points = loss',
     missionProgress: 'Mission progress',
     nextCase: 'Next case', agencyReview: 'Agency review',
     allCasesReviewed: 'All cases reviewed', target: 'Target', pointsWord: 'points',
@@ -203,7 +203,7 @@ const translations = {
     tool_image: 'Image analysis', tool_source: 'Source check', tool_profile: 'Profile check', tool_activities: 'Activities',
     previousActivities: 'Previous activities', profileActivities: 'Posts from this profile', currentPost: 'Current post', noPreviousActivities: 'No earlier posts from this profile are available.', tip: 'Tip', whyImportant: 'Why is this important?', collapseTip: 'Collapse tip', activitiesHintQuestion: 'Do the profile’s earlier posts fit the current post?', activitiesHintWhy: 'Previous activities show which topics and content the profile normally publishes. Compare them with the current post.',
     hintShowFree: 'Show free tip', hintUse: 'Use tip', hintLeft: 'left', hintNoneLeft: 'No tips left', hintShowDefault: 'Show tip',
-    hintStatusFree: 'Tips are free in the first three rounds.', hintStatusLeftPrefix: '', hintStatusLeftSuffix: 'of 6 tips remaining.', hintStatusEmpty: 'All 6 tips have been used.',
+    hintStatusFree: 'Tips are free in the first three rounds.', hintStatusLeftPrefix: '', hintStatusLeftSuffix: 'of 5 tips remaining.', hintStatusEmpty: 'All 5 tips have been used.',
     zoomOut: 'Zoom out', zoomIn: 'Zoom in', resetView: 'Reset', zoomHelp: 'Double-tap or double-click to zoom. In the enlarged image you can move it with mouse or finger.', coordHelper: 'Coordinate helper active.',
     imgAnomaliesFound: 'anomalies found.', imgMiss: 'No stored anomaly was found there. Look at a different area or use the tip.', imgTipQ: 'Do faces, hands, text, lighting or backgrounds look natural?', imgTipWhy1: 'A manipulated image can contain small visual anomalies. If individual areas look unnatural or faulty, you should examine the post more closely.', imgTipWhy2: 'However, an inconspicuous image does not automatically mean the post is real.', imgShowResult: 'Show evaluation', imgAllFound: 'All anomalies found', imgResultTitle: 'Image check evaluation', imgFoundLabel: 'Found:', imgMissedLabel: 'Missed:',
     srcTipQ: 'Is it clear who is responsible for the content of this source?', srcTipWhy: 'A cited source is not automatically trustworthy. Check who is responsible and whether the page content really matches the claim in the post.', srcNoneTitle: 'No linked page', srcNoneBody: 'This post contains no link. That is normal for private accounts, but more suspicious for news accounts.', srcEyebrow: 'SOURCE CHECK', srcLess: 'Show less', srcPreview: 'Quick look at the page', srcPostType: 'Post', srcResponsible: 'Responsible', srcPublished: 'Published',
@@ -218,7 +218,7 @@ const translations = {
     lensTipWhy1: 'A real image can be from somewhere totally different. If it is from another event or another year, it does not prove this story.',
     lensTipWhy2: 'And if the search finds nothing, that still does not mean the post is real.',
     verdictWord: 'Assessment', reasonWord: 'Reasoning', yourReasonLabel: 'Your reason', actualReasonLabel: 'The actual reason',
-    valChooseVerdict: 'Choose an assessment: Real, Manipulated or Misleading.',
+    valChooseVerdict: 'Choose an assessment: Real, Manipulated or Suspicious.',
     valSelectAnswer: 'Select at least one answer.',
     valTypeClue: 'Please type the clue, effect, or rule you identified.',
     verdictSuspekt: 'Suspicious – needs further research',
