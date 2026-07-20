@@ -215,6 +215,10 @@ export default function App() {
     {demoStep===0&&<>
       <div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('introEyebrow')}</span><h1>{t('introTitle')}</h1>
       <p>{t('introBody')}</p>
+      <div className="intro-audio-wrap">
+        <span>🔊 {t('introListen')}</span>
+        <audio className="intro-audio" controls preload="none" src={imagePath(`assets/intro_${lang}.mp3`)} key={lang} />
+      </div>
       <div className="mission-rules"><strong>{t('introWinRule')}</strong><strong>{t('introLoseRule')}</strong></div>
       <button onClick={()=>setDemoStep(1)}>{t('startDemo')}</button>
       <button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipDemo')}</button>
