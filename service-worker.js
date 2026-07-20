@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deepfake-defender-v7-audio-fix-20260720';
+const CACHE_NAME = 'deepfake-defender-v8-ios-fix-20260720';
 
 const APP_SHELL = [
   './',
