@@ -10,25 +10,29 @@ const translations = {
   de: {
     // Navigation
     feed: 'Feed', cases: 'Fälle', agency: 'Agentur', profile: 'Profil',
+    
     // Intro
     introEyebrow: 'Digitale Glaubwürdigkeits-Agentur',
-    introTitle: 'Willkommen bei AiGram',
-    introText: 'Beobachte den Feed, prüfe gemeldete Inhalte und schütze die Plattform vor Deepfakes.',
+    introTitle: 'Willkommen bei AiGram 👋',
+    introText: 'Um zu starten, hör dir kurz die Einführungsnachricht an – tippe dafür auf den Play Knopf ▶️.',
     startMission: 'Mission starten',
+    
     // Intro / Demo
     startDemo: 'Kurze Demo starten', skipDemo: 'Demo überspringen', skipWord: 'Überspringen', backWord: 'Zurück', demoOf: 'von',
-    introBody: 'Handle bei jedem gemeldeten Beitrag. Richtige Entscheidungen bringen Punkte, falsche oder nicht bearbeitete Fälle kosten Punkte.',
+    introBody: 'Welche Feeds sind Deepfakes? Richtige Entscheidungen bringen dir Punkte, aber falsche oder nicht bearbeitete Fälle kosten Punkte.',
     introWinRule: '🏆 Sieg bei 20 Punkten', introLoseRule: '❌ Niederlage bei −10 Punkten',
     demo1Title: 'Guck dir diesen echten App-Post an', demo1Body: 'Vergrößere das Bild. Nutze den Zoom und untersuche, ob Gesichter, Hände, Schrift, Licht oder Hintergründe natürlich wirken.',
     demo2Title: 'Nur bei Posts mit Link', demo2Body: 'Öffne die verlinkte Seite und vergleiche ihren Inhalt mit der Aussage im Post. Manche Seiten sind offiziell, andere unseriös oder der Post übertreibt den Originaltext.', demo2Eyebrow: 'SEHT SELBST', demo2Example: 'Post: „Ab morgen überall hitzefrei!“ – im Artikel steht: nur für eine einzige Schule.',
     demo3Body1: 'Ein verifiziertes Profil bedeutet, dass es geprüft wurde. Dies bedeutet aber nicht automatisch, dass der Beitrag echt ist.', demo3Body2: 'Vergleiche die Profilinformationen deshalb immer mit den anderen Hinweisen.', demo3ProfileAge: 'Profil angelegt: vor 3 Tagen', demo3ProfileResp: 'Verantwortliche Person: nicht erkennbar',
     demo4Title: 'Beiträge des Profils ansehen', demo4Body: 'Sieh dir die sichtbaren Beiträge dieses Profils an und vergleiche sie mit dem aktuellen Beitrag.', demo4Check: 'Prüfe, ob Thema und Darstellung zusammenpassen.',
     demo5Title: 'Entscheiden und handeln', demo5Sub: 'Entwickle deine eigene Strategie', demo5Body: 'In diesem Beispiel ist das Profil zwar verifiziert und eine Quelle ist angegeben. Die Quelle ist jedoch nicht seriös. Vergleiche deshalb immer mehrere Hinweise. In den ersten drei Runden kannst du die Tipps kostenlos nutzen. Danach stehen dir für das gesamte restliche Spiel nur noch sechs Tipps zur Verfügung. Setze sie sorgfältig ein, denn falsche Entscheidungen kosten Punkte.', demo5WinRule: '20 Punkte = gewonnen', demo5LoseRule: '−10 Punkte = verloren',
+    
     // Mission-Fortschritt
     missionProgress: 'Missionsfortschritt',
     nextCase: 'Nächster Fall', agencyReview: 'Agentur-Prüfung',
     allCasesReviewed: 'Alle Fälle geprüft', target: 'Ziel', pointsWord: 'Punkte',
     agencyNotification: 'Agentur-Meldung',
+    
     // Feed
     forYou: 'Für dich', following: 'Abonniert',
     latestPosts: 'Neueste Beiträge', refresh: 'Aktualisieren',
@@ -39,10 +43,12 @@ const translations = {
     feedReviewCompleted: 'Feed-Prüfung abgeschlossen',
     agencyReviewCompleted: 'Agentur-Prüfung abgeschlossen',
     loadingMore: 'Weitere Beiträge werden geladen…', allCaughtUp: 'Du bist auf dem neuesten Stand',
+    
     // Fälle-Tab
     agencyDatabase: 'Agentur-Datenbank', reviewedCases: 'Geprüfte Fälle',
     noCasesYet: 'Noch keine Fälle', reviewedWillAppear: 'Geprüfte Beiträge erscheinen hier.',
     noWrittenResponse: 'Keine schriftliche Antwort erfasst.',
+    
     // Agentur-Tab
     agencyCenter: 'Agentur-Zentrale', digitalCredibility: 'Digitale Glaubwürdigkeit',
     credibilityPoints: 'Glaubwürdigkeitspunkte', completedTasks: 'Abgeschlossene Aufgaben',
@@ -57,17 +63,21 @@ const translations = {
     localAi: 'Lokale KI', ready: 'Bereit', optional: 'Optional',
     exportJson: 'JSON exportieren', exportCsv: 'CSV exportieren', deleteLocalData: 'Lokale Daten löschen',
     sessionIdLabel: 'Sitzungs-ID', startNewRun: 'Neuen zufälligen Durchlauf starten',
+    
     // Profil-Tab
     agencyTeam: 'Agentur-Team', profileBio: 'Überwacht die Informationsintegrität auf AiGram.',
     pointsWord2: 'Punkte', casesWord: 'Fälle', rulesWord: 'Regeln',
+    
     // Kommentare
     comments: 'Kommentare', addComment: 'Kommentar hinzufügen…', post: 'Senden', reply: 'Antworten',
+    
     // Run-Zusammenfassung
     runComplete: 'Durchlauf abgeschlossen', missionAccomplished: 'Agentur-Mission erfüllt',
     missionReviewed: 'Mission geprüft',
     youFinished: 'Du hast alle', casesWith: 'Fälle abgeschlossen mit',
     credibilityPointsLower: 'Glaubwürdigkeitspunkten', correct: 'Richtig', needsReview: 'Zu prüfen',
     viewAgencyResults: 'Agentur-Ergebnisse ansehen', startAnotherRun: 'Weiteren zufälligen Durchlauf starten',
+    
     // Aufgabe
     feedReview: 'Feed-Prüfung', openInvestigation: 'Untersuchung öffnen',
     chooseYourChecks: 'Wähle deine Prüfungen', allChecksAvailable: 'Alle Analyse-Optionen stehen bereit. Nutze jede Prüfung, die du für sinnvoll hältst, oder entscheide, ohne jedes Werkzeug zu öffnen.',
@@ -81,24 +91,33 @@ const translations = {
     yourAnalysis: 'Deine Analyse', typeAnalysis: 'Gib deine Analyse ein',
     enlargeEvidence: 'Beweis vergrößern',
     noInfoCheck: 'Für diese Prüfung liegen keine weiteren Informationen vor.',
+    
     // Werkzeug-Namen
     tool_image: 'Bildanalyse', tool_source: 'Quellenprüfung', tool_profile: 'Profilprüfung', tool_activities: 'Aktivitäten',
     previousActivities: 'Bisherige Aktivitäten', profileActivities: 'Beiträge dieses Profils', currentPost: 'Aktueller Beitrag', noPreviousActivities: 'Keine früheren Beiträge dieses Profils verfügbar.', tip: 'Tipp', whyImportant: 'Warum ist das wichtig?', collapseTip: 'Tipp zuklappen', activitiesHintQuestion: 'Passen die bisherigen Beiträge des Profils zum aktuellen Beitrag?', activitiesHintWhy: 'Die bisherigen Aktivitäten zeigen, welche Themen und Inhalte das Profil normalerweise veröffentlicht. Vergleiche sie deshalb mit dem aktuellen Beitrag.',
+    
     // Analyse-Werkzeuge: Tipps
     hintShowFree: 'Kostenlosen Tipp anzeigen', hintUse: 'Tipp einsetzen', hintLeft: 'übrig', hintNoneLeft: 'Keine Tipps mehr verfügbar', hintShowDefault: 'Tipp anzeigen',
     hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.', hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 6 Tipps verfügbar.', hintStatusEmpty: 'Alle 6 Tipps wurden eingesetzt.',
+    
     // Bildanalyse
     zoomOut: 'Verkleinern', zoomIn: 'Vergrößern', resetView: 'Zurücksetzen', zoomHelp: 'Doppeltippen oder doppelklicken zum Zoomen. Im vergrößerten Bild kannst du es mit Maus oder Finger verschieben.', coordHelper: 'Koordinaten-Helfer aktiv.',
     imgAnomaliesFound: 'Auffälligkeiten gefunden.', imgMiss: 'Dort wurde keine hinterlegte Auffälligkeit gefunden. Schau dir einen anderen Bereich an oder nutze den Tipp.', imgTipQ: 'Wirken Gesichter, Hände, Schrift, Licht oder Hintergründe natürlich?', imgTipWhy1: 'Ein manipuliertes Bild kann kleine visuelle Auffälligkeiten enthalten. Wenn einzelne Bereiche unnatürlich oder fehlerhaft aussehen, solltest du den Beitrag genauer prüfen.', imgTipWhy2: 'Ein unauffälliges Bild bedeutet jedoch nicht automatisch, dass der Beitrag echt ist.', imgShowResult: 'Auswertung anzeigen', imgAllFound: 'Alle Auffälligkeiten gefunden', imgResultTitle: 'Auswertung der Bildprüfung', imgFoundLabel: 'Gefunden:', imgMissedLabel: 'Übersehen:',
+    
     // Quellenprüfung
     srcTipQ: 'Ist erkennbar, wer für den Inhalt dieser Quelle verantwortlich ist?', srcTipWhy: 'Eine angegebene Quelle ist nicht automatisch seriös. Prüfe, wer verantwortlich ist und ob der Inhalt der Seite wirklich zur Aussage im Post passt.', srcNoneTitle: 'Keine verlinkte Seite', srcNoneBody: 'Dieser Post enthält keinen Link. Das ist bei privaten Accounts normal, bei News-Accounts aber auffälliger.', srcEyebrow: 'QUELLENPRÜFUNG', srcLess: 'Weniger anzeigen', srcPreview: 'Seite kurz ansehen', srcPostType: 'Beitrag', srcResponsible: 'Verantwortlich', srcPublished: 'Veröffentlicht',
+    
     // Profilprüfung
     profTipQ: 'Ist das Profil verifiziert?', profNone: 'Für dieses Profil sind keine weiteren Angaben verfügbar.', profUnreachable: 'Profil nicht erreichbar', profPartial: 'Ältere Profildaten sind nur teilweise verfügbar.', profPosts: 'Beiträge', profFollowers: 'Follower', profFollowing: 'Folgt', profType: 'Profiltyp', profCreated: 'Profil angelegt', profVisibility: 'Sichtbarkeit', profVerification: 'Verifizierung',
+    
     // Aktivitäten
     actRecentComments: 'Letzte Kommentare von', actHistoryExplainer: 'Diese Historie zeigt die letzten vier Kommentare, die der Account selbst unter anderen Beiträgen geschrieben hat.', actNoHistory: 'Für diesen Account ist noch keine Kommentarhistorie vorhanden.',
+    
     // Gemeinsame Fallback-Werte
     notIdentifiable: 'Nicht erkennbar', notProvided: 'Nicht angegeben', notVisible: 'Nicht sichtbar',
+    
     // Validierung
+    
     // Bildherkunft / Lens + 2-Punkte-Feedback
     tool_origin: 'Bildherkunft',
     originEyebrow: 'BILDHERKUNFT', originIntro: 'Rückwärtssuche: Wo ist dieses Bild schon einmal aufgetaucht?',
@@ -116,8 +135,8 @@ const translations = {
   en: {
     feed: 'Feed', cases: 'Cases', agency: 'Agency', profile: 'Profile',
     introEyebrow: 'Digital Credibility Agency',
-    introTitle: 'Welcome to AiGram',
-    introText: 'Monitor the feed, review reported content, and protect the platform from deepfakes.',
+    introTitle: 'Welcome to AiGram 👋',
+    introText: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
     startMission: 'Start Mission',
     startDemo: 'Start quick demo', skipDemo: 'Skip demo', skipWord: 'Skip', backWord: 'Back', demoOf: 'of',
     introBody: 'Take action on every reported post. Correct decisions earn points; wrong or unhandled cases cost points.',
