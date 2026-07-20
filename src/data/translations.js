@@ -14,7 +14,7 @@ const translations = {
     // Intro
     introEyebrow: 'Digitale Glaubwürdigkeits-Agentur',
     introTitle: 'Willkommen bei AiGram 👋',
-    introListen: 'Um deine Mission zu starten, hör dir kurz die Einführungsnachricht an – tippe dafür auf den Play Knopf ▶️.',
+    introText: 'Um deine Mission zu starten, hör dir kurz die Einführungsnachricht an – tippe dafür auf den Play Knopf ▶️.',
     startMission: 'Mission starten',
     
     // Intro / Demo
@@ -139,7 +139,7 @@ const translations = {
     introText: 'To get to know your mission, listen to the short introduction by tapping the playbutton ▶️.',
     startMission: 'Start Mission',
     startDemo: 'Start quick demo', skipDemo: 'Skip demo', skipWord: 'Skip', backWord: 'Back', demoOf: 'of',
-    introListen: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
+    introText: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
     introWinRule: '🏆 Win at 20 points', introLoseRule: '❌ Loss at −10 points',
     demo1Title: 'Look at this real in-app post', demo1Body: 'Enlarge the image. Use the zoom and check whether faces, hands, text, lighting or backgrounds look natural.',
     demo2Title: 'Only for posts with a link', demo2Body: 'Open the linked page and compare its content with the claim in the post. Some pages are official, others dubious, or the post exaggerates the original text.', demo2Eyebrow: 'SEE FOR YOURSELF', demo2Example: 'Post: “From tomorrow, school’s out everywhere!” – the article says: only for a single school.',
