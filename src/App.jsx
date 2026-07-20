@@ -211,30 +211,15 @@ export default function App() {
     <nav className="bottom-nav"><button className={activeTab==='feed'?'active':''} onClick={()=>setActiveTab('feed')}><Home/><span>{t('feed')}</span></button><button className={activeTab==='cases'?'active':''} onClick={()=>setActiveTab('cases')}><ShieldCheck/><span>{t('cases')}</span></button><button className={activeTab==='agency'?'active':''} onClick={()=>{setActiveTab('agency');setUnreadNotificationCount(0);}} aria-label="Pushnachrichten öffnen"><span className="nav-icon-wrap"><Bell/>{unreadNotificationCount>0&&<span className="notification-badge">{unreadNotificationCount>99?'99+':unreadNotificationCount}</span>}</span><span>{t('agency')}</span></button><button className={activeTab==='profile'?'active':''} onClick={()=>setActiveTab('profile')}><UserRound/><span>{t('profile')}</span></button></nav><div className="score-chip"><ShieldCheck size={17}/><span>{score}</span></div>
   </div>
 
-  {intro&&<div className="modal-backdrop"><section className="intro-card demo-card">
-    {demoStep===0&&<>
+  {demoStep===0&&<>
       <div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('introEyebrow')}</span><h1>{t('introTitle')}</h1>
       <p>{t('introBody')}</p>
-     <div className="intro-audio-wrap">
-        <button
-          type="button"
-          className="intro-audio-btn"
-          onClick={(e) => {
-            const a = e.currentTarget.parentElement.querySelector('audio');
-            if (!a) return;
-            if (a.paused) {
-              a.play().catch(() => alert('Ton konnte nicht starten. Prüfe, ob das Gerät stummgeschaltet ist.'));
-            } else {
-              a.pause();
-            }
-          }}
-        >
-          ▶︎ {t('introBody')}
-        </button>
+      <div className="intro-audio-wrap">
         <audio
           className="intro-audio"
+          controls
           playsInline
-          preload="auto"
+          preload="metadata"
           src={imagePath(`assets/intro_${lang}.mp3`)}
           key={lang}
         />
