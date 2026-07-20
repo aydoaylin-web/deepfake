@@ -173,6 +173,21 @@ export default function App() {
 
   useEffect(()=>{ if(!loaderRef.current)return; const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting)setVisibleCount(v=>Math.min(posts.length,v+3));},{rootMargin:'300px'}); observer.observe(loaderRef.current); return()=>observer.disconnect(); },[posts.length]);
 
+  useEffect(()=>{
+      const onReturn=()=>{
+        if(document.visibilityState!=='visible')return;
+        if(activeTask||intro||selectedPost||commentsPost)return;
+        if(hasSavedProgress())setShowResume(true);
+      };
+      document.addEventListener('visibilitychange',onReturn);
+      window.addEventListener('focus',onReturn);
+      return()=>{document.removeEventListener('visibilitychange',onReturn);window.removeEventListener('focus',onReturn);};
+    },[activeTask,intro,selectedPost,commentsPost]);
+
+
+
+
+  
   function logResearchEvent(type,payload={}){setResearchEvents(events=>[...events,{id:createUuid(),sessionId,participantCode,runId,type,timestamp:new Date().toISOString(),...payload}]);}
   function clearResearchData(){if(!window.confirm('Delete all locally stored research events for this session?'))return;setResearchEvents([]);}
   function normalizeAnswer(v=''){return String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();}
