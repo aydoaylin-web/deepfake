@@ -79,9 +79,11 @@ const translations = {
     viewAgencyResults: 'Agentur-Ergebnisse ansehen', startAnotherRun: 'Weiteren zufälligen Durchlauf starten',
     
     // Aufgabe
-    feedReview: 'Feed-Prüfung', //openInvestigation: 'Untersuchung öffnen',
-    //chooseYourChecks: 'Wähle deine Prüfungen', allChecksAvailable: //'Alle Analyse-Optionen stehen bereit. Nutze jede Prüfung, die du für sinnvoll hältst, oder entscheide, ohne jedes Werkzeug zu öffnen.',
-    //yourAssessment: 'Deine Einschätzung', decideAndJustify: 'Entscheiden und begründen',
+    // openInvestigation: 'Untersuchung öffnen',
+    // chooseYourChecks: 'Wähle deine Prüfungen',
+    // allChecksAvailable: 'Alle Analyse-Optionen stehen bereit. Nutze jede Prüfung, die du für sinnvoll hältst, oder entscheide, ohne jedes Werkzeug zu öffnen.',
+    // yourAssessment: 'Deine Einschätzung',
+    feedReview: 'Feed-Prüfung', 
     trustworthy: 'Vertrauenswürdig', suspicious: 'Verdächtig',
     verdictEcht: 'Echt', verdictManipuliert: 'Manipuliert', verdictSuspekt: 'Suspekt – weitere Recherche notwendig', correctAssessmentWas: 'Richtige Einschätzung wäre gewesen:', guessHint: 'Richtige Einschätzung – aber unbelegt. Öffne das passende Prüfwerkzeug und benenne den konkreten Hinweis.', sharpenReason: 'Tipp: Benenne den konkreten Hinweis noch genauer.', luckyGuess: 'Geraten', timeUp: 'Zeit abgelaufen.', pushTitle_news: 'Neuer gemeldeter Beitrag', pushText_news: 'Ein möglicherweise manipulierter Beitrag wurde zur Prüfung gemeldet.', pushTitle_liveCheck: 'Dringende Live-Prüfung', pushText_liveCheck: 'Ein viraler Beitrag muss schnell untersucht werden.', pushTitle_perspective: 'Wirkungsanalyse erforderlich', pushText_perspective: 'Untersuche die mögliche Absicht hinter dem Beitrag.', pushTitle_realityDefense: 'Schutzstrategie erforderlich', pushText_realityDefense: 'Entwickle eine Regel zum Schutz vor ähnlichen Fällen.',
     yourJustification: 'Deine Begründung', explainEvidence: 'Erkläre die Belege für deine Entscheidung.',
@@ -119,12 +121,13 @@ const translations = {
     
     // Validierung
     
-    // Bildherkunft / Lens + 2-Punkte-Feedback
+    // Bildherkunft / Lens + 2-Punkte-Feedback,     
+    //Das beweist aber nicht, dass der Beitrag nciht echt ist.',
     tool_origin: 'Bildherkunft',
     originEyebrow: 'BILDHERKUNFT', originIntro: 'Online Bildsuche: Wo ist dieses Bild schon einmal aufgetaucht?',
     originHitsLabel: 'Frühere Fundstellen', originNoneTitle: 'Keine früheren Fundstellen',
-    originNoneBody: 'Die Online Bildsuche findet dieses Bild sonst nirgends. 
-      //Das beweist aber nicht, dass der Beitrag nciht echt ist.',
+    originNoneBody: 'Die Online Bildsuche findet dieses Bild sonst nirgends.', 
+    
     lensTipQ: 'Gab es das Bild schon von früher – und passt das dann überhaupt zu dem, was hier behauptet wird?',
     lensTipWhy1: 'Ein echtes Bild kann von ganz woanders kommen. Wenn es von einem anderen Ereignis oder aus einem anderen Jahr ist, beweist es diese Story hier nicht.',
     lensTipWhy2: 'Findet die Suche nichts, heißt das trotzdem nicht, dass der Beitrag nicht echt ist.',
