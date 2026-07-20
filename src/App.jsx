@@ -31,6 +31,22 @@ function shuffle(items) { const copy = [...items]; for (let i = copy.length - 1;
 function imagePath(path) { return `${import.meta.env.BASE_URL}${String(path || "").replace(/^\//, "")}`; }
 function playNotificationSound() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)(); const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(880, ctx.currentTime); gain.gain.setValueAtTime(0.15, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4); osc.start(); osc.stop(ctx.currentTime + 0.4); } catch { /* Audio nicht verfügbar */ } }
 
+function createUuid() {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
+    return createUuid();
+  }
+
+  return (
+    "id-" +
+    Date.now().toString(36) +
+    "-" +
+    Math.random().toString(36).slice(2)
+  );
+}
+
 export default function App() {
   const saved = loadState();
   const [posts,setPosts]=useState([]); const [tasks,setTasks]=useState([]); const [profiles,setProfiles]=useState([]); const [dataStories,setDataStories]=useState([]); const [guides,setGuides]=useState([]); const [contentSettings,setContentSettings]=useState({}); const [contentManifest,setContentManifest]=useState(null); const [loading,setLoading]=useState(true); const [loadingError,setLoadingError]=useState('');
@@ -47,9 +63,9 @@ export default function App() {
   const [simulationConfirmed,setSimulationConfirmed]=useState(false);
   const [selectedPost,setSelectedPost]=useState(null);
   const [commentsPost,setCommentsPost]=useState(null);  const [activeNotification,setActiveNotification]=useState(null); const [notifiedTasks,setNotifiedTasks]=useState([]); const [notificationHistory,setNotificationHistory]=useState(saved.notificationHistory||[]); const [unreadNotificationCount,setUnreadNotificationCount]=useState(saved.unreadNotificationCount||0); const [confidence,setConfidence]=useState(3); const [evaluating,setEvaluating]=useState(false);
-  const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||crypto.randomUUID()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${crypto.randomUUID().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
+  const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||createUuid()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${createUuid().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
   const [zoom,setZoom]=useState(1); const [heartBurst,setHeartBurst]=useState(null); const [storyPulse,setStoryPulse]=useState(0); const [commentDraft,setCommentDraft]=useState('');
-  const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||crypto.randomUUID()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??6); const [revealedHints,setRevealedHints]=useState([]);
+  const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||createUuid()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??6); const [revealedHints,setRevealedHints]=useState([]);
   const notificationTimeout=useRef(null); const loaderRef=useRef(null); const taskStartedAt=useRef(null);
 
   const taskMap=useMemo(()=>Object.fromEntries(tasks.map(t=>[t.id,t])),[tasks]);
@@ -153,7 +169,7 @@ export default function App() {
 
   useEffect(()=>{ if(!loaderRef.current)return; const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting)setVisibleCount(v=>Math.min(posts.length,v+3));},{rootMargin:'300px'}); observer.observe(loaderRef.current); return()=>observer.disconnect(); },[posts.length]);
 
-  function logResearchEvent(type,payload={}){setResearchEvents(events=>[...events,{id:crypto.randomUUID(),sessionId,participantCode,runId,type,timestamp:new Date().toISOString(),...payload}]);}
+  function logResearchEvent(type,payload={}){setResearchEvents(events=>[...events,{id:createUuid(),sessionId,participantCode,runId,type,timestamp:new Date().toISOString(),...payload}]);}
   function clearResearchData(){if(!window.confirm('Delete all locally stored research events for this session?'))return;setResearchEvents([]);}
   function normalizeAnswer(v=''){return String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();}
   function localRuleEvaluation(task,text){const n=normalizeAnswer(text);const words=new Set(n.split(' ').filter(Boolean));const w=(task.acceptedWords||[]).find(c=>{const x=normalizeAnswer(c);return x.includes(' ')?n.includes(x):words.has(x);});const p=(task.acceptedPhrases||[]).find(c=>n.includes(normalizeAnswer(c)));return w||p?{status:'accepted',accepted:true,feedback:'',mode:w?'accepted-word':'accepted-phrase',matchedCriterion:w||p}:null;}
@@ -190,7 +206,7 @@ export default function App() {
     const followed=new Set(tasks.map(task=>task.followUpTaskId).filter(Boolean));
     const pushTaskIds=new Set(posts.map(post=>post.taskId).filter(Boolean));
     const primary=tasks.filter(task=>pushTaskIds.has(task.id)&&!followed.has(task.id)).map(task=>task.id);
-    const newRunId=crypto.randomUUID();
+    const newRunId=createUuid();
     setPosts(items=>shuffle(items));setRunOrder(shuffle(primary));setRunId(newRunId);setVisibleCount(5);setNotifiedTasks([]);setActiveNotification(null);
     setScore(0);setCompleted([]);setCaseResults([]);setAgencyRules([]);setTipsRemaining(6);setRevealedHints([]);setUnreadNotificationCount(0);setNotificationHistory([]);setRunSummary(null);setActiveTab('feed');
     logResearchEvent('new_run_started',{runId:newRunId,previousCompletedTasks:completed.length,previousScore:score});window.scrollTo({top:0,behavior:'smooth'});
@@ -199,7 +215,7 @@ export default function App() {
     const text=commentDraft.trim();
     if(!commentsPost||!text)return;
     const postId=commentsPost.id;
-    const newComment={id:crypto.randomUUID(),username:'agency_team',text,time:'now'};
+    const newComment={id:createUuid(),username:'agency_team',text,time:'now'};
     setCustomComments(current=>({...current,[postId]:[...(current[postId]||[]),newComment]}));
     setPosts(items=>items.map(post=>post.id===postId?{...post,comments:[...(post.comments||[]),newComment]}:post));
     setCommentsPost(current=>current?.id===postId?{...current,comments:[...(current.comments||[]),newComment]}:current);
@@ -360,7 +376,7 @@ function reopenDemo(){
             className="intro-audio"
             controls
             playsInline
-            preload="metadata"
+            preload="none"
             src={imagePath(`assets/intro_${lang}.mp3`)}
             key={lang}
           />
