@@ -311,3 +311,29 @@ img{user-select:none;-webkit-user-drag:none}
 }
 .reason-compare p{margin:0;font-size:.85rem;white-space:pre-wrap}
 @media(max-width:520px){.reason-compare{grid-template-columns:1fr}}
+
+/* === Mobile-Fix: zuverlässiges Scrollen & Bild-Rendering (nur Smartphones) === */
+@media (max-width: 600px) {
+  html, body, #root {
+    overflow-x: clip;      /* verhindert Querscrollen, blockiert aber NICHT das vertikale Scrollen */
+    height: auto;
+    min-height: 100%;
+  }
+  body { -webkit-overflow-scrolling: touch; }
+
+  /* Weichzeichner auf Handys abschalten -> kein Ruckeln, Bilder bleiben nicht leer */
+  .app-header,
+  .bottom-nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #fff;
+  }
+
+  /* kein Clipping, das Scrollen/Neuzeichnen stört */
+  .phone-shell { overflow: visible; }
+
+  /* content-visibility deaktivieren -> Bilder erscheinen zuverlässig */
+  .post-image,
+  .post-media img,
+  .profile-grid img { content-visibility: visible; }
+}
