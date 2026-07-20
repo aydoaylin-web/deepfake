@@ -14,12 +14,13 @@ const translations = {
     // Intro
     introEyebrow: 'Digitale Glaubwürdigkeits-Agentur',
     introTitle: 'Willkommen bei AiGram 👋',
+    introListen: 'Einführung',
     introText: 'Um zu starten, hör dir kurz die Einführungsnachricht an – tippe dafür auf den Play Knopf ▶️.',
     startMission: 'Mission starten',
     
     // Intro / Demo
     startDemo: 'Kurze Demo starten', skipDemo: 'Demo überspringen', skipWord: 'Überspringen', backWord: 'Zurück', demoOf: 'von',
-    introBody: 'Welche Feeds sind Deepfakes? Richtige Entscheidungen bringen dir Punkte, aber falsche oder nicht bearbeitete Fälle kosten Punkte.',
+    introBody: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
     introWinRule: '🏆 Sieg bei 20 Punkten', introLoseRule: '❌ Niederlage bei −10 Punkten',
     demo1Title: 'Guck dir diesen echten App-Post an', demo1Body: 'Vergrößere das Bild. Nutze den Zoom und untersuche, ob Gesichter, Hände, Schrift, Licht oder Hintergründe natürlich wirken.',
     demo2Title: 'Nur bei Posts mit Link', demo2Body: 'Öffne die verlinkte Seite und vergleiche ihren Inhalt mit der Aussage im Post. Manche Seiten sind offiziell, andere unseriös oder der Post übertreibt den Originaltext.', demo2Eyebrow: 'SEHT SELBST', demo2Example: 'Post: „Ab morgen überall hitzefrei!“ – im Artikel steht: nur für eine einzige Schule.',
@@ -137,9 +138,10 @@ const translations = {
     introEyebrow: 'Digital Credibility Agency',
     introTitle: 'Welcome to AiGram 👋',
     introText: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
+    introListen: 'Introduction',
     startMission: 'Start Mission',
     startDemo: 'Start quick demo', skipDemo: 'Skip demo', skipWord: 'Skip', backWord: 'Back', demoOf: 'of',
-    introBody: 'Take action on every reported post. Correct decisions earn points; wrong or unhandled cases cost points.',
+    introBody: 'To get started, listen to the short introduction by tapping the playbutton ▶️.',
     introWinRule: '🏆 Win at 20 points', introLoseRule: '❌ Loss at −10 points',
     demo1Title: 'Look at this real in-app post', demo1Body: 'Enlarge the image. Use the zoom and check whether faces, hands, text, lighting or backgrounds look natural.',
     demo2Title: 'Only for posts with a link', demo2Body: 'Open the linked page and compare its content with the claim in the post. Some pages are official, others dubious, or the post exaggerates the original text.', demo2Eyebrow: 'SEE FOR YOURSELF', demo2Example: 'Post: “From tomorrow, school’s out everywhere!” – the article says: only for a single school.',
