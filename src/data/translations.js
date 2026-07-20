@@ -79,9 +79,9 @@ const translations = {
     viewAgencyResults: 'Agentur-Ergebnisse ansehen', startAnotherRun: 'Weiteren zufälligen Durchlauf starten',
     
     // Aufgabe
-    feedReview: 'Feed-Prüfung', openInvestigation: 'Untersuchung öffnen',
-    chooseYourChecks: 'Wähle deine Prüfungen', allChecksAvailable: 'Alle Analyse-Optionen stehen bereit. Nutze jede Prüfung, die du für sinnvoll hältst, oder entscheide, ohne jedes Werkzeug zu öffnen.',
-    yourAssessment: 'Deine Einschätzung', decideAndJustify: 'Entscheiden und begründen',
+    feedReview: 'Feed-Prüfung', //openInvestigation: 'Untersuchung öffnen',
+    //chooseYourChecks: 'Wähle deine Prüfungen', allChecksAvailable: //'Alle Analyse-Optionen stehen bereit. Nutze jede Prüfung, die du für sinnvoll hältst, oder entscheide, ohne jedes Werkzeug zu öffnen.',
+    //yourAssessment: 'Deine Einschätzung', decideAndJustify: 'Entscheiden und begründen',
     trustworthy: 'Vertrauenswürdig', suspicious: 'Verdächtig',
     verdictEcht: 'Echt', verdictManipuliert: 'Manipuliert', verdictSuspekt: 'Suspekt – weitere Recherche notwendig', correctAssessmentWas: 'Richtige Einschätzung wäre gewesen:', guessHint: 'Richtige Einschätzung – aber unbelegt. Öffne das passende Prüfwerkzeug und benenne den konkreten Hinweis.', sharpenReason: 'Tipp: Benenne den konkreten Hinweis noch genauer.', luckyGuess: 'Geraten', timeUp: 'Zeit abgelaufen.', pushTitle_news: 'Neuer gemeldeter Beitrag', pushText_news: 'Ein möglicherweise manipulierter Beitrag wurde zur Prüfung gemeldet.', pushTitle_liveCheck: 'Dringende Live-Prüfung', pushText_liveCheck: 'Ein viraler Beitrag muss schnell untersucht werden.', pushTitle_perspective: 'Wirkungsanalyse erforderlich', pushText_perspective: 'Untersuche die mögliche Absicht hinter dem Beitrag.', pushTitle_realityDefense: 'Schutzstrategie erforderlich', pushText_realityDefense: 'Entwickle eine Regel zum Schutz vor ähnlichen Fällen.',
     yourJustification: 'Deine Begründung', explainEvidence: 'Erkläre die Belege für deine Entscheidung.',
@@ -97,15 +97,16 @@ const translations = {
     previousActivities: 'Bisherige Aktivitäten', profileActivities: 'Beiträge dieses Profils', currentPost: 'Aktueller Beitrag', noPreviousActivities: 'Keine früheren Beiträge dieses Profils verfügbar.', tip: 'Tipp', whyImportant: 'Warum ist das wichtig?', collapseTip: 'Tipp zuklappen', activitiesHintQuestion: 'Passen die bisherigen Beiträge des Profils zum aktuellen Beitrag?', activitiesHintWhy: 'Die bisherigen Aktivitäten zeigen, welche Themen und Inhalte das Profil normalerweise veröffentlicht. Vergleiche sie deshalb mit dem aktuellen Beitrag.',
     
     // Analyse-Werkzeuge: Tipps
-    hintShowFree: 'Kostenlosen Tipp anzeigen', hintUse: 'Tipp einsetzen', hintLeft: 'übrig', hintNoneLeft: 'Keine Tipps mehr verfügbar', hintShowDefault: 'Tipp anzeigen',
-    hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.', hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 6 Tipps verfügbar.', hintStatusEmpty: 'Alle 6 Tipps wurden eingesetzt.',
+    hintShowFree: 'Tipp anzeigen', hintUse: 'Tipp einsetzen', hintLeft: 'übrig', hintNoneLeft: 'Keine Tipps mehr verfügbar', hintShowDefault: 'Tipp anzeigen',
+    //hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.', 
+    hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 6 Tipps verfügbar.', hintStatusEmpty: 'Alle 6 Tipps wurden eingesetzt.',
     
     // Bildanalyse
     zoomOut: 'Verkleinern', zoomIn: 'Vergrößern', resetView: 'Zurücksetzen', zoomHelp: 'Doppeltippen oder doppelklicken zum Zoomen. Im vergrößerten Bild kannst du es mit Maus oder Finger verschieben.', coordHelper: 'Koordinaten-Helfer aktiv.',
     imgAnomaliesFound: 'Auffälligkeiten gefunden.', imgMiss: 'Dort wurde keine hinterlegte Auffälligkeit gefunden. Schau dir einen anderen Bereich an oder nutze den Tipp.', imgTipQ: 'Wirken Gesichter, Hände, Schrift, Licht oder Hintergründe natürlich?', imgTipWhy1: 'Ein manipuliertes Bild kann kleine visuelle Auffälligkeiten enthalten. Wenn einzelne Bereiche unnatürlich oder fehlerhaft aussehen, solltest du den Beitrag genauer prüfen.', imgTipWhy2: 'Ein unauffälliges Bild bedeutet jedoch nicht automatisch, dass der Beitrag echt ist.', imgShowResult: 'Auswertung anzeigen', imgAllFound: 'Alle Auffälligkeiten gefunden', imgResultTitle: 'Auswertung der Bildprüfung', imgFoundLabel: 'Gefunden:', imgMissedLabel: 'Übersehen:',
     
     // Quellenprüfung
-    srcTipQ: 'Ist erkennbar, wer für den Inhalt dieser Quelle verantwortlich ist?', srcTipWhy: 'Eine angegebene Quelle ist nicht automatisch seriös. Prüfe, wer verantwortlich ist und ob der Inhalt der Seite wirklich zur Aussage im Post passt.', srcNoneTitle: 'Keine verlinkte Seite', srcNoneBody: 'Dieser Post enthält keinen Link. Das ist bei privaten Accounts normal, bei News-Accounts aber auffälliger.', srcEyebrow: 'QUELLENPRÜFUNG', srcLess: 'Weniger anzeigen', srcPreview: 'Seite kurz ansehen', srcPostType: 'Beitrag', srcResponsible: 'Verantwortlich', srcPublished: 'Veröffentlicht',
+    srcTipQ: 'Ist erkennbar, wer für den Inhalt dieser Quelle verantwortlich ist?', srcTipWhy: 'Eine angegebene Quelle ist nicht automatisch seriös. Prüfe, wer verantwortlich ist, ob es ein offizielles Medium ist und ob der Inhalt der Seite wirklich zur Aussage im Post passt.', srcNoneTitle: 'Keine verlinkte Seite', srcNoneBody: 'Dieser Post enthält keinen Link. Das ist bei privaten Accounts normal, bei News-Accounts aber auffälliger.', srcEyebrow: 'QUELLENPRÜFUNG', srcLess: 'Weniger anzeigen', srcPreview: 'Seite kurz ansehen', srcPostType: 'Beitrag', srcResponsible: 'Verantwortlich', srcPublished: 'Veröffentlicht',
     
     // Profilprüfung
     profTipQ: 'Ist das Profil verifiziert?', profNone: 'Für dieses Profil sind keine weiteren Angaben verfügbar.', profUnreachable: 'Profil nicht erreichbar', profPartial: 'Ältere Profildaten sind nur teilweise verfügbar.', profPosts: 'Beiträge', profFollowers: 'Follower', profFollowing: 'Folgt', profType: 'Profiltyp', profCreated: 'Profil angelegt', profVisibility: 'Sichtbarkeit', profVerification: 'Verifizierung',
@@ -120,14 +121,15 @@ const translations = {
     
     // Bildherkunft / Lens + 2-Punkte-Feedback
     tool_origin: 'Bildherkunft',
-    originEyebrow: 'BILDHERKUNFT', originIntro: 'Rückwärtssuche: Wo ist dieses Bild schon einmal aufgetaucht?',
+    originEyebrow: 'BILDHERKUNFT', originIntro: 'Online Bildsuche: Wo ist dieses Bild schon einmal aufgetaucht?',
     originHitsLabel: 'Frühere Fundstellen', originNoneTitle: 'Keine früheren Fundstellen',
-    originNoneBody: 'Die Rückwärtssuche findet dieses Bild sonst nirgends. Das beweist aber nicht, dass der Beitrag echt ist.',
-    lensTipQ: 'Gibt es das Bild schon von früher – und passt das dann überhaupt zu dem, was hier behauptet wird?',
+    originNoneBody: 'Die Online Bildsuche findet dieses Bild sonst nirgends. 
+      //Das beweist aber nicht, dass der Beitrag nciht echt ist.',
+    lensTipQ: 'Gab es das Bild schon von früher – und passt das dann überhaupt zu dem, was hier behauptet wird?',
     lensTipWhy1: 'Ein echtes Bild kann von ganz woanders kommen. Wenn es von einem anderen Ereignis oder aus einem anderen Jahr ist, beweist es diese Story hier nicht.',
-    lensTipWhy2: 'Findet die Suche nichts, heißt das trotzdem nicht, dass der Beitrag echt ist.',
+    lensTipWhy2: 'Findet die Suche nichts, heißt das trotzdem nicht, dass der Beitrag nicht echt ist.',
     verdictWord: 'Einschätzung', reasonWord: 'Begründung', yourReasonLabel: 'Dein Grund', actualReasonLabel: 'Der eigentliche Grund',
-    valChooseVerdict: 'Wähle eine Einschätzung: Echt, Manipuliert oder Irreführend.',
+    valChooseVerdict: 'Was ist deine Einschätzung?: Echt, Manipuliert oder Irreführend.',
     valSelectAnswer: 'Wähle mindestens eine Antwort.',
     valTypeClue: 'Bitte nenne den Hinweis, die Wirkung oder die Regel, die du erkannt hast.',
     evalMoreSpecific: 'Bitte formuliere deine Antwort etwas genauer und benenne den Hinweis, die Wirkung oder die Regel.',
