@@ -216,7 +216,6 @@ export default function App() {
       <div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('introEyebrow')}</span><h1>{t('introTitle')}</h1>
       <p>{t('introBody')}</p>
      <div className="intro-audio-wrap">
-        <span>🔊 {t('introListen')}</span>
         <audio
           className="intro-audio"
           controls
