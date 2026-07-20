@@ -850,9 +850,8 @@ function reopenDemo(){
   {runSummary&&<div className="modal-backdrop"><section className="run-summary-card"><div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('runComplete')}</span><h2>{runSummary.targetReached?'Mission gewonnen':runSummary.lost?'Mission verloren':t('missionReviewed')}</h2><p>{runSummary.targetReached?'Du hast 20 Glaubwürdigkeitspunkte erreicht.':runSummary.lost?'Dein Punktestand ist auf −10 gefallen. Starte eine neue Mission und prüfe die Hinweise genauer.':<>Du hast {runSummary.total} Fälle mit <strong>{runSummary.score} Glaubwürdigkeitspunkten</strong> bearbeitet.</>}</p><div className="run-summary-stats"><div><strong>{runSummary.correct}</strong><span>{t('correct')}</span></div><div><strong>{runSummary.total-runSummary.correct}</strong><span>{t('needsReview')}</span></div><div><strong>{runSummary.score}</strong><span>{t('pointsWord2')}</span></div></div><button className="primary" onClick={()=>{setRunSummary(null);setActiveTab('agency');}}>{t('viewAgencyResults')}</button><button className="secondary-action" onClick={startNewRun}>{t('startAnotherRun')}</button></section></div>}
 
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
-    {activeTask.type==='news' ? <>
-      <div className="mechanic-step"><span>{t('openInvestigation')}</span><strong>{t('chooseYourChecks')}</strong></div>
-      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+    {activeTask.type==='news' ? 
+      <div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
@@ -876,7 +875,6 @@ function reopenDemo(){
     );
   })}
 </div>
-      <div className="mechanic-step decision-heading"><span>{t('yourAssessment')}</span><strong>{t('decideAndJustify')}</strong></div>
       <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
       <p className="instruction">{activeTask.instruction}</p>
       <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/><small>{t('shortAnswerHint')}</small></div>
