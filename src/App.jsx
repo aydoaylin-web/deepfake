@@ -546,7 +546,7 @@ function reopenDemo(){
           >
             {irisListening
               ? (lang === 'de' ? 'Iris hört zu …' : 'Iris is listening …')
-              : (lang === 'de' ? 'Sprachsteuerung aktivieren' : 'Enable voice control')}
+              : (lang === 'de' ? '🎙️Iris wecken: "Hallo Iris"' : '🎙️Wake Iris: "Hello Iris"')}
           </button>
 
           {irisSpeaking && (
