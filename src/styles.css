@@ -422,3 +422,5 @@ img{user-select:none;-webkit-user-drag:none}
   cursor: not-allowed;
   opacity: .8;
 }
+
+.resume-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 4px}.resume-stats>div{padding:14px;border:1px solid #e0e4eb;border-radius:14px;background:#f7f9fc}.resume-stats strong{display:block;color:#0d2c62;font-size:26px}.resume-stats span{font-size:10px;color:#7c8490;text-transform:uppercase;letter-spacing:.04em}.resume-restart{margin-top:10px}
