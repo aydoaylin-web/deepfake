@@ -41,8 +41,12 @@ export default function App() {
   const [taskPhase,setTaskPhase]=useState('inspect'); const [usedTools,setUsedTools]=useState([]); const [openTool,setOpenTool]=useState(null); const [verdict,setVerdict]=useState(''); const [taskOrigin,setTaskOrigin]=useState('push');
   const [score,setScore]=useState(saved.score??0); const [completed,setCompleted]=useState(saved.completed||[]); const [caseResults,setCaseResults]=useState(saved.caseResults||[]); const [agencyRules,setAgencyRules]=useState(saved.agencyRules||[]);
   const [liked,setLiked]=useState(saved.liked||[]); const [savedPosts,setSavedPosts]=useState(saved.savedPosts||[]); const [commentLikes,setCommentLikes]=useState(saved.commentLikes||[]); const [customComments,setCustomComments]=useState(saved.customComments||{});
-  const [seconds,setSeconds]=useState(180); const [intro,setIntro]=useState(saved.introSeen!==true); const [demoStep,setDemoStep]=useState(0); const [selectedPost,setSelectedPost]=useState(null); const [commentsPost,setCommentsPost]=useState(null);
-  const [activeNotification,setActiveNotification]=useState(null); const [notifiedTasks,setNotifiedTasks]=useState([]); const [notificationHistory,setNotificationHistory]=useState(saved.notificationHistory||[]); const [unreadNotificationCount,setUnreadNotificationCount]=useState(saved.unreadNotificationCount||0); const [confidence,setConfidence]=useState(3); const [evaluating,setEvaluating]=useState(false);
+  const [seconds,setSeconds]=useState(180);
+  const [intro,setIntro]=useState(saved.introSeen!==true);
+  const [demoStep,setDemoStep]=useState(-1);
+  const [simulationConfirmed,setSimulationConfirmed]=useState(false);
+  const [selectedPost,setSelectedPost]=useState(null);
+  const [commentsPost,setCommentsPost]=useState(null);  const [activeNotification,setActiveNotification]=useState(null); const [notifiedTasks,setNotifiedTasks]=useState([]); const [notificationHistory,setNotificationHistory]=useState(saved.notificationHistory||[]); const [unreadNotificationCount,setUnreadNotificationCount]=useState(saved.unreadNotificationCount||0); const [confidence,setConfidence]=useState(3); const [evaluating,setEvaluating]=useState(false);
   const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||crypto.randomUUID()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${crypto.randomUUID().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
   const [zoom,setZoom]=useState(1); const [heartBurst,setHeartBurst]=useState(null); const [storyPulse,setStoryPulse]=useState(0); const [commentDraft,setCommentDraft]=useState('');
   const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||crypto.randomUUID()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??6); const [revealedHints,setRevealedHints]=useState([]);
@@ -67,11 +71,48 @@ export default function App() {
     const postsWithSavedComments=p.map(post=>({...post,comments:[...(post.comments||[]),...(saved.customComments?.[post.id]||[])]}));setPosts(settings.randomizeFeed===false?postsWithSavedComments:shuffle(postsWithSavedComments));setTasks(t);setProfiles(profileData);setDataStories(storyData);setGuides(guideData);setContentSettings(settings);setContentManifest(manifest);setRunOrder(current=>current.length?current:(settings.randomizePrimaryMissions===false?primary:shuffle(primary)));setLoading(false);
   }).catch(e=>{setLoadingError(e.message);setLoading(false);}); },[]);
 
-  useEffect(()=>{ localStorage.setItem(STORAGE_KEY,JSON.stringify({score,completed,caseResults,agencyRules,liked,savedPosts,commentLikes,customComments,introSeen:!intro,researchEvents,sessionId,participantCode,runOrder,runId,lang,tipsRemaining,unreadNotificationCount,notificationHistory})); },[score,completed,caseResults,agencyRules,liked,savedPosts,commentLikes,customComments,intro,researchEvents,sessionId,participantCode,runOrder,runId,lang,tipsRemaining,unreadNotificationCount,notificationHistory]);
-
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        score,
+        completed,
+        caseResults,
+        agencyRules,
+        liked,
+        savedPosts,
+        commentLikes,
+        customComments,
+        introSeen: !intro,
+        lang,
+        researchEvents,
+        sessionId,
+        participantCode,
+        runOrder,
+        runId,
+      })
+    );
+  }, [
+    score,
+    completed,
+    caseResults,
+    agencyRules,
+    liked,
+    savedPosts,
+    commentLikes,
+    customComments,
+    intro,
+    lang,
+    researchEvents,
+    sessionId,
+    participantCode,
+    runOrder,
+    runId,
+  ]);
+  
   useEffect(()=>{ fetch('/api/health').then(r=>r.json()).then(setAiStatus).catch(()=>setAiStatus({api:'offline',ollama:false})); },[]);
   useEffect(()=>{ if(!saved.sessionId) logResearchEvent('session_started',{participantCode,runId,userAgent:navigator.userAgent,viewport:`${window.innerWidth}x${window.innerHeight}`}); },[]);
-  useEffect(()=>{ if(!activeTask||feedback)return; setSeconds(activeTask.timeLimit||180); const id=setInterval(()=>setSeconds(v=>Math.max(0,v-1)),1000); return()=>clearInterval(id); },[activeTask,feedback]);
+  useEffect(()=>{ if(!activeTask||feedback)return; setSeconds(activeTask.timeLimit||240); const id=setInterval(()=>setSeconds(v=>Math.max(0,v-1)),1000); return()=>clearInterval(id); },[activeTask,feedback]);
   useEffect(()=>{ if(seconds===0&&activeTask&&!feedback)submitTask(true); },[seconds]);
   useEffect(()=>{ const blocked=selectedPost||activeTask||intro||commentsPost; document.body.style.overflow=blocked?'hidden':''; return()=>{document.body.style.overflow='';}; },[selectedPost,activeTask,intro,commentsPost]);
   useEffect(()=>{ const id=setInterval(()=>setStoryPulse(v=>v+1),2600); return()=>clearInterval(id); },[]);
@@ -172,8 +213,16 @@ export default function App() {
   function navigatePost(direction){if(!selectedPost)return;const i=posts.findIndex(p=>p.id===selectedPost.id);setSelectedPost(posts[(i+direction+posts.length)%posts.length]);setZoom(1);}
   async function sharePost(post){const text=`${post.username}: ${post.caption}`;try{if(navigator.share)await navigator.share({title:'AiGram post',text});else{await navigator.clipboard.writeText(text);alert('Post copied to clipboard.');}}catch{/* user cancelled */}}
   function openPost(post){setSelectedPost(post);setZoom(1);logResearchEvent('post_opened',{postId:post.id});}
-  function reopenIntro(){setDemoStep(0);setIntro(true);}
-  function reopenDemo(){setDemoStep(1);setIntro(true);}
+  function reopenIntro(){
+  setSimulationConfirmed(false);
+  setDemoStep(-1);
+  setIntro(true);
+}
+
+function reopenDemo(){
+  setDemoStep(1);
+  setIntro(true);
+}
   function getAccountActivityComments(post){
     if(!post)return [];
     return (post.accountActivity||[]).slice(0,4);
@@ -210,30 +259,361 @@ export default function App() {
 
     <nav className="bottom-nav"><button className={activeTab==='feed'?'active':''} onClick={()=>setActiveTab('feed')}><Home/><span>{t('feed')}</span></button><button className={activeTab==='cases'?'active':''} onClick={()=>setActiveTab('cases')}><ShieldCheck/><span>{t('cases')}</span></button><button className={activeTab==='agency'?'active':''} onClick={()=>{setActiveTab('agency');setUnreadNotificationCount(0);}} aria-label="Pushnachrichten öffnen"><span className="nav-icon-wrap"><Bell/>{unreadNotificationCount>0&&<span className="notification-badge">{unreadNotificationCount>99?'99+':unreadNotificationCount}</span>}</span><span>{t('agency')}</span></button><button className={activeTab==='profile'?'active':''} onClick={()=>setActiveTab('profile')}><UserRound/><span>{t('profile')}</span></button></nav><div className="score-chip"><ShieldCheck size={17}/><span>{score}</span></div>
   </div>
- {intro&&<div className="modal-backdrop"><section className="intro-card demo-card">
-  {demoStep===0&&<>
-      <div className="intro-shield"><ShieldCheck size={42}/></div><span className="eyebrow">{t('introEyebrow')}</span><h1>{t('introTitle')}</h1>
-      <p>{t('introBody')}</p>
-      <div className="intro-audio-wrap">
-        <audio
-          className="intro-audio"
-          controls
-          playsInline
-          preload="metadata"
-          src={imagePath(`assets/intro_${lang}.mp3`)}
-          key={lang}
-        />
-      </div>
-      <div className="mission-rules"><strong>{t('introWinRule')}</strong><strong>{t('introLoseRule')}</strong></div>
-      <button onClick={()=>setDemoStep(1)}>{t('startDemo')}</button>
-      <button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipDemo')}</button>
-    </>}
-    {demoStep===1&&<><span className="eyebrow">Demo 1 {t('demoOf')} 5</span><h2>{t('tool_image')}</h2>{demoPost&&<article className="demo-real-post"><div><b>@{demoPost.username}</b><small>{demoPost.time}</small></div><img src={imagePath(demoPost.media)} alt={demoPost.imageAlt}/><p><b>{demoPost.username}</b> {demoPost.caption}</p></article>}<div className="demo-tool-preview"><ScanSearch/><div><strong>{t('demo1Title')}</strong><p>{t('demo1Body')}</p></div></div><div className="demo-actions"><button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipWord')}</button><button onClick={()=>setDemoStep(2)}>{t('continueWord')}</button></div></>}
-    {demoStep===2&&<><span className="eyebrow">Demo 2 {t('demoOf')} 5</span><h2>{t('tool_source')}</h2><div className="demo-tool-preview"><Globe2/><div><strong>{t('demo2Title')}</strong><p>{t('demo2Body')}</p></div></div><div className="demo-link-example"><small>{t('demo2Eyebrow')}</small><b>blitz-news.example/hitzefrei</b><span>{t('demo2Example')}</span></div><div className="demo-actions"><button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipWord')}</button><button onClick={()=>setDemoStep(3)}>{t('continueWord')}</button></div></>}
-    {demoStep===3&&<><span className="eyebrow">Demo 3 {t('demoOf')} 5</span><h2>{t('tool_profile')}</h2><div className="demo-tool-preview"><UserRound/><div><strong>{t('whyImportant')}</strong><p>{t('demo3Body1')}</p><p>{t('demo3Body2')}</p></div></div><div className="demo-profile-example"><b>@news_update24</b><span>{t('demo3ProfileAge')}</span><span>{t('demo3ProfileResp')}</span></div><div className="demo-actions"><button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipWord')}</button><button onClick={()=>setDemoStep(4)}>{t('continueWord')}</button></div></>}
-    {demoStep===4&&<><span className="eyebrow">Demo 4 {t('demoOf')} 5</span><h2>{t('tool_activities')}</h2><div className="demo-tool-preview"><RefreshCw/><div><strong>{t('demo4Title')}</strong><p>{t('demo4Body')}</p></div></div><div className="demo-comments-example"><p><b>@news_update24</b> {t('profileActivities')}</p><p>{t('demo4Check')}</p></div><div className="demo-actions"><button className="demo-skip" onClick={()=>setIntro(false)}>{t('skipWord')}</button><button onClick={()=>setDemoStep(5)}>{t('continueWord')}</button></div></>}
-    {demoStep===5&&<><span className="eyebrow">Demo 5 {t('demoOf')} 5</span><h2>{t('demo5Title')}</h2><div className="demo-tool-preview"><ShieldCheck/><div><strong>{t('demo5Sub')}</strong><p>{t('demo5Body')}</p></div></div><div className="mission-rules"><strong>{t('demo5WinRule')}</strong><strong>{t('demo5LoseRule')}</strong></div><button onClick={()=>setIntro(false)}>{t('startMission')}</button><button className="demo-back" onClick={()=>setDemoStep(4)}>{t('backWord')}</button></>}
-  </section></div>}
+{intro&&
+  <div className="modal-backdrop">
+    <section className="intro-card demo-card">
+
+      {demoStep===-1&&<>
+        <div className="intro-shield">
+          <ShieldCheck size={42}/>
+        </div>
+
+        <span className="eyebrow">
+          {lang==='de' ? 'Vor dem Start' : 'Before you begin'}
+        </span>
+
+        <h1>
+          {lang==='de'
+            ? 'Sprache wählen'
+            : 'Choose your language'}
+        </h1>
+
+        <div className="lang-switch intro-language-switch">
+          {LANGUAGES.map(language=>(
+            <button
+              type="button"
+              key={language.code}
+              className={lang===language.code?'active':''}
+              onClick={()=>setLang(language.code)}
+            >
+              {language.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="simulation-notice">
+          <Info size={24}/>
+
+          <div>
+            <h2>
+              {lang==='de'
+                ? 'Hinweis zur Simulation'
+                : 'Simulation notice'}
+            </h2>
+
+            <p>
+              {lang==='de'
+                ? 'Diese Anwendung ist eine Simulation. Alle dargestellten Profile, Beiträge, Kommentare und Situationen sind fiktiv und wurden ausschließlich für Lern- und Forschungszwecke erstellt.'
+                : 'This application is a simulation. All profiles, posts, comments and situations shown are fictional and were created exclusively for learning and research purposes.'}
+            </p>
+
+            <p>
+              {lang==='de'
+                ? 'Einige Inhalte können bewusst manipulierte oder irreführende Informationen darstellen. Sie dienen dazu, den kritischen Umgang mit digitalen Inhalten zu üben.'
+                : 'Some content may intentionally contain manipulated or misleading information. It is included to practise the critical evaluation of digital content.'}
+            </p>
+          </div>
+        </div>
+
+        <label className="simulation-confirmation">
+          <input
+            type="checkbox"
+            checked={simulationConfirmed}
+            onChange={event=>setSimulationConfirmed(event.target.checked)}
+          />
+
+          <span>
+            {lang==='de'
+              ? 'Ich habe verstanden, dass es sich um eine Simulation mit fiktiven Inhalten handelt.'
+              : 'I understand that this is a simulation containing fictional content.'}
+          </span>
+        </label>
+
+        <button
+          type="button"
+          disabled={!simulationConfirmed}
+          onClick={()=>setDemoStep(0)}
+        >
+          {lang==='de' ? 'Weiter' : 'Continue'}
+        </button>
+      </>}
+
+      {demoStep===0&&<>
+        <div className="intro-shield">
+          <ShieldCheck size={42}/>
+        </div>
+
+        <span className="eyebrow">
+          {t('introEyebrow')}
+        </span>
+
+        <h1>
+          {t('introTitle')}
+        </h1>
+
+        <p>
+          {t('introBody')}
+        </p>
+
+        <div className="intro-audio-wrap">
+          <audio
+            className="intro-audio"
+            controls
+            playsInline
+            preload="metadata"
+            src={imagePath(`assets/intro_${lang}.mp3`)}
+            key={lang}
+          />
+        </div>
+
+        <div className="mission-rules">
+          <strong>{t('introWinRule')}</strong>
+          <strong>{t('introLoseRule')}</strong>
+        </div>
+
+        <button
+          type="button"
+          onClick={()=>setDemoStep(1)}
+        >
+          {t('startDemo')}
+        </button>
+
+        <button
+          type="button"
+          className="demo-skip"
+          onClick={()=>setIntro(false)}
+        >
+          {t('skipDemo')}
+        </button>
+      </>}
+
+      {demoStep===1&&<>
+        <span className="eyebrow">
+          Demo 1 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_image')}
+        </h2>
+
+        {demoPost&&
+          <article className="demo-real-post">
+            <div>
+              <b>@{demoPost.username}</b>
+              <small>{demoPost.time}</small>
+            </div>
+
+            <img
+              src={imagePath(demoPost.media)}
+              alt={demoPost.imageAlt}
+            />
+
+            <p>
+              <b>{demoPost.username}</b> {demoPost.caption}
+            </p>
+          </article>
+        }
+
+        <div className="demo-tool-preview">
+          <ScanSearch/>
+
+          <div>
+            <strong>{t('demo1Title')}</strong>
+            <p>{t('demo1Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(2)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===2&&<>
+        <span className="eyebrow">
+          Demo 2 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_source')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <Globe2/>
+
+          <div>
+            <strong>{t('demo2Title')}</strong>
+            <p>{t('demo2Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-link-example">
+          <small>{t('demo2Eyebrow')}</small>
+          <b>blitz-news.example/hitzefrei</b>
+          <span>{t('demo2Example')}</span>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(3)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===3&&<>
+        <span className="eyebrow">
+          Demo 3 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_profile')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <UserRound/>
+
+          <div>
+            <strong>{t('whyImportant')}</strong>
+            <p>{t('demo3Body1')}</p>
+            <p>{t('demo3Body2')}</p>
+          </div>
+        </div>
+
+        <div className="demo-profile-example">
+          <b>@news_update24</b>
+          <span>{t('demo3ProfileAge')}</span>
+          <span>{t('demo3ProfileResp')}</span>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(4)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===4&&<>
+        <span className="eyebrow">
+          Demo 4 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('tool_activities')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <RefreshCw/>
+
+          <div>
+            <strong>{t('demo4Title')}</strong>
+            <p>{t('demo4Body')}</p>
+          </div>
+        </div>
+
+        <div className="demo-comments-example">
+          <p>
+            <b>@news_update24</b> {t('profileActivities')}
+          </p>
+
+          <p>
+            {t('demo4Check')}
+          </p>
+        </div>
+
+        <div className="demo-actions">
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={()=>setIntro(false)}
+          >
+            {t('skipWord')}
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>setDemoStep(5)}
+          >
+            {t('continueWord')}
+          </button>
+        </div>
+      </>}
+
+      {demoStep===5&&<>
+        <span className="eyebrow">
+          Demo 5 {t('demoOf')} 5
+        </span>
+
+        <h2>
+          {t('demo5Title')}
+        </h2>
+
+        <div className="demo-tool-preview">
+          <ShieldCheck/>
+
+          <div>
+            <strong>{t('demo5Sub')}</strong>
+            <p>{t('demo5Body')}</p>
+          </div>
+        </div>
+
+        <div className="mission-rules">
+          <strong>{t('demo5WinRule')}</strong>
+          <strong>{t('demo5LoseRule')}</strong>
+        </div>
+
+        <button
+          type="button"
+          onClick={()=>setIntro(false)}
+        >
+          {t('startMission')}
+        </button>
+
+        <button
+          type="button"
+          className="demo-back"
+          onClick={()=>setDemoStep(4)}
+        >
+          {t('backWord')}
+        </button>
+      </>}
+
+    </section>
+  </div>
+}
 
   {selectedPost&&<div className="modal-backdrop post-modal-backdrop" onClick={()=>setSelectedPost(null)}><section className="post-modal" onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setSelectedPost(null)} aria-label="Close"><X/></button><button className="modal-nav modal-prev" onClick={()=>navigatePost(-1)} aria-label="Previous"><ChevronLeft/></button><button className="modal-nav modal-next" onClick={()=>navigatePost(1)} aria-label="Next"><ChevronRight/></button><div className="post-modal-media"><img style={{transform:`scale(${zoom})`}} src={imagePath(selectedPost.media)} alt={selectedPost.imageAlt}/><div className="zoom-controls"><button onClick={()=>setZoom(z=>Math.max(1,z-.25))}><ZoomOut/></button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(z=>Math.min(3,z+.25))}><ZoomIn/></button></div></div><div className="post-modal-info"><div className="post-head"><div className="avatar">{selectedPost.username.slice(0,1).toUpperCase()}</div><div className="post-user"><strong>{selectedPost.username}</strong><span>{selectedPost.location}</span></div></div><div className="modal-caption"><b>{selectedPost.username}</b> {selectedPost.caption}</div><div className="modal-comments">{selectedPost.comments.map((c,i)=><p key={`${c.username}-${i}`}><b>{c.username}</b> {c.text}</p>)}</div></div></section></div>}
 
