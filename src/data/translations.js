@@ -19,7 +19,7 @@ const translations = {
     
     // Intro / Demo
     startDemo: 'Kurze Demo starten', skipDemo: 'Demo überspringen', skipWord: 'Überspringen', backWord: 'Zurück', demoOf: 'von',
-    introBody: 'Um zu starten, hör dir kurz die Einführungsnachricht an – tippe dafür auf den Play-Knopf ▶️.',
+    introBody: 'Um deine Mission zu starten musst du Iris wecken. Sag dafür laut ins Mikrofon: "Hallo Iris".',
     introWinRule: '🏆 Sieg bei 20 Punkten', introLoseRule: '❌ Niederlage bei −10 Punkten',
     demo1Title: 'Guck dir diesen echten App-Post an', demo1Body: 'Vergrößere das Bild. Nutze den Zoom und untersuche, ob Gesichter, Hände, Schrift, Licht oder Hintergründe natürlich wirken.',
     demo2Title: 'Nur bei Posts mit Link', demo2Body: 'Öffne die verlinkte Seite und vergleiche ihren Inhalt mit der Aussage im Post. Manche Seiten sind offiziell, andere unseriös oder der Post übertreibt den Originaltext.', demo2Eyebrow: 'SEHT SELBST', demo2Example: 'Post: „Ab morgen überall hitzefrei!“ – im Artikel steht: nur für eine einzige Schule.',
