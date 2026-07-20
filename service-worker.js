@@ -1,4 +1,5 @@
-const CACHE_NAME = 'deepfake-defender-v6-feed-fix-20260717';
+const CACHE_NAME = 'deepfake-defender-v7-audio-fix-20260720';
+
 const APP_SHELL = [
   './',
   './index.html',
@@ -16,49 +17,95 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)));
+
+    await Promise.all(
+      keys
+        .filter(key => key !== CACHE_NAME)
+        .map(key => caches.delete(key))
+    );
+
     await self.clients.claim();
   })());
 });
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
   const url = new URL(event.request.url);
+
   if (url.origin !== self.location.origin) return;
 
-  // Content files must be network-first so a previous prototype cannot hide the feed.
-  if (url.pathname.includes('/content/') || url.pathname.endsWith('.json')) {
+  // Audio-Dateien niemals cachen (wichtig für iOS/Android)
+  const isAudio =
+    event.request.destination === 'audio' ||
+    url.pathname.endsWith('.mp3');
+
+  // Mobile Browser verwenden häufig Range Requests für Audio
+  const isRangeRequest = event.request.headers.has('range');
+
+  if (isAudio || isRangeRequest) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // JSON-Dateien immer aktuell aus dem Netzwerk laden
+  if (
+    url.pathname.includes('/content/') ||
+    url.pathname.endsWith('.json')
+  ) {
     event.respondWith((async () => {
       try {
-        const response = await fetch(event.request, { cache: 'no-store' });
-        if (response.ok) {
+        const response = await fetch(event.request, {
+          cache: 'no-store'
+        });
+
+        if (response.ok && response.status === 200) {
           const cache = await caches.open(CACHE_NAME);
           await cache.put(event.request, response.clone());
         }
+
         return response;
       } catch {
-        return (await caches.match(event.request)) || new Response('Content unavailable.', { status: 503 });
+        return (
+          await caches.match(event.request)
+        ) || new Response('Content unavailable.', {
+          status: 503
+        });
       }
     })());
+
     return;
   }
 
+  // HTML-Seiten
   if (event.request.mode === 'navigate') {
-    event.respondWith(fetch(event.request).catch(() => caches.match('./index.html')));
+    event.respondWith(
+      fetch(event.request).catch(() =>
+        caches.match('./index.html')
+      )
+    );
+
     return;
   }
 
-  // Network-first also prevents stale JavaScript/CSS after an update.
+  // Alle übrigen Dateien (JS, CSS, Bilder usw.)
   event.respondWith((async () => {
     try {
       const response = await fetch(event.request);
-      if (response.ok) {
+
+      // Nur vollständige Antworten cachen (kein 206 Partial Content)
+      if (response.ok && response.status === 200) {
         const cache = await caches.open(CACHE_NAME);
         await cache.put(event.request, response.clone());
       }
+
       return response;
     } catch {
-      return (await caches.match(event.request)) || new Response('Offline resource unavailable.', { status: 503 });
+      return (
+        await caches.match(event.request)
+      ) || new Response('Offline resource unavailable.', {
+        status: 503
+      });
     }
   })());
 });
