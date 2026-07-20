@@ -102,6 +102,9 @@ const translations = {
     hintShowFree: 'Tipp anzeigen', hintUse: 'Tipp einsetzen', hintLeft: 'übrig', hintNoneLeft: 'Keine Tipps mehr verfügbar', hintShowDefault: 'Tipp anzeigen',
     hintStatusFree: 'Die Tipps sind in den ersten drei Runden kostenlos.',
     hintStatusLeftPrefix: 'Noch', hintStatusLeftSuffix: 'von 5 Tipps verfügbar.', hintStatusEmpty: 'Alle 5 Tipps wurden eingesetzt.',
+    hintInfoNote: 'Beachte. Bei den ersten drei Überprüfungen kannst du die Tipps unbegrenzt nutzen. Danach stehen dir für das gesamte restliche Spiel nur noch sechs Tipps zur Verfügung.',
+    verdictQuestion: 'Was ist dein Urteil?',
+
     
     // Bildanalyse
     zoomOut: 'Verkleinern', zoomIn: 'Vergrößern', resetView: 'Zurücksetzen', zoomHelp: 'Doppeltippen oder doppelklicken zum Zoomen. Im vergrößerten Bild kannst du es mit Maus oder Finger verschieben.', coordHelper: 'Koordinaten-Helfer aktiv.',
@@ -204,6 +207,8 @@ const translations = {
     previousActivities: 'Previous activities', profileActivities: 'Posts from this profile', currentPost: 'Current post', noPreviousActivities: 'No earlier posts from this profile are available.', tip: 'Tip', whyImportant: 'Why is this important?', collapseTip: 'Collapse tip', activitiesHintQuestion: 'Do the profile’s earlier posts fit the current post?', activitiesHintWhy: 'Previous activities show which topics and content the profile normally publishes. Compare them with the current post.',
     hintShowFree: 'Show free tip', hintUse: 'Use tip', hintLeft: 'left', hintNoneLeft: 'No tips left', hintShowDefault: 'Show tip',
     hintStatusFree: 'Tips are free in the first three rounds.', hintStatusLeftPrefix: '', hintStatusLeftSuffix: 'of 5 tips remaining.', hintStatusEmpty: 'All 5 tips have been used.',
+    hintInfoNote: 'Note: for the first three reviews you can use the tips without limit. After that, only six tips are available for the rest of the game.',
+    verdictQuestion: 'What is your verdict?',
     zoomOut: 'Zoom out', zoomIn: 'Zoom in', resetView: 'Reset', zoomHelp: 'Double-tap or double-click to zoom. In the enlarged image you can move it with mouse or finger.', coordHelper: 'Coordinate helper active.',
     imgAnomaliesFound: 'anomalies found.', imgMiss: 'No stored anomaly was found there. Look at a different area or use the tip.', imgTipQ: 'Do faces, hands, text, lighting or backgrounds look natural?', imgTipWhy1: 'A manipulated image can contain small visual anomalies. If individual areas look unnatural or faulty, you should examine the post more closely.', imgTipWhy2: 'However, an inconspicuous image does not automatically mean the post is real.', imgShowResult: 'Show evaluation', imgAllFound: 'All anomalies found', imgResultTitle: 'Image check evaluation', imgFoundLabel: 'Found:', imgMissedLabel: 'Missed:',
     srcTipQ: 'Is it clear who is responsible for the content of this source?', srcTipWhy: 'A cited source is not automatically trustworthy. Check who is responsible and whether the page content really matches the claim in the post.', srcNoneTitle: 'No linked page', srcNoneBody: 'This post contains no link. That is normal for private accounts, but more suspicious for news accounts.', srcEyebrow: 'SOURCE CHECK', srcLess: 'Show less', srcPreview: 'Quick look at the page', srcPostType: 'Post', srcResponsible: 'Responsible', srcPublished: 'Published',
