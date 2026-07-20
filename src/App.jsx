@@ -14,6 +14,7 @@ import OriginCheckPanel from "./components/OriginCheckPanel";
 import { matchReason } from "./data/conceptMatcher";
 const STORAGE_KEY = 'deepfake-defender-react-state-v6';
 const TARGET_SCORE = 20;
+const MAX_TIPS = 5;
 const ANALYSIS_TOOLS = [
   { id: "image", label: "Bildanalyse", icon: ScanSearch },
   { id: "source", label: "Quellenprüfung", icon: Globe2 },
@@ -36,7 +37,7 @@ function createUuid() {
     typeof crypto !== "undefined" &&
     typeof crypto.randomUUID === "function"
   ) {
-    return createUuid();
+    return crypto.randomUUID();
   }
 
   return (
@@ -60,12 +61,13 @@ export default function App() {
   const [seconds,setSeconds]=useState(180);
   const [intro,setIntro]=useState(saved.introSeen!==true);
   const [demoStep,setDemoStep]=useState(-1);
+  const [showResume,setShowResume]=useState(saved.introSeen===true && (((saved.completed?.length)||0)>0 || (saved.score??0)!==0 || ((saved.caseResults?.length)||0)>0));
   const [simulationConfirmed,setSimulationConfirmed]=useState(false);
   const [selectedPost,setSelectedPost]=useState(null);
   const [commentsPost,setCommentsPost]=useState(null);  const [activeNotification,setActiveNotification]=useState(null); const [notifiedTasks,setNotifiedTasks]=useState([]); const [notificationHistory,setNotificationHistory]=useState(saved.notificationHistory||[]); const [unreadNotificationCount,setUnreadNotificationCount]=useState(saved.unreadNotificationCount||0); const [confidence,setConfidence]=useState(3); const [evaluating,setEvaluating]=useState(false);
   const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||createUuid()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${createUuid().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
   const [zoom,setZoom]=useState(1); const [heartBurst,setHeartBurst]=useState(null); const [storyPulse,setStoryPulse]=useState(0); const [commentDraft,setCommentDraft]=useState('');
-  const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||createUuid()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??6); const [revealedHints,setRevealedHints]=useState([]);
+  const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||createUuid()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??MAX_TIPS); const [revealedHints,setRevealedHints]=useState([]);
   const notificationTimeout=useRef(null); const loaderRef=useRef(null); const taskStartedAt=useRef(null);
 
   const taskMap=useMemo(()=>Object.fromEntries(tasks.map(t=>[t.id,t])),[tasks]);
@@ -106,6 +108,7 @@ export default function App() {
         participantCode,
         runOrder,
         runId,
+        tipsRemaining,
       })
     );
   }, [
@@ -124,13 +127,14 @@ export default function App() {
     participantCode,
     runOrder,
     runId,
+    tipsRemaining,
   ]);
   
   useEffect(()=>{ fetch('/api/health').then(r=>r.json()).then(setAiStatus).catch(()=>setAiStatus({api:'offline',ollama:false})); },[]);
   useEffect(()=>{ if(!saved.sessionId) logResearchEvent('session_started',{participantCode,runId,userAgent:navigator.userAgent,viewport:`${window.innerWidth}x${window.innerHeight}`}); },[]);
   useEffect(()=>{ if(!activeTask||feedback)return; setSeconds(activeTask.timeLimit||240); const id=setInterval(()=>setSeconds(v=>Math.max(0,v-1)),1000); return()=>clearInterval(id); },[activeTask,feedback]);
   useEffect(()=>{ if(seconds===0&&activeTask&&!feedback)submitTask(true); },[seconds]);
-  useEffect(()=>{ const blocked=selectedPost||activeTask||intro||commentsPost; document.body.style.overflow=blocked?'hidden':''; return()=>{document.body.style.overflow='';}; },[selectedPost,activeTask,intro,commentsPost]);
+  useEffect(()=>{ const blocked=selectedPost||activeTask||intro||commentsPost||showResume; document.body.style.overflow=blocked?'hidden':''; return()=>{document.body.style.overflow='';}; },[selectedPost,activeTask,intro,commentsPost,showResume]);
   useEffect(()=>{ const id=setInterval(()=>setStoryPulse(v=>v+1),2600); return()=>clearInterval(id); },[]);
   useEffect(()=>{ const onKey=(e)=>{if(e.key==='Escape'){setSelectedPost(null);setCommentsPost(null);if(activeTask)setActiveTask(null);} if(selectedPost&&e.key==='ArrowRight')navigatePost(1); if(selectedPost&&e.key==='ArrowLeft')navigatePost(-1);}; window.addEventListener('keydown',onKey); return()=>window.removeEventListener('keydown',onKey); });
 
@@ -181,7 +185,7 @@ export default function App() {
   const completedNewsRounds=caseResults.filter(result=>result.type==='news').length;
   const freeHintRounds=completedNewsRounds<3;
   const hintMode=freeHintRounds?'free':tipsRemaining>0?'limited':'empty';
-  const hintButtonLabel=freeHintRounds?t('hintShowFree'):tipsRemaining>0?`${t('hintUse')} (${tipsRemaining} ${t('hintLeft')})`:t('hintNoneLeft');
+  const hintButtonLabel=freeHintRounds?t('hintShowFree'):tipsRemaining>0?`${t('hintUse')} (${tipsRemaining}/${MAX_TIPS})`:t('hintNoneLeft');
 
   function useHint(toolId){
     if(revealedHints.includes(toolId)){setRevealedHints(items=>items.filter(id=>id!==toolId));return;}
@@ -208,7 +212,7 @@ export default function App() {
     const primary=tasks.filter(task=>pushTaskIds.has(task.id)&&!followed.has(task.id)).map(task=>task.id);
     const newRunId=createUuid();
     setPosts(items=>shuffle(items));setRunOrder(shuffle(primary));setRunId(newRunId);setVisibleCount(5);setNotifiedTasks([]);setActiveNotification(null);
-    setScore(0);setCompleted([]);setCaseResults([]);setAgencyRules([]);setTipsRemaining(6);setRevealedHints([]);setUnreadNotificationCount(0);setNotificationHistory([]);setRunSummary(null);setActiveTab('feed');
+    setScore(0);setCompleted([]);setCaseResults([]);setAgencyRules([]);setTipsRemaining(MAX_TIPS);setRevealedHints([]);setUnreadNotificationCount(0);setNotificationHistory([]);setRunSummary(null);setActiveTab('feed');
     logResearchEvent('new_run_started',{runId:newRunId,previousCompletedTasks:completed.length,previousScore:score});window.scrollTo({top:0,behavior:'smooth'});
   }
   function addComment(){
@@ -631,6 +635,42 @@ function reopenDemo(){
   </div>
 }
 
+  {showResume&&!intro&&<div className="modal-backdrop">
+    <section className="intro-card resume-card">
+      <div className="intro-shield"><ShieldCheck size={42}/></div>
+      <span className="eyebrow">{lang==='de'?'Willkommen zurück':'Welcome back'}</span>
+      <h1>{lang==='de'?'Weiterspielen?':'Continue playing?'}</h1>
+      <p>{lang==='de'
+        ? 'Es gibt einen gespeicherten Spielstand. Du kannst dort weitermachen, wo du aufgehört hast, oder eine neue Mission starten.'
+        : 'You have a saved game. You can pick up where you left off, or start a new mission.'}</p>
+      <div className="resume-stats">
+        <div><strong>{saved.score??0}</strong><span>{lang==='de'?'Punkte':'Points'}</span></div>
+        <div><strong>{(saved.completed?.length)||0}</strong><span>{lang==='de'?'Fälle':'Cases'}</span></div>
+      </div>
+      <button
+        type="button"
+        className="primary"
+        onClick={()=>{setShowResume(false);setActiveTab('feed');logResearchEvent('run_resumed',{completedTasks:(saved.completed?.length)||0,score:saved.score??0});}}
+      >
+        {lang==='de'?'Weiterspielen':'Continue'}
+      </button>
+      <button
+        type="button"
+        className="secondary-action resume-restart"
+        onClick={()=>{
+          const ok=window.confirm(lang==='de'
+            ? 'Neue Mission starten? Dein gespeicherter Fortschritt geht dabei verloren.'
+            : 'Start a new mission? Your saved progress will be lost.');
+          if(!ok)return;
+          startNewRun();
+          setShowResume(false);
+        }}
+      >
+        <Sparkles size={18}/> {lang==='de'?'Neu starten':'Start new'}
+      </button>
+    </section>
+  </div>}
+
   {selectedPost&&<div className="modal-backdrop post-modal-backdrop" onClick={()=>setSelectedPost(null)}><section className="post-modal" onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setSelectedPost(null)} aria-label="Close"><X/></button><button className="modal-nav modal-prev" onClick={()=>navigatePost(-1)} aria-label="Previous"><ChevronLeft/></button><button className="modal-nav modal-next" onClick={()=>navigatePost(1)} aria-label="Next"><ChevronRight/></button><div className="post-modal-media"><img style={{transform:`scale(${zoom})`}} src={imagePath(selectedPost.media)} alt={selectedPost.imageAlt}/><div className="zoom-controls"><button onClick={()=>setZoom(z=>Math.max(1,z-.25))}><ZoomOut/></button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(z=>Math.min(3,z+.25))}><ZoomIn/></button></div></div><div className="post-modal-info"><div className="post-head"><div className="avatar">{selectedPost.username.slice(0,1).toUpperCase()}</div><div className="post-user"><strong>{selectedPost.username}</strong><span>{selectedPost.location}</span></div></div><div className="modal-caption"><b>{selectedPost.username}</b> {selectedPost.caption}</div><div className="modal-comments">{selectedPost.comments.map((c,i)=><p key={`${c.username}-${i}`}><b>{c.username}</b> {c.text}</p>)}</div></div></section></div>}
 
   {commentsPost&&<div className="modal-backdrop comments-backdrop" onClick={()=>setCommentsPost(null)}><section className="comments-sheet" onClick={e=>e.stopPropagation()}><div className="sheet-handle"></div><header><h2>{t('comments')}</h2><button onClick={()=>setCommentsPost(null)}><X/></button></header><div className="comments-list">{(commentsPost.comments||[]).map((c,i)=>{const id=`${commentsPost.id}-${i}`;return <article className="comment-row" key={c.id||id}><div className="comment-avatar">{c.username[0].toUpperCase()}</div><p><b>{c.username}</b> {c.text}<small>{i+1}m · {t('reply')}</small></p><button className={commentLikes.includes(id)?'is-liked':''} onClick={()=>toggle(commentLikes,setCommentLikes,id)}><Heart size={16} fill={commentLikes.includes(id)?'currentColor':'none'}/></button></article>})}</div><div className="comment-input"><div className="comment-avatar">A</div><input value={commentDraft} onChange={e=>setCommentDraft(e.target.value)} onKeyDown={e=>{if(e.key==='Enter')addComment();}} placeholder={t('addComment')}/><button disabled={!commentDraft.trim()} onClick={addComment}>{t('post')}</button></div></section></div>}
@@ -640,7 +680,7 @@ function reopenDemo(){
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
     {activeTask.type==='news' ? <>
       <div className="mechanic-step"><span>{t('openInvestigation')}</span><strong>{t('chooseYourChecks')}</strong></div>
-      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${t('hintStatusLeftPrefix')} ${tipsRemaining} ${t('hintStatusLeftSuffix')}`.trim():t('hintStatusEmpty')}</span></div>
+      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
