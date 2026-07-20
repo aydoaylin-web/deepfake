@@ -1,7 +1,7 @@
 import { BadgeCheck, CalendarDays, Eye, HelpCircle, LockKeyhole, UserRound } from 'lucide-react';
 
 function Hint({ mode, revealed, onUse, buttonLabel, t = (x) => x }) {
-  if (!revealed) return <button type="button" className="analysis-tip-button" disabled={mode==='empty'} onClick={onUse}><HelpCircle size={16}/>{buttonLabel}</button>;
+  if (!revealed) return <button type="button" className="analysis-tip-toggle" disabled={mode==='empty'} onClick={onUse} aria-label={t('tip')} title={buttonLabel}><HelpCircle size={18}/></button>;
   return <div className="analysis-tip"><strong><HelpCircle size={16}/> {t('tip')}</strong><p>{t('profTipQ')}</p><b>{t('whyImportant')}</b><p>{t('demo3Body1')}</p><p>{t('demo3Body2')}</p><button type="button" className="analysis-tip-collapse" onClick={onUse}>{t('collapseTip')}</button></div>;
 }
 
