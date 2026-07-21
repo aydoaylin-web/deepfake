@@ -1849,34 +1849,71 @@ body::after{
   body::before{animation:df-splash-bg 2.2s ease forwards}
 }
 
-/* FIX: Iris-Hilfe-Zeile bleibt komplett im Bild, nichts wird abgeschnitten */
+/* ============================================================
+   FINALE KORREKTUR der Iris-Hilfe-Zeile.
+   Überschreibt ALLE älteren, sich widersprechenden .feed-help-*
+   Regeln (space-between, align-items:stretch, Icon-Button-Größe).
+   Nichts mehr danach einfügen.
+   ============================================================ */
 .task-sheet .feed-help-row{
   display:flex !important;
   flex-wrap:wrap !important;
-  align-items:stretch !important;
+  align-items:center !important;
   justify-content:flex-start !important;
   gap:8px !important;
   width:100% !important;
-  margin:0 0 12px !important;
+  margin:12px 0 !important;
   padding:0 !important;
 }
-.task-sheet .hint-resource-status{
-  flex:0 0 auto !important;
-  max-width:100% !important;
-  margin:0 !important;
-}
 .task-sheet .feed-help-wrap{
-  flex:1 1 160px !important;   /* nimmt den Rest, darf aber schrumpfen */
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  flex:1 1 200px !important;
   min-width:0 !important;
   margin:0 !important;
+  gap:8px !important;
 }
-.task-sheet .feed-help-button{
-  width:100% !important;
+/* Beide Hilfe-Buttons: gleicher Stil, echte Größe (kein kleiner Icon-Knopf mehr) */
+.task-sheet .feed-help-icon-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:7px !important;
+  width:auto !important;
   min-width:0 !important;
   max-width:100% !important;
-  padding:10px 14px !important;
+  height:auto !important;
+  min-height:46px !important;
+  padding:10px 16px !important;
+  border-radius:12px !important;
+  font-weight:800 !important;
+  font-size:14px !important;
+  line-height:1.2 !important;
+  white-space:nowrap !important;
+  writing-mode:horizontal-tb !important;
+  text-orientation:mixed !important;
+}
+/* Linker "Hilfe"-Button: kompakt, wächst nicht */
+.task-sheet .feed-help-row > .feed-help-icon-button{
+  flex:0 0 auto !important;
+}
+/* Rechter "Frag Iris"-Button: füllt den Rest, darf notfalls umbrechen statt abzuschneiden */
+.task-sheet .feed-help-wrap > .feed-help-icon-button{
+  flex:1 1 auto !important;
+  width:100% !important;
   white-space:normal !important;
   overflow-wrap:anywhere !important;
-  text-align:center !important;
-  line-height:1.25 !important;
+}
+/* Emoji + Text normal darstellen, keine erzeugten Pseudo-Icons, kein vertikaler Text */
+.task-sheet .feed-help-icon-button .help-button-emoji{display:inline !important;font-size:18px !important;line-height:1 !important}
+.task-sheet .feed-help-icon-button::before,
+.task-sheet .feed-help-icon-button::after{content:none !important}
+.task-sheet .feed-help-icon-button > span{writing-mode:horizontal-tb !important;white-space:normal !important}
+
+/* Sehr schmale Handys: beide Buttons je eine volle Zeile */
+@media (max-width:420px){
+  .task-sheet .feed-help-row > .feed-help-icon-button,
+  .task-sheet .feed-help-wrap{flex:1 1 100% !important;width:100% !important}
+  .task-sheet .feed-help-wrap > .feed-help-icon-button{width:100% !important}
 }
