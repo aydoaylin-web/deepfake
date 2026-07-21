@@ -577,3 +577,38 @@ img{user-select:none;-webkit-user-drag:none}
   background:var(--teal);
   box-shadow:inset 0 0 0 3px #fff;
 }
+
+/* Hintergrund kräftiger grau-blau */
+.task-sheet{background:#e7ebf2 !important}
+
+/* --- ANALYSE-ZONE: türkisgrün getönt, hebt sich ab --- */
+.task-sheet .analysis-tools{
+  padding:12px;
+  border-radius:16px;
+  background:#eef7f3;              /* zarte Türkisgrün-Tönung */
+  border:1px solid #d3ebe1;
+}
+.task-sheet .analysis-tool-card{
+  border:1px solid #cfe6db !important;
+}
+.task-sheet .analysis-tool-title svg:first-child{color:#1f9e78}  /* Werkzeug-Icon türkisgrün */
+.task-sheet .analysis-tool-title svg:last-of-type{color:#1f9e78} /* Häkchen türkisgrün */
+.task-sheet .accordion-symbol{color:#9aa3b2}                     /* "+" dezent grau */
+
+/* --- URTEIL-ZONE: neutral weiß/navy, klar anders als Analyse --- */
+.task-sheet .verdict-options button{background:#fff;border:1px solid #e4e8f0 !important}
+.task-sheet .verdict-options button.selected{
+  border-color:#1f9e78 !important;background:#e8f6f0;color:#0f6e56;
+  box-shadow:0 0 0 2px rgba(31,158,120,.18);
+}
+
+/* --- "i"-Box + Iris-Button: sauber im Farbcode, gleiche Form --- */
+.task-sheet .feed-help-row{align-items:stretch}
+.task-sheet .hint-resource-status,
+.task-sheet .feed-help-button{
+  min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:0;padding:0 18px;border-radius:14px;font-weight:800;
+}
+.task-sheet .hint-resource-status{background:#fff;border:1px solid #e4e8f0;color:#102b5b}
+.task-sheet .hint-resource-status svg{color:#db2b73}          /* "i" = pink, nicht rot */
+.task-sheet .feed-help-button{background:#db2b73 !important;border:1px solid #db2b73;color:#fff}
