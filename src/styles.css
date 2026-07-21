@@ -1328,3 +1328,394 @@ body,
   }
 }
 
+
+/* =========================================================
+   JSX-ABGLEICH UND EINHEITLICHE GRÖSSE DES PRÜFBEITRAGS
+   ========================================================= */
+
+/* Emojis befinden sich jetzt direkt in der JSX. */
+.feed-help-wrap .feed-help-icon-button svg{
+  display:initial;
+}
+
+.feed-help-icon-button::before,
+.feed-help-icon-button::after,
+.feed-help-wrap .feed-help-icon-button:nth-of-type(1)::before,
+.feed-help-wrap .feed-help-icon-button:nth-of-type(2)::before,
+.feed-help-icon-button[aria-label*="Info" i]::before,
+.feed-help-icon-button[title*="Info" i]::before,
+.feed-help-icon-button[aria-label*="Hilfe" i]::before,
+.feed-help-icon-button[title*="Hilfe" i]::before,
+.feed-help-icon-button[aria-label*="Help" i]::before,
+.feed-help-icon-button[title*="Help" i]::before{
+  content:none !important;
+}
+
+.help-button-emoji{
+  display:block;
+  font-size:20px;
+  line-height:1;
+}
+
+/* Das Glühbirnen-Emoji kommt jetzt aus hintButtonLabel in der JSX. */
+.task-sheet .analysis-tip-button::before,
+.task-sheet .analysis-tip-toggle::before,
+.task-sheet .analysis-tip-toggle::after{
+  content:none !important;
+}
+
+/* Einheitliche Feedgröße innerhalb jeder Analyse:
+   300 px hoch, vollständiges Bild, keine Verzerrung. */
+.task-sheet .task-feed-post{
+  width:100%;
+  margin:14px 0;
+  overflow:hidden;
+  border:1px solid #e1e5ec;
+  border-radius:14px;
+  background:#fff;
+}
+
+.task-sheet .task-feed-post .post-image-button{
+  width:100%;
+  height:300px;
+  max-height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#111;
+}
+
+.task-sheet .task-feed-post .post-image{
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Auch die kompakte Bilddarstellung anderer Aufgabentypen
+   überschreitet 300 px nicht. */
+.task-sheet .task-image-button{
+  width:100%;
+  height:300px;
+  max-height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#111;
+}
+
+.task-sheet .task-image-button img{
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Orange Assets in den weißen Urteilsbuttons. */
+.task-sheet .verdict-options .verdict-asset{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  color:var(--dd-orange) !important;
+  stroke:currentColor;
+}
+
+@media (max-width:600px){
+  .task-sheet .task-feed-post .post-image-button,
+  .task-sheet .task-image-button{
+    height:240px;
+    max-height:240px;
+  }
+}
+
+
+/* =========================================================
+   KORREKTUR: KEINE FARBIGEN RÄNDER
+   Orange nur noch für Icons und dezente Zustände.
+   ========================================================= */
+
+/* Analysewerkzeuge: neutraler, sehr dezenter Rand */
+.task-sheet .analysis-tool-card,
+.task-sheet .analysis-tool-card:hover,
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  border:1px solid #e3e7ed !important;
+}
+
+.task-sheet .analysis-tool-card:hover,
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  background:#fff !important;
+  box-shadow:0 6px 18px rgba(17,24,39,.07) !important;
+}
+
+/* Keine orange Umrandung am geöffneten Werkzeug */
+.task-sheet .analysis-tool-card.open .analysis-tool-toggle{
+  background:#fafbfc !important;
+}
+
+/* Urteilsoptionen: weiß, neutraler Rand */
+.task-sheet .verdict-options button,
+.task-sheet .verdict-options button:hover,
+.task-sheet .verdict-options button.selected{
+  border:1px solid #e3e7ed !important;
+}
+
+/* Hover nur über eine sehr dezente Fläche */
+.task-sheet .verdict-options button:hover{
+  background:#fafbfc !important;
+  box-shadow:none !important;
+}
+
+/* Auswahl ohne farbigen Rand */
+.task-sheet .verdict-options button.selected{
+  background:#f7f8fa !important;
+  color:var(--dd-text) !important;
+  box-shadow:0 0 0 2px rgba(17,24,39,.06) !important;
+}
+
+/* Auch interne Auswahlbuttons ohne orange Rand */
+.task-sheet .source-assessment-options button,
+.task-sheet .source-assessment-options button:hover,
+.task-sheet .source-assessment-options button.selected,
+.task-sheet .image-inspection-controls button,
+.task-sheet .image-inspection-controls button:hover{
+  border:1px solid #e3e7ed !important;
+}
+
+.task-sheet .source-assessment-options button:hover,
+.task-sheet .source-assessment-options button.selected,
+.task-sheet .image-inspection-controls button:hover{
+  background:#f7f8fa !important;
+}
+
+/* Orange bleibt ausschließlich bei Symbolen/Assets */
+.task-sheet .analysis-tool-title > svg,
+.task-sheet .analysis-tool-title > img,
+.task-sheet .analysis-tool-title .tool-icon,
+.task-sheet .analysis-tool-title .analysis-tool-icon,
+.task-sheet .accordion-symbol,
+.task-sheet .verdict-options .verdict-asset{
+  color:var(--dd-orange) !important;
+}
+
+
+/* =========================================================
+   FINALE KORREKTUR NACH LAYOUT-VORGABE
+   Keine Ränder an Analysewerkzeugen oder Urteilsoptionen.
+   Keine strukturellen Änderungen an den Werkzeugen.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Hilfe und Iris-Hilfe: alte sichtbare Beschriftungen
+   --------------------------------------------------------- */
+
+.task-sheet .feed-help-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:14px 0 18px;
+}
+
+.task-sheet .feed-help-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  margin:0;
+}
+
+.task-sheet .feed-help-icon-button{
+  width:auto;
+  min-width:0;
+  height:auto;
+  min-height:42px;
+  padding:9px 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:0 !important;
+  border-radius:11px;
+  background:var(--dd-blue) !important;
+  color:#fff !important;
+  font-size:13px;
+  font-weight:800;
+  white-space:normal;
+  box-shadow:none;
+}
+
+.task-sheet .feed-help-icon-button:hover{
+  border:0 !important;
+  background:var(--dd-blue-hover) !important;
+}
+
+.task-sheet .feed-help-icon-button::before,
+.task-sheet .feed-help-icon-button::after{
+  content:none !important;
+}
+
+.task-sheet .help-button-emoji{
+  flex:0 0 auto;
+  font-size:18px;
+}
+
+/* ---------------------------------------------------------
+   Analysewerkzeuge: vollständig ohne Rand
+   --------------------------------------------------------- */
+
+.task-sheet .analysis-tools{
+  gap:12px;
+  margin:14px 0 0;
+}
+
+.task-sheet .analysis-tool-card,
+.task-sheet .analysis-tool-card:hover,
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  border:0 !important;
+  border-color:transparent !important;
+  border-radius:14px;
+  background:#fff !important;
+  box-shadow:0 2px 10px rgba(17,24,39,.09) !important;
+}
+
+.task-sheet .analysis-tool-card:hover{
+  box-shadow:0 4px 14px rgba(17,24,39,.11) !important;
+}
+
+.task-sheet .analysis-tool-card.open{
+  box-shadow:0 6px 18px rgba(17,24,39,.12) !important;
+}
+
+.task-sheet .analysis-tool-toggle,
+.task-sheet .analysis-tool-card.open .analysis-tool-toggle{
+  padding:14px 15px;
+  border:0 !important;
+  background:#fff !important;
+}
+
+.task-sheet .analysis-tool-content{
+  padding:4px 15px 17px;
+  border:0 !important;
+  background:#fff !important;
+}
+
+/* Sämtliche Icons im Werkzeugkopf sind orange – auch Statussymbol und +/- */
+.task-sheet .analysis-tool-title > svg,
+.task-sheet .analysis-tool-title > svg:last-child,
+.task-sheet .analysis-tool-title > img,
+.task-sheet .analysis-tool-title .tool-icon,
+.task-sheet .analysis-tool-title .analysis-tool-icon,
+.task-sheet .accordion-symbol{
+  color:var(--dd-orange) !important;
+  stroke:currentColor !important;
+}
+
+/* Mehr Übersicht innerhalb eines geöffneten Werkzeugs,
+   ohne dessen Aufbau oder Form zu verändern. */
+.task-sheet .analysis-tool-content > *{
+  margin-top:12px;
+}
+
+.task-sheet .analysis-tool-content > *:first-child{
+  margin-top:4px;
+}
+
+.task-sheet .analysis-tool-content p{
+  line-height:1.55;
+}
+
+.task-sheet .analysis-tool-content .analysis-tip,
+.task-sheet .analysis-tool-content .analysis-takeaway,
+.task-sheet .analysis-tool-content .tip-info-note,
+.task-sheet .analysis-tool-content .hint-info-note{
+  margin-top:14px;
+}
+
+/* ---------------------------------------------------------
+   Urteilsfrage: mehr Abstand und ruhige Einbettung
+   --------------------------------------------------------- */
+
+.task-sheet .verdict-question{
+  margin:30px 0 14px;
+  padding:14px 16px;
+  border:0 !important;
+  border-radius:12px;
+  background:#f4f6f9;
+  color:#0c2858;
+  font-size:clamp(15px,4vw,17px);
+  font-weight:800;
+  line-height:1.45;
+}
+
+.task-sheet .verdict-question strong{
+  font-weight:800;
+}
+
+/* ---------------------------------------------------------
+   Urteilsoptionen: vollständig ohne Rand
+   --------------------------------------------------------- */
+
+.task-sheet .verdict-options{
+  gap:10px;
+  margin:0 0 14px;
+}
+
+.task-sheet .verdict-options button,
+.task-sheet .verdict-options button:hover,
+.task-sheet .verdict-options button.selected{
+  border:0 !important;
+  border-color:transparent !important;
+  border-radius:13px;
+  background:#fff !important;
+  box-shadow:0 2px 10px rgba(17,24,39,.09) !important;
+}
+
+.task-sheet .verdict-options button:hover{
+  background:#fafbfc !important;
+  box-shadow:0 4px 14px rgba(17,24,39,.11) !important;
+}
+
+.task-sheet .verdict-options button.selected{
+  background:#f5f6f8 !important;
+  box-shadow:0 0 0 3px rgba(17,24,39,.07) !important;
+}
+
+/* Orange bleibt ausschließlich bei den Assets. */
+.task-sheet .verdict-options .verdict-asset{
+  color:var(--dd-orange) !important;
+  stroke:currentColor !important;
+}
+
+/* ---------------------------------------------------------
+   Smartphone
+   --------------------------------------------------------- */
+
+@media (max-width:600px){
+  .task-sheet .feed-help-row{
+    align-items:stretch;
+  }
+
+  .task-sheet .feed-help-wrap{
+    flex:1;
+  }
+
+  .task-sheet .feed-help-icon-button{
+    min-height:42px;
+  }
+
+  .task-sheet .feed-help-wrap .feed-help-icon-button{
+    width:100%;
+  }
+
+  .task-sheet .verdict-question{
+    margin-top:26px;
+  }
+}
+
