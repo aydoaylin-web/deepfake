@@ -443,7 +443,7 @@ export default function App() {
     logResearchEvent('hint_used',{taskId:activeTask?.id,postId:activePost?.id,toolId,free:freeHintRounds,tipsRemainingAfter:freeHintRounds?tipsRemaining:Math.max(0,tipsRemaining-1)});
   }
 
-  function openTask(taskId,postOverride=null,origin='push'){const task=taskMap[taskId];if(!task||completed.includes(taskId))return;const post=postOverride||posts.find(p=>p.id===task.postId)||null;setActiveNotification(null);if(origin==='push')setUnreadNotificationCount(count=>Math.max(0,count-1));setActiveTask(task);setActivePost(post);setSelectedAnswers([]);setReason('');setConfidence(3);setFeedback(null);setTaskPhase(task.type==='news'?'inspect':'answer');setUsedTools([]);setOpenTool(null);setRevealedHints([]);setVerdict('');setTaskOrigin(origin);taskStartedAt.current=Date.now();logResearchEvent('task_opened',{taskId:task.id,postId:post?.id||task.postId,origin});}
+  function openTask(taskId,postOverride=null,origin='push'){const task=taskMap[taskId];if(!task||completed.includes(taskId))return;const post=postOverride||posts.find(p=>p.id===task.postId)||null;setActiveNotification(null);if(origin==='push')setUnreadNotificationCount(count=>Math.max(0,count-1));setActiveTask(task);setActivePost(post);setSelectedAnswers([]);setReason('');setConfidence(3);setFeedback(null);setTaskPhase(task.type==='news'?'inspect':'answer');setUsedTools([]);setOpenTool(null);setRevealedHints([]);setShowHintNote(false);setVerdict('');setTaskOrigin(origin);taskStartedAt.current=Date.now();logResearchEvent('task_opened',{taskId:task.id,postId:post?.id||task.postId,origin});}
   function useAnalysisTool(toolId){ if(!activeTask)return; setOpenTool(current=>current===toolId?null:toolId); if(!usedTools.includes(toolId)){setUsedTools(items=>[...items,toolId]);logResearchEvent('analysis_tool_used',{taskId:activeTask.id,postId:activePost?.id,toolId,order:usedTools.length+1});} }
   function toggleAnswer(id){if(!activeTask)return;setSelectedAnswers(cur=>activeTask.answerMode==='multipleChoice'?(cur.includes(id)?cur.filter(x=>x!==id):[...cur,id]):[id]);if(feedback?.validation)setFeedback(null);}
   function isCorrectAnswer(task,answers){const correct=task.correctAnswers||[];if(task.answerMode==='multipleChoice'){const required=task.minimumCorrectSelections||correct.length;return answers.filter(a=>correct.includes(a)).length>=required&&answers.every(a=>correct.includes(a));}return answers.some(a=>correct.includes(a));}
@@ -452,7 +452,7 @@ export default function App() {
     const projectedScore=score+delta;
     if(projectedScore>=targetScore||projectedScore<=-10||projectedCompleted.length>=tasks.length){setRunSummary({score:projectedScore,correct:caseResults.filter(item=>item.correct).length+(correct?1:0),total:projectedCompleted.length,targetReached:projectedScore>=targetScore,lost:projectedScore<=-10});}
     const VL={echt:t('verdictEcht'),manipuliert:t('verdictManipuliert'),suspekt:t('verdictSuspekt')};const actualReason=reasonEval&&reasonEval.feedback?(reasonEval.feedback[lang]||reasonEval.feedback.de):(verdictCorrect?activeTask.feedbackCorrect:activeTask.feedbackWrong);setFeedback({correct,delta,point1,point2,verdictCorrect,reasonMatched:point2===1,correctVerdictLabel:VL[activeTask.correctVerdict]||activeTask.correctVerdict,yourReason:reason.trim(),actualReason,expired});setEvaluating(false);}
-  function closeTask(){const next=feedback?.correct?activeTask?.followUpTaskId:null;const post=activePost;setActiveTask(null);setActivePost(null);setFeedback(null);setTaskPhase('inspect');setUsedTools([]);setOpenTool(null);setRevealedHints([]);setVerdict('');if(next&&!completed.includes(next))setTimeout(()=>openTask(next,post),300);}
+  function closeTask(){const next=feedback?.correct?activeTask?.followUpTaskId:null;const post=activePost;setActiveTask(null);setActivePost(null);setFeedback(null);setTaskPhase('inspect');setUsedTools([]);setOpenTool(null);setRevealedHints([]);setShowHintNote(false);setVerdict('');if(next&&!completed.includes(next))setTimeout(()=>openTask(next,post),300);}
   function toggle(list,setter,id){setter(list.includes(id)?list.filter(x=>x!==id):[...list,id]);}
   function startNewRun(){
     const followed=new Set(tasks.map(task=>task.followUpTaskId).filter(Boolean));
@@ -955,10 +955,11 @@ function reopenDemo(){
           className="hint-resource-status hint-resource-compact"
           onClick={() => setShowHintNote(v => !v)}
           aria-expanded={showHintNote}
+          aria-label={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
+          title={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
         >
           <Info size={17}/>
-          <span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span>
-        </button><Info size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+        </button>
         <div className="feed-help-wrap">
           <audio
             ref={feedHelpAudioRef}
@@ -979,7 +980,7 @@ function reopenDemo(){
               ? (feedHelpListening
                   ? (lang === 'de' ? '🎙️ Iris hört zu …' : '🎙️ Iris is listening …')
                   : (lang === 'de' ? '❓Sag „Iris Hilfe“🎙️' : '❓Say “Iris help”🎙️ '))
-              : (lang === 'de' ? '❓Hilfe 🔊' : '❓help 🔊')}
+              : (lang === 'de' ? '❓' : '❓')}
           </button>
           {feedHelpSpeaking && (
             <button
@@ -992,7 +993,13 @@ function reopenDemo(){
           )}
         </div>
       </div>
-        {showHintNote && <p className="hint-info-note">{t('hintInfoNote')}</p>}  
+        {showHintNote && (
+          <p className="hint-info-note">
+            {lang === 'de'
+              ? 'Beachte: Bei den ersten drei Überprüfungen kannst du die Tipps unbegrenzt nutzen. Danach stehen dir für das gesamte restliche Spiel nur noch fünf Tipps zur Verfügung.'
+              : 'Please note: During the first three reviews, you can use hints without limitation. After that, only five hints are available for the entire remainder of the game.'}
+          </p>
+        )}
         {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
@@ -1028,3 +1035,4 @@ function reopenDemo(){
     </>}</section></div>}
   </div>;
 }
+
