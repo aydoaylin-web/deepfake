@@ -1719,3 +1719,76 @@ body,
   }
 }
 
+
+/* =========================================================
+   FINALE FEINKORREKTUR DER ANALYSESEITE
+   Nur: Schatten entfernen, Inhalte ordnen, Urteilsfrage einbinden.
+   ========================================================= */
+
+/* Analysewerkzeuge ohne sichtbaren Rand- oder Karten-Schatten. */
+.task-sheet .analysis-tool-card,
+.task-sheet .analysis-tool-card:hover,
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+/* Geöffnete Inhalte lediglich über Abstände lesbarer machen. */
+.task-sheet .analysis-tool-content{
+  padding-top:6px;
+}
+
+.task-sheet .analysis-tool-content > *{
+  margin-top:0;
+}
+
+.task-sheet .analysis-tool-content > * + *{
+  margin-top:14px;
+}
+
+.task-sheet .analysis-tool-content p{
+  margin-bottom:0;
+  line-height:1.55;
+}
+
+.task-sheet .analysis-tool-content .analysis-tip,
+.task-sheet .analysis-tool-content .analysis-takeaway,
+.task-sheet .analysis-tool-content .tip-info-note,
+.task-sheet .analysis-tool-content .hint-info-note{
+  margin-top:16px;
+}
+
+.task-sheet .analysis-tool-content .analysis-tip-collapse{
+  margin-top:14px;
+}
+
+/* Mehr Abstand nach den Werkzeugen; Frage ohne zusätzlichen Kasten. */
+.task-sheet .verdict-question{
+  margin:34px 0 14px;
+  padding:0;
+  border:0 !important;
+  border-radius:0;
+  background:transparent;
+  color:#0c2858;
+  font-size:clamp(15px,4vw,17px);
+  font-weight:800;
+  line-height:1.45;
+}
+
+/* Urteilsoptionen ohne sichtbaren Rand- oder Karten-Schatten. */
+.task-sheet .verdict-options button,
+.task-sheet .verdict-options button:hover,
+.task-sheet .verdict-options button.selected{
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.task-sheet .verdict-options button:hover{
+  background:#fafbfc !important;
+}
+
+.task-sheet .verdict-options button.selected{
+  background:#f5f6f8 !important;
+  box-shadow:inset 0 0 0 2px rgba(17,24,39,.06) !important;
+}
