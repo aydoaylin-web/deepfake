@@ -507,32 +507,6 @@ img{user-select:none;-webkit-user-drag:none}
 .hint-info-note{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#eef2fb;color:#0c2858;font-size:clamp(12px,3.4vw,14px);line-height:1.45}
 
 
-/* ===== Rosa-Schema: nur #f5c2ef / #fbe1f7 / #ffffff ===== */
-.task-sheet{background:#fff !important;border-top:4px solid #f5c2ef !important}
-
-/* Analyse-Karten (kleinere Fläche) = kräftigeres Rosa #f5c2ef */
-.task-sheet .analysis-tools{background:transparent;border:0;padding:0}
-.task-sheet .analysis-tool-card{background:#f5c2ef !important;border-color:#eaa9e0 !important}
-.task-sheet .analysis-tool-toggle{background:transparent !important}
-.task-sheet .analysis-tool-content{background:transparent}
-.task-sheet .analysis-tool-title,
-.task-sheet .analysis-tool-title>svg{color:#7a2d6e !important}   /* dunkles Rosé = lesbar */
-.task-sheet .accordion-symbol{color:#a05a95 !important}
-
-/* Urteils-Karten (größere Fläche) = helleres Rosa #fbe1f7 */
-.task-sheet .verdict-options button{background:#fbe1f7 !important;border-color:#f3cdea !important;color:#4a1f43 !important}
-.task-sheet .verdict-options button.selected{background:#f5c2ef !important;border-color:#c874b3 !important;box-shadow:0 0 0 2px rgba(200,116,179,.25) !important}
-.task-sheet .verdict-options button.selected::after{border-color:#b0559e !important;background:#b0559e !important;box-shadow:inset 0 0 0 3px #fff !important}
-
-/* i-Box + Iris-Button = weiß mit zartrosa Rahmen */
-.task-sheet .hint-resource-status,
-.task-sheet .feed-help-button{background:#ffffff !important;border:1px solid #f3cdea !important;color:#7a2d6e !important;font-weight:800}
-.task-sheet .hint-resource-status svg{color:#c874b3 !important}
-
-/* Frage + Textfeld neutral auf weiß */
-.task-sheet .verdict-question{color:#4a1f43 !important}
-.task-sheet .analysis-input-block textarea{background:#fff !important}
-
 /* =========================================================
    Finale Korrektur: Außenhintergrund und echte Icon-Buttons
    ========================================================= */
@@ -702,3 +676,267 @@ body,
   }
 }
 
+/* =========================================================
+   Feedanalyse im For-You-Stil
+   ========================================================= */
+
+:root{
+  --analysis-blue:#092b61;
+  --analysis-blue-hover:#123d7b;
+  --analysis-blue-soft:#eef4ff;
+  --analysis-line:#dce3ee;
+  --analysis-text:#131722;
+  --analysis-muted:#667085;
+  --analysis-white:#ffffff;
+}
+
+/* Feedanalyse verwendet dieselben neutralen Farben wie die For-You-Seite. */
+.task-sheet{
+  background:var(--analysis-white);
+  border-top:0;
+  color:var(--analysis-text);
+}
+
+.task-sheet .task-top,
+.task-sheet .task-post-caption,
+.task-sheet .analysis-input-block,
+.task-sheet .confidence-control{
+  background:var(--analysis-white);
+}
+
+/* Analysewerkzeuge bleiben vollständig weiß. */
+.task-sheet .analysis-tools{
+  background:transparent;
+  border:0;
+  padding:0;
+}
+
+.task-sheet .analysis-tool-card{
+  background:var(--analysis-white);
+  border:1px solid var(--analysis-line);
+  box-shadow:none;
+}
+
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  background:var(--analysis-white);
+  border-color:#9db5d8;
+  box-shadow:0 7px 20px rgba(9,43,97,.08);
+}
+
+.task-sheet .analysis-tool-toggle,
+.task-sheet .analysis-tool-card.open .analysis-tool-toggle,
+.task-sheet .analysis-tool-content{
+  background:var(--analysis-white);
+}
+
+.task-sheet .analysis-tool-title{
+  color:#17365f;
+}
+
+/* Nur die Symbole der Analysewerkzeuge erhalten Farbe. */
+.task-sheet .analysis-tool-card:nth-child(1) .analysis-tool-title > svg:first-child{
+  color:#7c3aed;
+}
+
+.task-sheet .analysis-tool-card:nth-child(2) .analysis-tool-title > svg:first-child{
+  color:#2563eb;
+}
+
+.task-sheet .analysis-tool-card:nth-child(3) .analysis-tool-title > svg:first-child{
+  color:#db2777;
+}
+
+.task-sheet .analysis-tool-card:nth-child(4) .analysis-tool-title > svg:first-child{
+  color:#f97316;
+}
+
+.task-sheet .analysis-tool-card:nth-child(5) .analysis-tool-title > svg:first-child{
+  color:#059669;
+}
+
+.task-sheet .analysis-tool-title > svg:last-child{
+  color:#16803c;
+}
+
+.task-sheet .accordion-symbol{
+  color:var(--analysis-blue);
+}
+
+/* Alle echten Aktionsbuttons in der Analyse erhalten das Intro-Blau. */
+.task-sheet .primary,
+.task-sheet .feed-help-button,
+.task-sheet .analysis-tip-button,
+.task-sheet .analysis-tip-collapse,
+.task-sheet .hotspot-reveal,
+.task-sheet .source-open-page,
+.task-sheet .image-inspection-controls button,
+.task-sheet .source-assessment-options button,
+.task-sheet .research-actions button{
+  border:1px solid var(--analysis-blue);
+  background:var(--analysis-blue);
+  color:#fff;
+  font-weight:800;
+  box-shadow:none;
+}
+
+.task-sheet .primary:hover,
+.task-sheet .feed-help-button:hover,
+.task-sheet .analysis-tip-button:hover,
+.task-sheet .analysis-tip-collapse:hover,
+.task-sheet .hotspot-reveal:hover,
+.task-sheet .source-open-page:hover,
+.task-sheet .image-inspection-controls button:hover,
+.task-sheet .source-assessment-options button:hover,
+.task-sheet .research-actions button:hover{
+  border-color:var(--analysis-blue-hover);
+  background:var(--analysis-blue-hover);
+  color:#fff;
+}
+
+.task-sheet .primary:active,
+.task-sheet .feed-help-button:active,
+.task-sheet .analysis-tip-button:active,
+.task-sheet .analysis-tip-collapse:active,
+.task-sheet .hotspot-reveal:active,
+.task-sheet .source-open-page:active,
+.task-sheet .image-inspection-controls button:active,
+.task-sheet .source-assessment-options button:active,
+.task-sheet .research-actions button:active{
+  transform:scale(.98);
+}
+
+/* Tipp wird als vollständiger Button angezeigt, nicht nur als i-Symbol. */
+.task-sheet .analysis-tip-button,
+.task-sheet .analysis-tip-toggle{
+  width:auto;
+  min-width:max-content;
+  height:auto;
+  min-height:40px;
+  padding:9px 13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:1px solid var(--analysis-blue);
+  border-radius:10px;
+  background:var(--analysis-blue);
+  color:#fff;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:800;
+}
+
+.task-sheet .analysis-tip-toggle::after{
+  content:"Tipp einsetzen";
+  font-size:13px;
+  line-height:1.2;
+}
+
+.task-sheet .analysis-tip-button svg,
+.task-sheet .analysis-tip-toggle svg{
+  width:18px;
+  height:18px;
+  color:#fff;
+  stroke-width:2.2;
+}
+
+.task-sheet .analysis-tip-button:hover,
+.task-sheet .analysis-tip-toggle:hover{
+  background:var(--analysis-blue-hover);
+  border-color:var(--analysis-blue-hover);
+  color:#fff;
+}
+
+/* Informationsfläche bleibt hell und passt zum Feed. */
+.task-sheet .hint-resource-status{
+  background:#f5f8fd;
+  border:1px solid #d9e3f2;
+  color:#123567;
+}
+
+.task-sheet .hint-resource-status svg{
+  color:#2563eb;
+}
+
+/* Urteilsbuttons blau, mit sichtbaren Emojis. */
+.task-sheet .verdict-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+.task-sheet .verdict-options button{
+  min-height:52px;
+  padding:12px 10px;
+  border:1px solid var(--analysis-blue);
+  border-radius:11px;
+  background:var(--analysis-blue);
+  color:#fff;
+  font-weight:850;
+  line-height:1.25;
+}
+
+.task-sheet .verdict-options button:hover{
+  background:var(--analysis-blue-hover);
+  border-color:var(--analysis-blue-hover);
+}
+
+.task-sheet .verdict-options button.selected{
+  background:#2563eb;
+  border-color:#2563eb;
+  color:#fff;
+  box-shadow:0 0 0 3px rgba(37,99,235,.20);
+}
+
+/* Reihenfolge: Echt, Suspekt, Manipuliert. */
+.task-sheet .verdict-options button:nth-child(1)::before{
+  content:"✅ ";
+}
+
+.task-sheet .verdict-options button:nth-child(2)::before{
+  content:"🤔 ";
+}
+
+.task-sheet .verdict-options button:nth-child(3)::before{
+  content:"⚠️ ";
+}
+
+/* Eingabefelder bleiben weiß und klar abgegrenzt. */
+.task-sheet textarea,
+.task-sheet input[type="text"],
+.task-sheet .analysis-input-block textarea{
+  background:#fff;
+  border-color:#d8deea;
+  color:var(--analysis-text);
+}
+
+.task-sheet textarea:focus,
+.task-sheet input[type="text"]:focus{
+  border-color:#2563eb;
+  outline:3px solid rgba(37,99,235,.16);
+}
+
+/* Rückmeldungen behalten semantische Farben. */
+.task-sheet .feedback.correct{
+  background:#ebf8ef;
+  color:#176c36;
+}
+
+.task-sheet .feedback.wrong,
+.task-sheet .feedback.warning{
+  background:#fff0ee;
+  color:#a42c24;
+}
+
+@media (max-width:600px){
+  .task-sheet .verdict-options{
+    grid-template-columns:1fr;
+  }
+
+  .task-sheet .analysis-tip-button,
+  .task-sheet .analysis-tip-toggle,
+  .task-sheet .feed-help-button{
+    width:100%;
+  }
+}
