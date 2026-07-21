@@ -976,6 +976,7 @@ function reopenDemo(){
           title={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
         >
           <span className="help-button-emoji" aria-hidden="true">ℹ️</span>
+          <span>{lang === 'de' ? 'Hilfe' : 'Help'}</span>
         </button>
         <div className="feed-help-wrap">
           <audio
@@ -996,6 +997,7 @@ function reopenDemo(){
             title={lang === 'de' ? 'Iris Hilfe' : 'Iris help'}
           >
             <span className="help-button-emoji" aria-hidden="true">❓</span>
+            <span>{lang === 'de' ? 'Frag Iris um Hilfe' : 'Ask Iris for help'}</span>
           </button>
           {feedHelpSpeaking && (
             <button
