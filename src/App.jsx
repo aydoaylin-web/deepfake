@@ -962,8 +962,8 @@ function reopenDemo(){
           {speechRecognitionSupported
             ? (feedHelpListening
                 ? (lang === 'de' ? '🎙️ Iris hört zu …' : '🎙️ Iris is listening …')
-                : (lang === 'de' ? '🎙️ Sag „Iris Hilfe“' : '🎙️ Say “Iris help”'))
-            : (lang === 'de' ? '🔊 Iris-Hilfe abspielen' : '🔊 Play Iris help')}
+                : (lang === 'de' ? '❓🎙️ Sag „Iris Hilfe“' : '❓🎙️ Say “Iris help”'))
+            : (lang === 'de' ? '❓Hilfe' : '❓help')}
         </button>
         {feedHelpSpeaking && (
           <button
