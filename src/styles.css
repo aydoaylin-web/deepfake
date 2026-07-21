@@ -940,3 +940,391 @@ body,
     width:100%;
   }
 }
+
+
+/* =========================================================
+   FINALE FORMATIERUNG DER FEEDANALYSE
+   Blau für Hilfe und Aktionen.
+   Einheitliches komplementäres Orange für Analyse-Assets.
+   ========================================================= */
+
+:root{
+  --dd-blue:#092b61;
+  --dd-blue-hover:#123d7b;
+  --dd-blue-focus:rgba(9,43,97,.24);
+
+  --dd-orange:#f28c28;
+  --dd-orange-hover:#dc7415;
+  --dd-orange-soft:#fff4e6;
+  --dd-orange-line:#f4bd82;
+
+  --dd-white:#ffffff;
+  --dd-text:#172033;
+  --dd-muted:#667085;
+  --dd-line:#dde3ec;
+}
+
+/* Die Analysefläche bleibt wie der For-You-Feed weiß und neutral. */
+.task-sheet{
+  background:var(--dd-white) !important;
+  color:var(--dd-text);
+}
+
+/* ---------------------------------------------------------
+   1. Hilfe-Buttons i und ?
+   --------------------------------------------------------- */
+
+/* Beide oberen Hilfe-Buttons als blaue Kästen. */
+.task-sheet .feed-help-icon-button,
+.feed-help-icon-button{
+  width:42px;
+  min-width:42px;
+  height:42px;
+  min-height:42px;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--dd-blue) !important;
+  border-radius:11px;
+  background:var(--dd-blue) !important;
+  color:#fff !important;
+  box-shadow:none;
+}
+
+.task-sheet .feed-help-icon-button:hover,
+.feed-help-icon-button:hover{
+  border-color:var(--dd-blue-hover) !important;
+  background:var(--dd-blue-hover) !important;
+}
+
+.task-sheet .feed-help-icon-button:active,
+.feed-help-icon-button:active{
+  transform:scale(.96);
+}
+
+.task-sheet .feed-help-icon-button:focus-visible,
+.feed-help-icon-button:focus-visible{
+  outline:3px solid var(--dd-blue-focus);
+  outline-offset:2px;
+}
+
+/* Vorhandenes Linien-Icon ausblenden, damit nur das Emoji sichtbar ist. */
+.feed-help-wrap .feed-help-icon-button svg{
+  display:none;
+}
+
+/* Erster Button = Information, zweiter Button = Hilfe. */
+.feed-help-wrap .feed-help-icon-button:nth-of-type(1)::before{
+  content:"ℹ️";
+  font-size:20px;
+  line-height:1;
+}
+
+.feed-help-wrap .feed-help-icon-button:nth-of-type(2)::before{
+  content:"❓";
+  font-size:20px;
+  line-height:1;
+}
+
+/* Falls die Buttons nicht gemeinsam in feed-help-wrap liegen. */
+.feed-help-icon-button[aria-label*="Info" i]::before,
+.feed-help-icon-button[title*="Info" i]::before{
+  content:"ℹ️";
+  font-size:20px;
+}
+
+.feed-help-icon-button[aria-label*="Hilfe" i]::before,
+.feed-help-icon-button[title*="Hilfe" i]::before,
+.feed-help-icon-button[aria-label*="Help" i]::before,
+.feed-help-icon-button[title*="Help" i]::before{
+  content:"❓";
+  font-size:20px;
+}
+
+/* ---------------------------------------------------------
+   2. Vier Analysewerkzeuge
+   --------------------------------------------------------- */
+
+.task-sheet .analysis-tools{
+  display:grid;
+  gap:10px;
+  margin:12px 0 16px;
+  padding:0;
+  background:transparent;
+}
+
+/* Alle Analysewerkzeuge erhalten exakt dieselbe Gestaltung. */
+.task-sheet .analysis-tool-card{
+  overflow:hidden;
+  border:1px solid var(--dd-orange-line) !important;
+  border-radius:14px;
+  background:var(--dd-white) !important;
+  box-shadow:none;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+
+.task-sheet .analysis-tool-card:hover{
+  border-color:var(--dd-orange) !important;
+}
+
+.task-sheet .analysis-tool-card.open,
+.task-sheet .analysis-tool-card.used{
+  border-color:var(--dd-orange) !important;
+  background:var(--dd-white) !important;
+  box-shadow:0 7px 20px rgba(242,140,40,.12);
+}
+
+.task-sheet .analysis-tool-toggle,
+.task-sheet .analysis-tool-card.open .analysis-tool-toggle,
+.task-sheet .analysis-tool-content{
+  background:var(--dd-white) !important;
+}
+
+.task-sheet .analysis-tool-title{
+  color:var(--dd-text) !important;
+}
+
+/* Jedes Werkzeug-Asset erhält dasselbe komplementäre Orange. */
+.task-sheet .analysis-tool-title > svg,
+.task-sheet .analysis-tool-title > img,
+.task-sheet .analysis-tool-title .tool-icon,
+.task-sheet .analysis-tool-title .analysis-tool-icon{
+  color:var(--dd-orange) !important;
+  fill:none;
+}
+
+/* Ein vorhandener Status-Haken bleibt semantisch grün. */
+.task-sheet .analysis-tool-title > svg:last-child{
+  color:#16803c !important;
+}
+
+/* Das Auf- und Zuklappsymbol ist ebenfalls orange. */
+.task-sheet .accordion-symbol{
+  color:var(--dd-orange) !important;
+}
+
+/* Die Inhalte der Werkzeuge bleiben vollständig weiß. */
+.task-sheet .source-browser,
+.task-sheet .profile-check-panel,
+.task-sheet .origin-check,
+.task-sheet .image-analysis-basic,
+.task-sheet .inspection-checklist,
+.task-sheet .source-check-card,
+.task-sheet .linked-page-preview{
+  background:var(--dd-white) !important;
+}
+
+/* ---------------------------------------------------------
+   3. Tipp einsetzen und einheitliche Tipp-Blöcke
+   --------------------------------------------------------- */
+
+/* Vollständiger blauer Tipp-Button. */
+.task-sheet .analysis-tip-button,
+.task-sheet .analysis-tip-toggle{
+  width:auto;
+  min-width:max-content;
+  min-height:42px;
+  height:auto;
+  margin-top:12px;
+  padding:10px 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid var(--dd-blue) !important;
+  border-radius:11px;
+  background:var(--dd-blue) !important;
+  color:#fff !important;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:800;
+  box-shadow:none;
+}
+
+.task-sheet .analysis-tip-button::before,
+.task-sheet .analysis-tip-toggle::before{
+  content:"💡";
+  font-size:17px;
+  line-height:1;
+}
+
+/* Verhindert eine doppelte CSS-Beschriftung aus einer älteren Regel. */
+.task-sheet .analysis-tip-toggle::after{
+  content:"Tipp einsetzen";
+  font-size:13px;
+  line-height:1.2;
+}
+
+.task-sheet .analysis-tip-button:hover,
+.task-sheet .analysis-tip-toggle:hover{
+  border-color:var(--dd-blue-hover) !important;
+  background:var(--dd-blue-hover) !important;
+  color:#fff !important;
+}
+
+.task-sheet .analysis-tip-button svg,
+.task-sheet .analysis-tip-toggle svg{
+  color:#fff !important;
+}
+
+/* Einheitliches Design für alle sichtbaren Tipp- und Hinweisblöcke. */
+.task-sheet .analysis-tip,
+.task-sheet .analysis-takeaway,
+.task-sheet .analysis-tip-disabled,
+.task-sheet .tip-info-note,
+.task-sheet .hint-info-note,
+.task-sheet .hint-resource-status{
+  margin-top:10px;
+  padding:13px 14px;
+  border:1px solid #cbd9ee !important;
+  border-radius:12px;
+  background:#f3f7fd !important;
+  color:#22314f !important;
+  font-size:.9rem;
+  line-height:1.45;
+  box-shadow:none;
+}
+
+.task-sheet .analysis-tip strong,
+.task-sheet .analysis-takeaway strong,
+.task-sheet .tip-info-note strong,
+.task-sheet .hint-info-note strong{
+  color:var(--dd-blue);
+}
+
+/* Tipp schließen bleibt eine sekundäre weiße Aktion. */
+.task-sheet .analysis-tip-collapse{
+  margin-top:10px;
+  padding:9px 12px;
+  border:1px solid var(--dd-blue) !important;
+  border-radius:9px;
+  background:#fff !important;
+  color:var(--dd-blue) !important;
+  font-weight:800;
+}
+
+.task-sheet .analysis-tip-collapse:hover{
+  background:#eef4ff !important;
+}
+
+/* ---------------------------------------------------------
+   4. Urteil, Echt, Manipuliert und Suspekt
+   --------------------------------------------------------- */
+
+.task-sheet .verdict-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+/* Weiß lassen, keine Emojis. */
+.task-sheet .verdict-options button{
+  min-height:56px;
+  padding:11px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid var(--dd-orange-line) !important;
+  border-radius:12px;
+  background:#fff !important;
+  color:var(--dd-text) !important;
+  font-weight:850;
+  line-height:1.25;
+  box-shadow:none;
+}
+
+/* Alte Emoji-Regeln vollständig entfernen. */
+.task-sheet .verdict-options button::before,
+.task-sheet .verdict-options button::after{
+  content:none !important;
+}
+
+/* Vorhandene SVG-, Bild- oder Asset-Symbole werden einheitlich orange. */
+.task-sheet .verdict-options button svg,
+.task-sheet .verdict-options button img,
+.task-sheet .verdict-options button .verdict-icon,
+.task-sheet .verdict-options button .verdict-asset{
+  width:21px;
+  height:21px;
+  flex:0 0 21px;
+  color:var(--dd-orange) !important;
+  fill:none;
+}
+
+.task-sheet .verdict-options button:hover{
+  border-color:var(--dd-orange) !important;
+  background:var(--dd-orange-soft) !important;
+}
+
+.task-sheet .verdict-options button.selected{
+  border-color:var(--dd-orange) !important;
+  background:var(--dd-orange-soft) !important;
+  color:var(--dd-text) !important;
+  box-shadow:0 0 0 3px rgba(242,140,40,.18) !important;
+}
+
+/* ---------------------------------------------------------
+   5. Weitere klickbare Analyse-Aktionen
+   --------------------------------------------------------- */
+
+.task-sheet .primary,
+.task-sheet .feed-help-button,
+.task-sheet .hotspot-reveal,
+.task-sheet .source-open-page{
+  border:1px solid var(--dd-blue) !important;
+  background:var(--dd-blue) !important;
+  color:#fff !important;
+  font-weight:800;
+}
+
+.task-sheet .primary:hover,
+.task-sheet .feed-help-button:hover,
+.task-sheet .hotspot-reveal:hover,
+.task-sheet .source-open-page:hover{
+  border-color:var(--dd-blue-hover) !important;
+  background:var(--dd-blue-hover) !important;
+}
+
+/* Werkzeuginterne Auswahlbuttons bleiben weiß und werden orange markiert. */
+.task-sheet .source-assessment-options button,
+.task-sheet .image-inspection-controls button{
+  border:1px solid var(--dd-orange-line) !important;
+  background:#fff !important;
+  color:var(--dd-text) !important;
+}
+
+.task-sheet .source-assessment-options button:hover,
+.task-sheet .image-inspection-controls button:hover{
+  border-color:var(--dd-orange) !important;
+  background:var(--dd-orange-soft) !important;
+}
+
+.task-sheet .source-assessment-options button.selected{
+  border-color:var(--dd-orange) !important;
+  background:var(--dd-orange-soft) !important;
+  color:var(--dd-text) !important;
+}
+
+/* ---------------------------------------------------------
+   6. Mobile Darstellung
+   --------------------------------------------------------- */
+
+@media (max-width:600px){
+  .task-sheet .verdict-options{
+    grid-template-columns:1fr;
+  }
+
+  .task-sheet .analysis-tip-button,
+  .task-sheet .analysis-tip-toggle,
+  .task-sheet .feed-help-button{
+    width:100%;
+  }
+
+  .feed-help-wrap{
+    width:100%;
+    justify-content:flex-end;
+  }
+}
+
