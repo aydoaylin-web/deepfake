@@ -502,3 +502,6 @@ img{user-select:none;-webkit-user-drag:none}
   .feed-help-button{width:100%}
   .verdict-options button{flex:1 1 100%}
 }
+
+.hint-resource-status{cursor:pointer}
+.hint-info-note{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#eef2fb;color:#0c2858;font-size:clamp(12px,3.4vw,14px);line-height:1.45}
