@@ -72,6 +72,7 @@ export default function App() {
   const [seconds,setSeconds]=useState(180);
   const [intro,setIntro]=useState(saved.introSeen!==true);
   const [demoStep,setDemoStep]=useState(-1);
+  const [showHintNote, setShowHintNote] = useState(false);
   const [showResume,setShowResume]=useState(saved.introSeen===true && (((saved.completed?.length)||0)>0 || (saved.score??0)!==0 || ((saved.caseResults?.length)||0)>0));
   const [simulationConfirmed,setSimulationConfirmed]=useState(false);
   const [selectedPost,setSelectedPost]=useState(null);
@@ -92,6 +93,9 @@ export default function App() {
   const taskMeta=contentSettings.taskTypes||TASK_META;
   const targetScore=Number(contentSettings.targetScore)||TARGET_SCORE;
 
+
+
+  
   useEffect(()=>{ setLoading(true); loadContentPack().then(pack=>{
     const {posts:p,tasks:t,profiles:profileData,stories:storyData,guides:guideData,settings,manifest}=pack;
     const followed=new Set(t.map(task=>task.followUpTaskId).filter(Boolean));
@@ -946,7 +950,15 @@ function reopenDemo(){
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
     {activeTask.type==='news' ? <>
       <div className="feed-help-row">
-        <div className="hint-resource-status hint-resource-compact"><Info size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+        <button
+          type="button"
+          className="hint-resource-status hint-resource-compact"
+          onClick={() => setShowHintNote(v => !v)}
+          aria-expanded={showHintNote}
+        >
+          <Info size={17}/>
+          <span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span>
+        </button><Info size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
         <div className="feed-help-wrap">
           <audio
             ref={feedHelpAudioRef}
@@ -980,7 +992,8 @@ function reopenDemo(){
           )}
         </div>
       </div>
-      {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
+        {showHintNote && <p className="hint-info-note">{t('hintInfoNote')}</p>}  
+        {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
