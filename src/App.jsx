@@ -634,11 +634,13 @@ function reopenDemo(){
 
           <button
             type="button"
-            onClick={irisListening ? stopIrisListening : activateIrisListening}
+            onClick={speechRecognitionSupported ? (irisListening ? stopIrisListening : activateIrisListening) : startIrisAudio}
           >
-            {irisListening
-              ? (lang === 'de' ? 'Iris hört zu …' : 'Iris is listening …')
-              : (lang === 'de' ? '🎙️Iris wecken' : '🎙️Wake Iris')}
+            {speechRecognitionSupported
+              ? (irisListening
+                  ? (lang === 'de' ? 'Iris hört zu …' : 'Iris is listening …')
+                  : (lang === 'de' ? '🎙️Iris wecken' : '🎙️Wake Iris'))
+              : (lang === 'de' ? '🔊 Begrüßung' : '🔊 Greeting')}
           </button>
 
           {irisSpeaking && (
@@ -943,40 +945,42 @@ function reopenDemo(){
 
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
     {activeTask.type==='news' ? <>
-      <div className="feed-help-wrap">
-        <audio
-          ref={feedHelpAudioRef}
-          src={imagePath(`assets/hilfe_${lang}.mp3`)}
-          preload="auto"
-          playsInline
-          key={`feedhelp-${lang}`}
-          onPlay={() => setFeedHelpSpeaking(true)}
-          onPause={() => setFeedHelpSpeaking(false)}
-          onEnded={() => setFeedHelpSpeaking(false)}
-        />
-        <button
-          type="button"
-          className="feed-help-button"
-          onClick={speechRecognitionSupported ? (feedHelpListening ? stopFeedHelpListening : activateFeedHelpListening) : startFeedHelpAudio}
-        >
-          {speechRecognitionSupported
-            ? (feedHelpListening
-                ? (lang === 'de' ? '🎙️ Iris hört zu …' : '🎙️ Iris is listening …')
-                : (lang === 'de' ? '❓🎙️ Sag „Iris Hilfe“' : '❓🎙️ Say “Iris help”'))
-            : (lang === 'de' ? '❓Hilfe' : '❓help')}
-        </button>
-        {feedHelpSpeaking && (
+      <div className="feed-help-row">
+        <div className="hint-resource-status hint-resource-compact"><Info size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+        <div className="feed-help-wrap">
+          <audio
+            ref={feedHelpAudioRef}
+            src={imagePath(`assets/hilfe_${lang}.mp3`)}
+            preload="auto"
+            playsInline
+            key={`feedhelp-${lang}`}
+            onPlay={() => setFeedHelpSpeaking(true)}
+            onPause={() => setFeedHelpSpeaking(false)}
+            onEnded={() => setFeedHelpSpeaking(false)}
+          />
           <button
             type="button"
-            className="demo-skip"
-            onClick={() => { const a = feedHelpAudioRef.current; if (a) { a.pause(); a.currentTime = 0; } setFeedHelpSpeaking(false); }}
+            className="feed-help-button"
+            onClick={speechRecognitionSupported ? (feedHelpListening ? stopFeedHelpListening : activateFeedHelpListening) : startFeedHelpAudio}
           >
-            {lang === 'de' ? 'Iris stoppen' : 'Stop Iris'}
+            {speechRecognitionSupported
+              ? (feedHelpListening
+                  ? (lang === 'de' ? '🎙️ Iris hört zu …' : '🎙️ Iris is listening …')
+                  : (lang === 'de' ? '❓Sag „Iris Hilfe“🎙️' : '❓Say “Iris help”🎙️ '))
+              : (lang === 'de' ? '❓Hilfe 🔊' : '❓help 🔊')}
           </button>
-        )}
-        {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
+          {feedHelpSpeaking && (
+            <button
+              type="button"
+              className="demo-skip"
+              onClick={() => { const a = feedHelpAudioRef.current; if (a) { a.pause(); a.currentTime = 0; } setFeedHelpSpeaking(false); }}
+            >
+              {lang === 'de' ? 'Iris stoppen' : 'Stop Iris'}
+            </button>
+          )}
+        </div>
       </div>
-      <div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+      {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
@@ -1002,7 +1006,7 @@ function reopenDemo(){
 </div>
       <p className="verdict-question"><strong>{lang==='de' ? 'Was ist dein Urteil? Ist dieser Feed echt, suspekt oder manipuliert?' : "What's your verdict? Is this feed real, suspicious or manipulated?"}</strong></p>
       <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
-      <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/><small>{t('shortAnswerHint')}</small></div>
+      <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/></div>
       {!feedback&&<div className="confidence-control"><label>{t('confidenceRating')} <strong>{confidence}/5</strong></label><input type="range" min="1" max="5" value={confidence} onChange={e=>setConfidence(Number(e.target.value))}/></div>}
       {feedback&&<div className={`feedback ${feedback.validation?'warning':feedback.correct?'correct':'wrong'}`}>{feedback.validation?<p>{feedback.text}</p>:<><strong>{feedback.delta>0?'+':''}{feedback.delta} {t('pointsWord3')}</strong><div className="feedback-scoreline"><span className={feedback.verdictCorrect?'ok':'no'}>{feedback.verdictCorrect?'✓':'✗'} {t('verdictWord')}</span><span className={feedback.reasonMatched?'ok':'no'}>{feedback.reasonMatched?'✓':'✗'} {t('reasonWord')}</span></div>{feedback.expired&&<p>{t('timeUp')}</p>}{!feedback.verdictCorrect&&!feedback.expired&&<p>{t('correctAssessmentWas')} {feedback.correctVerdictLabel}.</p>}{feedback.yourReason&&<div className="reason-compare"><div><b>{t('yourReasonLabel')}</b><p>{feedback.yourReason}</p></div><div><b>{t('actualReasonLabel')}</b><p>{feedback.actualReason}</p></div></div>}</>}</div>}
       {!feedback||feedback.validation?<button className="primary" disabled={evaluating} onClick={()=>submitTask(false)}>{evaluating?t('evaluating'):t('checkAnswer')}</button>:<button className="primary" onClick={closeTask}>{t('continueWord')}</button>}
