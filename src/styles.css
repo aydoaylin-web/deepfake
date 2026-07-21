@@ -430,9 +430,75 @@ img{user-select:none;-webkit-user-drag:none}
 .resume-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 4px}.resume-stats>div{padding:14px;border:1px solid #e0e4eb;border-radius:14px;background:#f7f9fc}.resume-stats strong{display:block;color:#0d2c62;font-size:26px}.resume-stats span{font-size:10px;color:#7c8490;text-transform:uppercase;letter-spacing:.04em}.resume-restart{margin-top:10px}
 .analysis-tip-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid #cfd6e4;background:#eef2f9;color:#0d2c62;cursor:pointer;padding:0}.analysis-tip-toggle:hover{background:#e2e9f5}.analysis-tip-toggle:disabled{opacity:.4;cursor:not-allowed}
 
-.feed-help-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}
-.feed-help-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0}
-.hint-resource-compact{flex:0 0 auto;width:auto;margin:0;padding:6px 10px}
-.feed-help-button{padding:11px 14px;border:0;border-radius:11px;background:#092b61;color:#fff;font-weight:800}
+/* Feed-Hilfe-Zeile: passt sich an jede Breite an */
+.feed-help-row{
+  display:flex;
+  flex-wrap:wrap;                /* bricht auf schmalen Geräten um */
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:12px 0;
+  width:100%;
+}
+.hint-resource-compact{
+  flex:0 1 auto;                 /* klein, darf schrumpfen */
+  width:auto;
+  min-width:0;
+  margin:0;
+  padding:6px 10px;
+  font-size:clamp(12px,3.4vw,14px);
+}
+.feed-help-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  margin:0;
+  min-width:0;
+}
+.feed-help-button{
+  max-width:100%;
+  padding:clamp(9px,2.6vw,11px) clamp(11px,3.4vw,14px);
+  border:0;
+  border-radius:11px;
+  background:#092b61;
+  color:#fff;
+  font-weight:800;
+  font-size:clamp(13px,3.6vw,15px);
+  line-height:1.2;
+  white-space:normal;            /* Text darf umbrechen statt zu überlaufen */
+  overflow-wrap:anywhere;
+}
 .feed-help-error{width:100%;margin:4px 0 0;color:#a42c24;font-size:12px}
-.verdict-question{margin:4px 0 10px;font-size:15px;font-weight:800;color:#0c2858;line-height:1.4}
+
+/* Fette Frage über den Urteils-Buttons */
+.verdict-question{
+  margin:4px 0 10px;
+  font-weight:800;
+  color:#0c2858;
+  font-size:clamp(14px,4vw,16px);
+  line-height:1.4;
+}
+
+/* Urteils-Buttons: nebeneinander, stapeln bei wenig Platz */
+.verdict-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.verdict-options button{
+  flex:1 1 120px;                /* teilen sich die Zeile, brechen bei Enge um */
+  min-width:0;
+  padding:clamp(10px,3vw,13px);
+  font-size:clamp(13px,3.6vw,15px);
+  line-height:1.2;
+  white-space:normal;
+}
+
+/* Sehr schmale Handys: alles sauber untereinander */
+@media (max-width:360px){
+  .feed-help-row{flex-direction:column;align-items:stretch}
+  .feed-help-wrap{justify-content:stretch}
+  .feed-help-button{width:100%}
+  .verdict-options button{flex:1 1 100%}
+}
