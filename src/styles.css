@@ -2,7 +2,7 @@
 @media(max-width:760px){.page{padding:0}.phone-shell{min-height:100vh;border-radius:0}.bottom-nav{bottom:0;border-radius:0}.score-chip{right:12px;bottom:72px}.post-modal-backdrop{padding:0}.post-modal{width:100%;height:100%;max-height:none;grid-template-columns:1fr;grid-template-rows:minmax(55vh,1fr) auto;border-radius:0}.post-modal-media{min-height:55vh}.post-modal-info{max-height:40vh}.expand-hint{opacity:1}.modal-nav{top:45%}.task-sheet{max-height:96vh}}
 
 /* Milestone 2: complete game mechanics */
-.mission-progress{padding:10px 14px 12px;background:#fff;border-bottom:1px solid var(--line,#e5e7eb)}
+.mission-progress{padding:10px 14px 12px;background:#fef1f5;border-bottom:1px solid var(--line,#e5e7eb)}
 .mission-progress>div:first-child{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#667085}
 .mission-progress strong{color:#071f50}
 .mission-track{height:7px;margin:7px 0;border-radius:999px;background:#edf0f5;overflow:hidden}
@@ -106,7 +106,7 @@ img{user-select:none;-webkit-user-drag:none}
 
 @media print{
   .topbar,.bottom-nav,.score-chip,.stories,.feed-tabs,.agency-toast{display:none!important}
-  .page,.phone-shell{padding:0;max-width:none;box-shadow:none;background:#fff}
+  .page,.phone-shell{padding:0;max-width:none;box-shadow:none;background:#fef1f5}
   .post{break-inside:avoid;border:1px solid #ccc}
 }
 
@@ -121,7 +121,7 @@ img{user-select:none;-webkit-user-drag:none}
   margin: 12px 0 0 28px;
   border: 1px solid #d8e1ee;
   border-radius: 12px;
-  background: #ffffff;
+  background: #fef1f5;
   overflow: hidden;
 }
 
@@ -229,12 +229,12 @@ img{user-select:none;-webkit-user-drag:none}
 .analysis-tip-disabled { margin-top:12px; padding:12px 14px; border-radius:12px; background:#f1f3f5; color:#5f6670; font-size:.9rem; line-height:1.4; }
 .profile-check-details-visible { display:grid; }
 .nav-icon-wrap{position:relative;display:inline-grid;place-items:center}.notification-badge{position:absolute;top:-8px;right:-11px;min-width:18px;height:18px;padding:0 5px;display:grid;place-items:center;border:2px solid #fff;border-radius:999px;background:#d92d20;color:#fff;font-size:9px;font-weight:900;line-height:1}.hint-resource-status{margin:0 0 12px;padding:10px 12px;display:flex;align-items:center;gap:8px;border:1px solid #dbe4f1;border-radius:12px;background:#f6f9fd;color:#29486f;font-size:12px;font-weight:750}.analysis-tip-button{margin-top:12px}.analysis-tip-button:disabled{cursor:not-allowed;opacity:.55}
-.task-post-caption{margin:10px 16px 0;padding:11px 12px;border:1px solid #e4e7ed;border-radius:11px;background:#fff;font-size:13px;line-height:1.45}.analysis-tip-collapse{margin-top:10px;padding:8px 10px;border:1px solid #d6dbe4;border-radius:8px;background:#fff;font-weight:700}.activity-post-list{display:grid;gap:10px;margin-top:10px}.activity-post{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:9px;border:1px solid #e4e7ed;border-radius:11px;background:#fff}.activity-post img{width:72px;height:72px;object-fit:cover;border-radius:8px}.activity-post p{margin:4px 0;font-size:12px;line-height:1.35}.activity-post small{color:#7b8391}.account-activities>strong{display:block;margin-bottom:4px}
+.task-post-caption{margin:10px 16px 0;padding:11px 12px;border:1px solid #e4e7ed;border-radius:11px;background:#fef1f5;font-size:13px;line-height:1.45}.analysis-tip-collapse{margin-top:10px;padding:8px 10px;border:1px solid #d6dbe4;border-radius:8px;background:#fff;font-weight:700}.activity-post-list{display:grid;gap:10px;margin-top:10px}.activity-post{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:9px;border:1px solid #e4e7ed;border-radius:11px;background:#fff}.activity-post img{width:72px;height:72px;object-fit:cover;border-radius:8px}.activity-post p{margin:4px 0;font-size:12px;line-height:1.35}.activity-post small{color:#7b8391}.account-activities>strong{display:block;margin-bottom:4px}
 
 .profile-help-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 4px}.profile-help-actions .secondary-action{margin-top:0}.current-activity-label{display:block;margin-top:3px;color:#315b97;font-weight:800}.activity-post>div{min-width:0}.activity-post p{overflow-wrap:anywhere}
 
 /* Requested navigation, activity history, demo post and notification list */
-.header-help-actions{display:flex;gap:6px}.header-help-actions button{display:flex;align-items:center;gap:4px;border:1px solid #ddd;border-radius:8px;background:#fff;padding:5px 7px;font-size:12px}.demo-real-post{border:1px solid #ddd;border-radius:12px;overflow:hidden;margin:12px 0;text-align:left;background:#fff}.demo-real-post>div{display:flex;justify-content:space-between;padding:9px 10px}.demo-real-post img{display:block;width:100%;max-height:240px;object-fit:cover}.demo-real-post p{padding:9px 10px;margin:0}.activity-explainer{font-size:13px;color:#666;margin:6px 0 12px}.account-comment-history{display:grid;gap:10px}.account-comment-entry{display:flex;gap:10px;padding:10px;border:1px solid #e5e5e5;border-radius:10px;background:#fff}.account-comment-entry p{margin:3px 0 5px}.account-comment-entry small{color:#777}.notification-center{margin-bottom:16px}.notification-center h3{display:flex;align-items:center;gap:7px}.notification-list{display:grid;gap:8px}.notification-list>button{display:grid;grid-template-columns:64px 1fr;gap:10px;text-align:left;border:1px solid #ddd;border-radius:12px;background:#fff;padding:8px;width:100%}.notification-list img{width:64px;height:64px;object-fit:cover;border-radius:8px}.notification-list span{min-width:0}.notification-list strong,.notification-list small,.notification-list em{display:block}.notification-list p{margin:4px 0}.notification-list em{font-size:12px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:normal}@media(max-width:520px){.header-help-actions span{display:none}.header-help-actions button{padding:5px}.header-actions{gap:4px}.lang-switch{transform:scale(.9)}}
+.header-help-actions{display:flex;gap:6px}.header-help-actions button{display:flex;align-items:center;gap:4px;border:1px solid #ddd;border-radius:8px;background:#fef1f5;padding:5px 7px;font-size:12px}.demo-real-post{border:1px solid #ddd;border-radius:12px;overflow:hidden;margin:12px 0;text-align:left;background:#fff}.demo-real-post>div{display:flex;justify-content:space-between;padding:9px 10px}.demo-real-post img{display:block;width:100%;max-height:240px;object-fit:cover}.demo-real-post p{padding:9px 10px;margin:0}.activity-explainer{font-size:13px;color:#666;margin:6px 0 12px}.account-comment-history{display:grid;gap:10px}.account-comment-entry{display:flex;gap:10px;padding:10px;border:1px solid #e5e5e5;border-radius:10px;background:#fff}.account-comment-entry p{margin:3px 0 5px}.account-comment-entry small{color:#777}.notification-center{margin-bottom:16px}.notification-center h3{display:flex;align-items:center;gap:7px}.notification-list{display:grid;gap:8px}.notification-list>button{display:grid;grid-template-columns:64px 1fr;gap:10px;text-align:left;border:1px solid #ddd;border-radius:12px;background:#fff;padding:8px;width:100%}.notification-list img{width:64px;height:64px;object-fit:cover;border-radius:8px}.notification-list span{min-width:0}.notification-list strong,.notification-list small,.notification-list em{display:block}.notification-list p{margin:4px 0}.notification-list em{font-size:12px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:normal}@media(max-width:520px){.header-help-actions span{display:none}.header-help-actions button{padding:5px}.header-actions{gap:4px}.lang-switch{transform:scale(.9)}}
 
 /* --- Bildherkunft (Lens) --- */
 .origin-check{display:flex;flex-direction:column;gap:.6rem}
@@ -330,7 +330,7 @@ img{user-select:none;-webkit-user-drag:none}
   .bottom-nav {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: #fff;
+    background: #fef1f5;
   }
 
   /* kein Clipping, das Scrollen/Neuzeichnen stört */
@@ -356,7 +356,7 @@ img{user-select:none;-webkit-user-drag:none}
   padding: 12px;
   border: 1px solid #d8dee8;
   border-radius: 12px;
-  background: #fff;
+  background: #fef1f5;
   color: #17365f;
   font-weight: 700;
   transition: .2s;
@@ -364,7 +364,7 @@ img{user-select:none;-webkit-user-drag:none}
 
 .intro-language-switch button.active {
   background: #092b61;
-  color: #fff;
+  color: #fef1f5;
   border-color: #092b61;
 }
 
@@ -422,7 +422,7 @@ img{user-select:none;-webkit-user-drag:none}
 
 .intro-card button:disabled {
   background: #cbd5e1;
-  color: #fff;
+  color: #fef1f5;
   cursor: not-allowed;
   opacity: .8;
 }
@@ -508,7 +508,7 @@ img{user-select:none;-webkit-user-drag:none}
 
 
 /* ===== Rosa-Schema: nur #f5c2ef / #fbe1f7 / #ffffff ===== */
-.task-sheet{background:#ffffff !important;border-top:4px solid #f5c2ef !important}
+.task-sheet{background:#fef1f5 !important;border-top:4px solid #f5c2ef !important}
 
 /* Analyse-Karten (kleinere Fläche) = kräftigeres Rosa #f5c2ef */
 .task-sheet .analysis-tools{background:transparent;border:0;padding:0}
