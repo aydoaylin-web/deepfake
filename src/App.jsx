@@ -6,7 +6,8 @@ import { loadContentPack } from './content';
 import {
   Bell, Bookmark, CheckCircle2, ChevronLeft, ChevronRight, Heart, Home,
   Maximize2, MessageCircle, MoreHorizontal, Plus, RefreshCw, Send,
-  ShieldCheck, Sparkles, UserRound, X, ZoomIn, ZoomOut, Globe2, ScanSearch, HelpCircle, Info, Search
+  ShieldCheck, Sparkles, UserRound, X, ZoomIn, ZoomOut, Globe2, ScanSearch, HelpCircle, Info, Search,
+  BadgeCheck, ScanLine, TriangleAlert
 } from 'lucide-react';
 import SourceCheckPanel from "./components/SourceCheckPanel";
 import ProfileCheckPanel from "./components/ProfileCheckPanel";
@@ -433,7 +434,11 @@ export default function App() {
   const completedNewsRounds=caseResults.filter(result=>result.type==='news').length;
   const freeHintRounds=completedNewsRounds<3;
   const hintMode=freeHintRounds?'free':tipsRemaining>0?'limited':'empty';
-  const hintButtonLabel=freeHintRounds?t('hintShowFree'):tipsRemaining>0?`${t('hintUse')} (${tipsRemaining}/${MAX_TIPS})`:t('hintNoneLeft');
+  const hintButtonLabel=freeHintRounds
+    ? `💡 ${t('hintShowFree')}`
+    : tipsRemaining>0
+      ? `💡 ${t('hintUse')} (${tipsRemaining}/${MAX_TIPS})`
+      : t('hintNoneLeft');
 
   function useHint(toolId){
     if(revealedHints.includes(toolId)){setRevealedHints(items=>items.filter(id=>id!==toolId));return;}
@@ -970,7 +975,7 @@ function reopenDemo(){
           aria-label={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
           title={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
         >
-          <Info size={17}/>
+          <span className="help-button-emoji" aria-hidden="true">ℹ️</span>
         </button>
         <div className="feed-help-wrap">
           <audio
@@ -990,7 +995,7 @@ function reopenDemo(){
             aria-label={lang === 'de' ? 'Iris Hilfe' : 'Iris help'}
             title={lang === 'de' ? 'Iris Hilfe' : 'Iris help'}
           >
-            <HelpCircle size={17}/>
+            <span className="help-button-emoji" aria-hidden="true">❓</span>
           </button>
           {feedHelpSpeaking && (
             <button
@@ -1035,7 +1040,35 @@ function reopenDemo(){
   })}
 </div>
       <p className="verdict-question"><strong>{lang==='de' ? 'Was ist dein Urteil? Ist dieser Feed echt, suspekt oder manipuliert?' : "What's your verdict? Is this feed real, suspicious or manipulated?"}</strong></p>
-      <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
+      <div className="verdict-options">
+        <button
+          type="button"
+          className={verdict==='echt'?'selected':''}
+          aria-pressed={verdict==='echt'}
+          onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}
+        >
+          <BadgeCheck className="verdict-asset" aria-hidden="true"/>
+          <span>{t('verdictEcht')}</span>
+        </button>
+        <button
+          type="button"
+          className={verdict==='manipuliert'?'selected':''}
+          aria-pressed={verdict==='manipuliert'}
+          onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}
+        >
+          <ScanLine className="verdict-asset" aria-hidden="true"/>
+          <span>{t('verdictManipuliert')}</span>
+        </button>
+        <button
+          type="button"
+          className={verdict==='suspekt'?'selected':''}
+          aria-pressed={verdict==='suspekt'}
+          onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}
+        >
+          <TriangleAlert className="verdict-asset" aria-hidden="true"/>
+          <span>{t('verdictSuspekt')}</span>
+        </button>
+      </div>
       <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/></div>
       {!feedback&&<div className="confidence-control"><label>{t('confidenceRating')} <strong>{confidence}/5</strong></label><input type="range" min="1" max="5" value={confidence} onChange={e=>setConfidence(Number(e.target.value))}/></div>}
       {feedback&&<div className={`feedback ${feedback.validation?'warning':feedback.correct?'correct':'wrong'}`}>{feedback.validation?<p>{feedback.text}</p>:<><strong>{feedback.delta>0?'+':''}{feedback.delta} {t('pointsWord3')}</strong><div className="feedback-scoreline"><span className={feedback.verdictCorrect?'ok':'no'}>{feedback.verdictCorrect?'✓':'✗'} {t('verdictWord')}</span><span className={feedback.reasonMatched?'ok':'no'}>{feedback.reasonMatched?'✓':'✗'} {t('reasonWord')}</span></div>{feedback.expired&&<p>{t('timeUp')}</p>}{!feedback.verdictCorrect&&!feedback.expired&&<p>{t('correctAssessmentWas')} {feedback.correctVerdictLabel}.</p>}{feedback.yourReason&&<div className="reason-compare"><div><b>{t('yourReasonLabel')}</b><p>{feedback.yourReason}</p></div><div><b>{t('actualReasonLabel')}</b><p>{feedback.actualReason}</p></div></div>}</>}</div>}
@@ -1045,4 +1078,3 @@ function reopenDemo(){
     </>}</section></div>}
   </div>;
 }
-
