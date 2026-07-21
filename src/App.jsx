@@ -14,7 +14,7 @@ import OriginCheckPanel from "./components/OriginCheckPanel";
 import { matchReason } from "./data/conceptMatcher";
 const STORAGE_KEY = 'deepfake-defender-react-state-v6';
 const TARGET_SCORE = 20;
-const MAX_TIPS = 6;
+const MAX_TIPS = 5;
 const ANALYSIS_TOOLS = [
   { id: "image", label: "Bildanalyse", icon: ScanSearch },
   { id: "source", label: "Quellenprüfung", icon: Globe2 },
@@ -56,6 +56,11 @@ export default function App() {
   const [irisListening, setIrisListening] = useState(false);
   const [irisSpeaking, setIrisSpeaking] = useState(false);
   const [speechError, setSpeechError] = useState("");
+  const feedHelpAudioRef = useRef(null);
+  const feedHelpRecognitionRef = useRef(null);
+  const [feedHelpListening, setFeedHelpListening] = useState(false);
+  const [feedHelpSpeaking, setFeedHelpSpeaking] = useState(false);
+  const [feedHelpError, setFeedHelpError] = useState("");
   const [posts,setPosts]=useState([]); const [tasks,setTasks]=useState([]); const [profiles,setProfiles]=useState([]); const [dataStories,setDataStories]=useState([]); const [guides,setGuides]=useState([]); const [contentSettings,setContentSettings]=useState({}); const [contentManifest,setContentManifest]=useState(null); const [loading,setLoading]=useState(true); const [loadingError,setLoadingError]=useState('');
   const [lang, setLang] = useState(saved.lang || 'de');
   const t = (key) => (translations[lang]?.[key]) ?? translations.de[key] ?? key;
@@ -74,7 +79,6 @@ export default function App() {
   const [researchEvents,setResearchEvents]=useState(saved.researchEvents||[]); const [sessionId]=useState(saved.sessionId||createUuid()); const [participantCode,setParticipantCode]=useState(saved.participantCode||`P-${createUuid().slice(0,6).toUpperCase()}`); const [aiStatus,setAiStatus]=useState({api:'checking',ollama:false});
   const [zoom,setZoom]=useState(1); const [heartBurst,setHeartBurst]=useState(null); const [storyPulse,setStoryPulse]=useState(0); const [commentDraft,setCommentDraft]=useState('');
   const [runOrder,setRunOrder]=useState(saved.runOrder||[]); const [runId,setRunId]=useState(saved.runId||createUuid()); const [runSummary,setRunSummary]=useState(null); const [tipsRemaining,setTipsRemaining]=useState(saved.tipsRemaining??MAX_TIPS); const [revealedHints,setRevealedHints]=useState([]);
-  const [showTipInfo,setShowTipInfo]=useState(false);
   const notificationTimeout=useRef(null); const loaderRef=useRef(null); const taskStartedAt=useRef(null);
 
   const taskMap=useMemo(()=>Object.fromEntries(tasks.map(t=>[t.id,t])),[tasks]);
@@ -145,8 +149,18 @@ export default function App() {
         // Spracherkennung war bereits beendet.
       }
 
+      try {
+        feedHelpRecognitionRef.current?.stop();
+      } catch {
+        // Feed-Hilfe-Spracherkennung war bereits beendet.
+      }
+
       if (irisAudioRef.current) {
         irisAudioRef.current.pause();
+      }
+
+      if (feedHelpAudioRef.current) {
+        feedHelpAudioRef.current.pause();
       }
     };
   }, []);
@@ -325,6 +339,82 @@ export default function App() {
     audio.pause();
     audio.currentTime = 0;
     setIrisSpeaking(false);
+  }
+
+  function startFeedHelpAudio() {
+    const audio = feedHelpAudioRef.current;
+    if (!audio) {
+      setFeedHelpError(lang === 'de'
+        ? 'Die Hilfe-Audiodatei wurde nicht gefunden.'
+        : 'The help audio file could not be found.');
+      return;
+    }
+    setFeedHelpError('');
+    audio.currentTime = 0;
+    const playPromise = audio.play();
+    if (playPromise) {
+      playPromise.catch(error => {
+        console.error('Feed-Hilfe-Audio konnte nicht gestartet werden:', error);
+        setFeedHelpSpeaking(false);
+        setFeedHelpError(lang === 'de'
+          ? 'Das Audio wurde vom Browser blockiert. Tippe erneut auf „Iris Hilfe“.'
+          : 'The browser blocked the audio. Tap “Iris help” again.');
+      });
+    }
+  }
+
+  function activateFeedHelpListening() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setFeedHelpError(lang === 'de'
+        ? 'Dieser Browser unterstützt keine Spracherkennung.'
+        : 'This browser does not support speech recognition.');
+      return;
+    }
+    if (feedHelpListening) return;
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = lang === 'de' ? 'de-DE' : 'en-GB';
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => { setFeedHelpListening(true); setFeedHelpError(''); };
+
+    recognition.onresult = event => {
+      const spokenText = Array.from(event.results)
+        .map(r => r[0]?.transcript || '')
+        .join(' ')
+        .toLowerCase();
+      const triggered =
+        spokenText.includes('iris hilfe') ||
+        spokenText.includes('iris help') ||
+        spokenText.includes('iris hilf');
+      if (triggered) {
+        recognition.stop();
+        startFeedHelpAudio();
+      }
+    };
+
+    recognition.onerror = () => {
+      setFeedHelpListening(false);
+      setFeedHelpError(lang === 'de'
+        ? 'Die Spracherkennung konnte nicht gestartet werden.'
+        : 'Speech recognition could not be started.');
+    };
+
+    recognition.onend = () => { setFeedHelpListening(false); };
+
+    feedHelpRecognitionRef.current = recognition;
+    try {
+      recognition.start();
+    } catch {
+      setFeedHelpListening(false);
+    }
+  }
+
+  function stopFeedHelpListening() {
+    try { feedHelpRecognitionRef.current?.stop(); } catch { /* egal */ }
+    setFeedHelpListening(false);
   }
 
   function logResearchEvent(type,payload={}){setResearchEvents(events=>[...events,{id:createUuid(),sessionId,participantCode,runId,type,timestamp:new Date().toISOString(),...payload}]);}
@@ -853,7 +943,38 @@ function reopenDemo(){
   {activeTask&&<div className="modal-backdrop task-backdrop"><section className={`task-sheet task-${activeTask.type}`}><div className="task-top"><button onClick={()=>setActiveTask(null)}><ChevronLeft/></button><div><span className="eyebrow">{taskOrigin==='feed'?t('feedReview'):taskMeta[activeTask.type]?.label||activeTask.type}</span><h2>{activeTask.title}</h2></div><div className="timer">{seconds}s</div></div>{activePost&&<button className="task-image-button" onClick={()=>openPost(activePost)}><img src={imagePath(activePost.media)} alt={activePost.imageAlt}/><span><Maximize2 size={16}/> {t('enlargeEvidence')}</span></button>}{activePost&&<div className="task-post-caption"><b>{activePost.username}</b> {activePost.caption}</div>}
     {activeTask.type==='news' ? <>
       <div className="mechanic-step"><span>{t('openInvestigation')}</span><strong>{t('chooseYourChecks')}</strong></div>
-      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><button type="button" className="tip-info-btn" onClick={()=>setShowTipInfo(v=>!v)} aria-label={lang==='de'?'Info zu Tipps':'Tip info'}><Info size={16}/></button>{!freeHintRounds&&<span>{tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span>}</div>{showTipInfo&&<div className="tip-info-note">{t('hintInfoNote')}</div>}
+      <p className="instruction">{t('allChecksAvailable')}</p><div className="hint-resource-status"><HelpCircle size={17}/><span>{freeHintRounds?t('hintStatusFree'):tipsRemaining>0?`${tipsRemaining}/${MAX_TIPS} ${lang==='de'?'Tipps':'tips'}`:t('hintStatusEmpty')}</span></div>
+      <div className="feed-help-wrap">
+        <audio
+          ref={feedHelpAudioRef}
+          src={imagePath(`assets/hilfe_${lang}.mp3`)}
+          preload="auto"
+          playsInline
+          key={`feedhelp-${lang}`}
+          onPlay={() => setFeedHelpSpeaking(true)}
+          onPause={() => setFeedHelpSpeaking(false)}
+          onEnded={() => setFeedHelpSpeaking(false)}
+        />
+        <button
+          type="button"
+          className="feed-help-button"
+          onClick={feedHelpListening ? stopFeedHelpListening : activateFeedHelpListening}
+        >
+          {feedHelpListening
+            ? (lang === 'de' ? '🎙️ Iris hört zu …' : '🎙️ Iris is listening …')
+            : (lang === 'de' ? '🎙️ Sag „Iris Hilfe“' : '🎙️ Say “Iris help”')}
+        </button>
+        {feedHelpSpeaking && (
+          <button
+            type="button"
+            className="demo-skip"
+            onClick={() => { const a = feedHelpAudioRef.current; if (a) { a.pause(); a.currentTime = 0; } setFeedHelpSpeaking(false); }}
+          >
+            {lang === 'de' ? 'Iris stoppen' : 'Stop Iris'}
+          </button>
+        )}
+        {feedHelpError && <p role="alert" className="feed-help-error">{feedHelpError}</p>}
+      </div>
 <div className="analysis-tools">
   {ANALYSIS_TOOLS.map((tool) => {
     const Icon = tool.icon;
@@ -878,7 +999,6 @@ function reopenDemo(){
   })}
 </div>
       <div className="mechanic-step decision-heading"><span>{t('yourAssessment')}</span><strong>{t('decideAndJustify')}</strong></div>
-      <p className="verdict-question">{t('verdictQuestion')}</p>
       <div className="verdict-options"><button className={verdict==='echt'?'selected':''} onClick={()=>{setVerdict('echt');if(feedback?.validation)setFeedback(null);}}>{t('verdictEcht')}</button><button className={verdict==='manipuliert'?'selected':''} onClick={()=>{setVerdict('manipuliert');if(feedback?.validation)setFeedback(null);}}>{t('verdictManipuliert')}</button><button className={verdict==='suspekt'?'selected':''} onClick={()=>{setVerdict('suspekt');if(feedback?.validation)setFeedback(null);}}>{t('verdictSuspekt')}</button></div>
       <p className="instruction">{activeTask.instruction}</p>
       <div className="analysis-input-block"><label htmlFor="analysis-answer">{t('yourJustification')}</label><textarea id="analysis-answer" value={reason} onChange={e=>{setReason(e.target.value);if(feedback?.validation)setFeedback(null);}} placeholder={activeTask.answerPrompt||t('explainEvidence')}/><small>{t('shortAnswerHint')}</small></div>
