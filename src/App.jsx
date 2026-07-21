@@ -31,7 +31,42 @@ const TASK_META = {
 function loadState() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } }
 function shuffle(items) { const copy = [...items]; for (let i = copy.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; } return copy; }
 function imagePath(path) { return `${import.meta.env.BASE_URL}${String(path || "").replace(/^\//, "")}`; }
-function playNotificationSound() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)(); const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination); osc.type = 'sine'; osc.frequency.setValueAtTime(880, ctx.currentTime); gain.gain.setValueAtTime(0.15, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4); osc.start(); osc.stop(ctx.currentTime + 0.4); } catch { /* Audio nicht verfügbar */ } }
+function playNotificationSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') { try { ctx.resume(); } catch { /* egal */ } }
+    const now = ctx.currentTime;
+    const master = ctx.createGain();
+    master.gain.value = 0.9;
+    master.connect(ctx.destination);
+    // Zwei helle, aufsteigende Glockentöne (iPhone-artig, selbst synthetisiert)
+    const notes = [
+      { f: 1318.51, t: 0.00, d: 0.30 }, // E6
+      { f: 1760.00, t: 0.11, d: 0.45 }, // A6
+    ];
+    notes.forEach(({ f, t, d }) => {
+      const start = now + t;
+      const g = ctx.createGain();
+      g.connect(master);
+      g.gain.setValueAtTime(0.0001, start);
+      g.gain.exponentialRampToValueAtTime(0.28, start + 0.012); // schneller Anschlag
+      g.gain.exponentialRampToValueAtTime(0.0001, start + d);   // glockiges Ausklingen
+      const o1 = ctx.createOscillator();
+      o1.type = 'triangle';
+      o1.frequency.value = f;
+      o1.connect(g);
+      const o2 = ctx.createOscillator(); // Oberschwingung für Glocken-Timbre
+      o2.type = 'sine';
+      o2.frequency.value = f * 2.01;
+      const g2 = ctx.createGain();
+      g2.gain.value = 0.32;
+      o2.connect(g2); g2.connect(g);
+      o1.start(start); o2.start(start);
+      o1.stop(start + d + 0.05); o2.stop(start + d + 0.05);
+    });
+    setTimeout(() => { try { ctx.close(); } catch { /* egal */ } }, 1000);
+  } catch { /* Audio nicht verfügbar */ }
+}
 
 function createUuid() {
   if (
@@ -200,6 +235,8 @@ export default function App() {
               setUnreadNotificationCount(count => count + 1);
               playNotificationSound();
               setNotifiedTasks(items => [...new Set([...items, candidateId])]);
+              const histItem = { id: `${task.id}-${Date.now()}`, taskId: task.id, postId: post.id, type: task.type, title: t('pushTitle_' + task.type), text: t('pushText_' + task.type), username: post.username, caption: post.caption, media: post.media, time: new Date().toLocaleTimeString(lang === 'de' ? 'de-DE' : 'en-GB', { hour: '2-digit', minute: '2-digit' }) };
+              setNotificationHistory(items => [histItem, ...items.filter(i => i.taskId !== task.id)].slice(0, 20));
               logResearchEvent('push_notification_shown', { taskId: task.id, postId: post.id, trigger: 'timer' });
             }
           }
@@ -976,7 +1013,7 @@ function reopenDemo(){
           title={lang === 'de' ? 'Informationen zu den Tipps' : 'Information about hints'}
         >
           <span className="help-button-emoji" aria-hidden="true">ℹ️</span>
-          <span>{lang === 'de' ? 'Hilfe' : 'Help'}</span>
+          <span>{lang === 'de' ? 'Info' : 'Info'}</span>
         </button>
         <div className="feed-help-wrap">
           <audio
@@ -997,7 +1034,7 @@ function reopenDemo(){
             title={lang === 'de' ? 'Iris Hilfe' : 'Iris help'}
           >
             <span className="help-button-emoji" aria-hidden="true">❓</span>
-            <span>{lang === 'de' ? 'Frag Iris um Hilfe' : 'Ask Iris for help'}</span>
+            <span>{lang === 'de' ? 'Hilfe' : 'Help'}</span>
           </button>
           {feedHelpSpeaking && (
             <button
