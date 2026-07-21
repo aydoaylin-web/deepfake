@@ -505,3 +505,101 @@ img{user-select:none;-webkit-user-drag:none}
 
 .hint-resource-status{cursor:pointer}
 .hint-info-note{margin:6px 0 0;padding:10px 12px;border-radius:10px;background:#eef2fb;color:#0c2858;font-size:clamp(12px,3.4vw,14px);line-height:1.45}
+
+
+/* ============================================================
+   FEED-ÜBERPRÜFUNG — einheitliche Kästen + Farbschema
+   Nur .task-sheet.task-news. For-You-Seite bleibt unberührt.
+   Achse A: Pink #db2b73 ↔ Türkisgrün #1f9e78 · Navy #102b5b
+   ============================================================ */
+.task-sheet.task-news{
+  --fp-navy:#102b5b;
+  --fp-pink:#db2b73;
+  --fp-teal:#1f9e78;
+  --fp-bg:#eef1f6;
+  --fp-card:#ffffff;
+  --fp-border:#e4e8f0;
+  --fp-radius:14px;
+  background:var(--fp-bg);
+  border-top:4px solid var(--fp-pink);
+  color:var(--fp-navy);
+}
+
+/* EIN einheitlicher Kasten-Stil für alle weißen Blöcke */
+.task-sheet.task-news .task-post-caption,
+.task-sheet.task-news .analysis-tool-card,
+.task-sheet.task-news .analysis-input-block textarea,
+.task-sheet.task-news .confidence-control{
+  background:var(--fp-card);
+  border:1px solid var(--fp-border);
+  border-radius:var(--fp-radius);
+}
+.task-sheet.task-news .feedback,
+.task-sheet.task-news .hint-info-note{border-radius:var(--fp-radius)}
+
+/* "i"-Box UND Iris-Button: gleicher Kasten, gleiche Höhe (Variante A) */
+.task-sheet.task-news .feed-help-row{align-items:stretch}
+.task-sheet.task-news .hint-resource-status,
+.task-sheet.task-news .feed-help-button{
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0;
+  padding:10px 14px;
+  border-radius:var(--fp-radius);
+  font-weight:800;
+  font-size:clamp(12px,3.4vw,14px);
+}
+/* das "i" = weiße Karte mit Rahmen */
+.task-sheet.task-news .hint-resource-status{
+  background:var(--fp-card);
+  border:1px solid var(--fp-border);
+  color:var(--fp-navy);
+}
+.task-sheet.task-news .hint-resource-status svg{color:var(--fp-pink)}
+/* Iris-Button = pink gefüllt (Hauptaktion) */
+.task-sheet.task-news .feed-help-button{
+  background:var(--fp-pink);
+  border:1px solid var(--fp-pink);
+  color:#fff;
+}
+
+/* Werkzeug-Karten: einheitlich, Akzente Pink/Türkisgrün */
+.task-sheet.task-news .analysis-tool-card.used{border-color:var(--fp-teal)}
+.task-sheet.task-news .analysis-tool-card.open .analysis-tool-toggle{background:#f2faf6}
+.task-sheet.task-news .analysis-tool-title{color:var(--fp-navy)}
+.task-sheet.task-news .analysis-tool-title svg:last-of-type{color:var(--fp-teal)}
+.task-sheet.task-news .accordion-symbol{color:var(--fp-pink)}
+
+/* Frage über den Urteils-Buttons */
+.task-sheet.task-news .verdict-question{color:var(--fp-navy)}
+
+/* Urteils-Buttons: einheitlich; ausgewählt = Türkisgrün */
+.task-sheet.task-news .verdict-options button{
+  background:var(--fp-card);
+  border:1px solid var(--fp-border);
+  border-radius:var(--fp-radius);
+  color:var(--fp-navy);
+}
+.task-sheet.task-news .verdict-options button.selected{
+  border-color:var(--fp-teal);
+  background:#e8f6f0;
+  color:#0f6e56;
+  box-shadow:0 0 0 2px rgba(31,158,120,.18);
+}
+
+/* Begründungsfeld */
+.task-sheet.task-news .analysis-input-block label{color:var(--fp-navy)}
+.task-sheet.task-news .analysis-input-block textarea:focus{
+  outline:none;
+  border-color:var(--fp-teal);
+  box-shadow:0 0 0 2px rgba(31,158,120,.15);
+}
+
+/* Confidence-Regler */
+.task-sheet.task-news .confidence-control label{color:var(--fp-navy)}
+.task-sheet.task-news .confidence-control input{accent-color:var(--fp-pink)}
+
+/* Primär-Button "Antwort prüfen" = Navy */
+.task-sheet.task-news .primary{background:var(--fp-navy)}
