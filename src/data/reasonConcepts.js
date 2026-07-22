@@ -27,23 +27,28 @@ const REASON_CONCEPTS = {
     de: "Die Bildersuche zeigt das Bild in passenden, ähnlichen Zusammenhängen, und die EU-Seite sagt dasselbe. Deshalb „Echt“.",
     en: "The reverse image search shows the image in matching contexts, and the EU page says the same. So “Real”.",
   }},
-  // (9) SUSPEKT — Owner nicht offiziell (nur Nachrichtenseite), keine weiteren Berichte (Bildsuche)
-  post_103: { verdict: "suspekt", concepts: [{
-    id: "nicht-offiziell-bildsuche-leer", name: "Quelle nicht offiziell + Bildsuche leer",
-    terms: ["offiziell", "nachrichtenseite", "ministerium", "behörde", "bildsuche", "nirgends", "weitere", "keine", "amtlich"],
-    phrases: ["die quelle ist nicht offiziell", "nur eine nachrichtenseite", "kein ministerium", "keine behörde", "keine weiteren berichte", "sonst berichtet niemand", "bildersuche findet nichts"],
+  // (9) ECHT — Bildsuche führt zur offiziellen Mitteilung des Bundesministeriums
+  post_103: { verdict: "echt", concepts: [{
+    id: "ministerium-bestaetigt", name: "Offizielle Stelle bestätigt (Bildsuche)",
+    terms: ["ministerium", "bundesministerium", "offiziell", "behörde", "amtlich", "bildsuche", "bestätigt", "bestätigen", "beleg", "quelle", "seriös"],
+    phrases: ["das ministerium hat das auch", "auch vom ministerium", "offizielle mitteilung", "die bildersuche bestätigt das", "auch woanders berichtet", "amtliche quelle bestätigt", "eine offizielle stelle sagt das gleiche"],
   }], feedback: {
-    de: "Die Quelle ist nicht offiziell – nur eine Nachrichtenseite (kein Ministerium o. Ä.) – und die Bildersuche findet keine weiteren Berichte dazu. Deshalb „Suspekt“.",
-    en: "The source is not official — just a news site, not a ministry — and the reverse image search finds no further reports. So “Suspicious”.",
+    de: "Die Bildersuche führt zur offiziellen Mitteilung des Bundesministeriums – die Meldung ist also belegt. Deshalb „Echt“.",
+    en: "The reverse image search leads to the ministry's official announcement — the report is backed up. So “Real”.",
   }},
-  // (6) MANIPULIERT — Quelle sagt Pilot, Post sagt "überall"; Profil unverifiziert, frisch
+  // (6) MANIPULIERT — Bild aus KI-Generator; zusätzlich widerspricht die Quelle.
+  // Zwei gleichwertige Konzepte: beide Begründungswege geben den Punkt.
   post_104: { verdict: "manipuliert", concepts: [{
+    id: "bild-aus-ki-generator", name: "Bild stammt aus einem KI-Bildgenerator",
+    terms: ["ki", "ai", "generator", "generiert", "erzeugt", "bildgenerator", "erstellt", "künstlich", "bildsuche", "gefunden", "fake"],
+    phrases: ["das bild ist ki", "mit ki erstellt", "aus einem ki generator", "die bildersuche findet es bei einem ki bild ersteller", "bild wurde generiert", "kommt von einem bildgenerator", "künstlich erzeugtes bild"],
+  }, {
     id: "quelle-widerspricht-junges-profil", name: "Quelle widerspricht + junges/unverifiziertes Profil",
     terms: ["pilot", "pilotprojekt", "test", "überall", "quelle", "widerspricht", "anders", "profil", "verifiziert", "neu", "frisch"],
     phrases: ["die quelle sagt was anderes", "nur ein pilotprojekt", "der post sagt überall", "im artikel steht anders", "profil ist neu", "konto erst gerade erstellt", "profil nicht verifiziert"],
   }], feedback: {
-    de: "Die Quelle sagt etwas anderes – es ist nur ein Pilotprojekt –, aber der Post behauptet „überall“. Dazu ist das Profil nicht verifiziert und erst vor Kurzem erstellt. Deshalb „Manipuliert“.",
-    en: "The source says something else — only a pilot project — but the post claims “everywhere”. On top of that the profile is unverified and freshly created. So “Manipulated”.",
+    de: "Die Bildersuche findet das Bild bei einem KI-Bildgenerator – es wurde also erzeugt. Dazu sagt die verlinkte Quelle nur „Test an wenigen Schulen“, während der Beitrag „alle“ behauptet. Deshalb „Manipuliert“.",
+    en: "The reverse image search finds the picture at an AI image generator — so it was created. On top of that the linked source only mentions a test at a few schools, while the post claims it applies to everyone. So “Manipulated”.",
   }},
   // (—) ECHT — Mona Lisa: KI-Look macht Info nicht falsch (unverändert beibehalten)
   post_105: { verdict: "echt", concepts: [{
@@ -54,14 +59,14 @@ const REASON_CONCEPTS = {
     de: "Auch wenn das Bild künstlich wirkt: Die Aussage ist faktisch korrekt und die Quelle bestätigt sie. Ein KI-Look macht eine Info nicht falsch – „Echt“.",
     en: "Even if the image looks artificial, the statement is correct and the source confirms it. An AI look does not make info false — “Real”.",
   }},
-  // (11) ECHT — offizielle Quelle, auch wenn Bildsuche noch nichts findet
+  // (11) ECHT — offizielle Stadtquelle, von der Bildsuche zusätzlich bestätigt
   post_106: { verdict: "echt", concepts: [{
-    id: "offizielle-quelle-bildsuche-leer-ok", name: "Offizielle Quelle (Bildsuche leer ist ok)",
-    terms: ["offiziell", "stadt", "quelle", "behörde", "seriös", "amtlich", "bestätigt"],
-    phrases: ["offizielle quelle", "die stadt bestätigt das", "offizielle seite der stadt", "auch ohne andere posts echt", "quelle ist offiziell"],
+    id: "offizielle-stadtquelle-bestaetigt", name: "Offizielle Stadtquelle + Bildsuche bestätigt",
+    terms: ["offiziell", "stadt", "presseamt", "quelle", "behörde", "seriös", "amtlich", "bestätigt", "bildsuche", "gleiche", "selbe"],
+    phrases: ["offizielle quelle", "die stadt bestätigt das", "offizielle seite der stadt", "quelle ist offiziell", "die bildersuche führt zur gleichen seite", "bildsuche bestätigt die stadt", "beides zeigt die stadt"],
   }], feedback: {
-    de: "Die Quelle ist offiziell (Stadt) – auch wenn die Bildersuche noch keine anderen Posts findet, macht das die Info nicht falsch. Deshalb „Echt“.",
-    en: "The source is official (city) — even if the reverse search finds no other posts yet, that does not make it false. So “Real”.",
+    de: "Die Quelle ist offiziell (Presseamt der Stadt) – und die Bildersuche führt zur selben amtlichen Seite. Zwei Wege, ein Ergebnis. Deshalb „Echt“.",
+    en: "The source is official (the city's press office) — and the reverse image search leads to the same official page. Two routes, one result. So “Real”.",
   }},
   // (13) MANIPULIERT — Artefakt, 6 Finger
   post_107: { verdict: "manipuliert", concepts: [{
