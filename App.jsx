@@ -1,3 +1,5 @@
+import { logCase } from './stats.js';
+import StatsPanel from './StatsPanel.jsx';
 import HotspotImage from "./components/HotspotImage";
 import translations, { LANGUAGES } from "./data/translations";
 import IMAGE_HOTSPOTS from "./data/imageHotspots";
