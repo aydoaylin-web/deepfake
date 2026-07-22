@@ -280,24 +280,24 @@
   },
   {
     "id": "post_104",
-    "username": "schule.digital",
-    "displayName": "Schule Digital",
+    "username": "luna.vibes",
+    "displayName": "luna.vibes",
     "verified": true,
     "avatar": "",
     "location": "",
     "mediaType": "image",
     "media": "assets/posts/Picture_7_App.png",
     "imageAlt": "Hände halten ein Tablet, auf dem ein digitales Zeugnis angezeigt wird",
-    "caption": "An ersten Schulen werden digitale Zeugnisse getestet. Papierzeugnisse bleiben zunächst weiterhin möglich.",
-    "source": "schule.digital",
+    "caption": "Leute hahahaha wir kriegen bald digitale Zeugnisse lol 🤣🤣🤣 https://bildung-digital.example/zeugnisse",
+    "source": "luna.vibes",
     "likes": 3892,
     "time": "2 Std.",
     "postType": "news",
     "taskId": "task_post_104",
     "comments": [
       {
-        "username": "frau_lindner",
-        "text": "An unserer Schule läuft der Test schon, klappt gut."
+        "username": "moruk.208",
+        "text": "als ob laber nicht."
       },
       {
         "username": "ben_2012",
@@ -320,17 +320,17 @@
       "domain": "bildung-digital.example",
       "title": "Pilotprojekt zu digitalen Zeugnissen",
       "imprint": "Vorhanden",
-      "author": "Redaktion Bildung Digital",
-      "published": "14. Juli 2026",
+      "author": "",
+      "published": "vor 36 Min",
       "status": "reliable",
       "note": "Die verlinkte Seite bestätigt genau das, was im Beitrag steht: ein Pilotprojekt an einzelnen Schulen.",
       "pageType": "Fachartikel",
-      "articleHeadline": "Digitale Zeugnisse werden zunächst in einem Pilotprojekt getestet.",
+      "articleHeadline": "Digitale Zeugnisse werden in einem Pilotprojekt getestet.",
       "articleSummary": "Die Seite bestätigt den Pilotversuch an ausgewählten Schulen – so wie im Beitrag beschrieben.",
       "keyFacts": [
-        "Nur ausgewählte Schulen nehmen teil",
-        "Papierzeugnisse bleiben zunächst möglich",
-        "Noch kein bundesweiter Beschluss"
+        "Alle Schulen nehmen teil",
+        "Papierzeugnisse wird es nicht mehr geben",
+        "Bundesweiter Beschluss"
       ]
     },
     "accountActivity": [
