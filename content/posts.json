@@ -274,8 +274,19 @@
     ],
     "imageOriginCheck": {
       "available": true,
-      "result": "none",
-      "hits": []
+      "result": "confirm",
+      "hits": [
+        {
+          "date": "10. Juli 2026",
+          "source": "bundesministerium.example",
+          "title": "Kennzeichnung von KI-Inhalten – offizielle Mitteilung"
+        },
+        {
+          "date": "10. Juli 2026",
+          "source": "news360.example",
+          "title": "Kennzeichnungspflichten für KI-Inhalte"
+        }
+      ]
     }
   },
   {
@@ -322,15 +333,15 @@
       "imprint": "Vorhanden",
       "author": "Luna Riese",
       "published": "12. Juli",
-      "status": "reliable",
-      "note": "Die verlinkte Seite bestätigt genau das, was im Beitrag steht: ein Pilotprojekt an einzelnen Schulen.",
+      "status": "mixed",
+      "note": "Die verlinkte Seite beschreibt nur einen Test an wenigen Schulen – der Beitrag behauptet dagegen, es gelte für alle.",
       "pageType": "Fachartikel",
       "articleHeadline": "Digitale Zeugnisse werden in einem Pilotprojekt getestet.",
-      "articleSummary": "Die Seite bestätigt den Pilotversuch an ausgewählten Schulen – so wie im Beitrag beschrieben.",
+      "articleSummary": "Die Seite beschreibt einen Pilotversuch an ausgewählten Schulen. Von einer bundesweiten Einführung steht dort nichts.",
       "keyFacts": [
-        "Alle Schulen nehmen teil",
-        "Papierzeugnisse wird es nicht mehr geben",
-        "Bundesweiter Beschluss"
+        "Nur ausgewählte Schulen nehmen teil",
+        "Papierzeugnisse bleiben vorerst bestehen",
+        "Kein bundesweiter Beschluss"
       ]
     },
     "accountActivity": [
@@ -357,8 +368,14 @@
     ],
     "imageOriginCheck": {
       "available": true,
-      "result": "none",
-      "hits": []
+      "result": "mismatch",
+      "hits": [
+        {
+          "date": "8. Juli 2026",
+          "source": "bildgenerator-ki.example",
+          "title": "Galerie erzeugter Bilder – „Tablet mit digitalem Zeugnis“"
+        }
+      ]
     }
   },
   {
@@ -547,8 +564,14 @@
     ],
     "imageOriginCheck": {
       "available": true,
-      "result": "none",
-      "hits": []
+      "result": "confirm",
+      "hits": [
+        {
+          "date": "1. Juli 2026",
+          "source": "stadt.presseamt",
+          "title": "Neue Handyregel an städtischen Schulen – Bekanntmachung"
+        }
+      ]
     }
   },
   {
