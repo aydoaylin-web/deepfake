@@ -2,7 +2,7 @@ import HotspotImage from "./components/HotspotImage";
 import translations, { LANGUAGES } from "./data/translations";
 import IMAGE_HOTSPOTS from "./data/imageHotspots";
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { loadContentPack } from './content';
+import { loadContentPack, localizeContent } from './content';
 import {
   Bell, Bookmark, CheckCircle2, ChevronLeft, ChevronRight, Heart, Home,
   Maximize2, MessageCircle, MoreHorizontal, Plus, RefreshCw, Send,
@@ -97,9 +97,19 @@ export default function App() {
   const [feedHelpListening, setFeedHelpListening] = useState(false);
   const [feedHelpSpeaking, setFeedHelpSpeaking] = useState(false);
   const [feedHelpError, setFeedHelpError] = useState("");
-  const [posts,setPosts]=useState([]); const [tasks,setTasks]=useState([]); const [profiles,setProfiles]=useState([]); const [dataStories,setDataStories]=useState([]); const [guides,setGuides]=useState([]); const [contentSettings,setContentSettings]=useState({}); const [contentManifest,setContentManifest]=useState(null); const [loading,setLoading]=useState(true); const [loadingError,setLoadingError]=useState('');
+  const [rawPosts,setPosts]=useState([]); const [rawTasks,setTasks]=useState([]); const [rawProfiles,setProfiles]=useState([]); const [rawDataStories,setDataStories]=useState([]); const [rawGuides,setGuides]=useState([]); const [rawContentSettings,setContentSettings]=useState({}); const [contentManifest,setContentManifest]=useState(null); const [loading,setLoading]=useState(true); const [loadingError,setLoadingError]=useState('');
   const [lang, setLang] = useState(saved.lang || 'de');
   const t = (key) => (translations[lang]?.[key]) ?? translations.de[key] ?? key;
+
+  // Inhalte aus content/ auf die aktive Sprache herunterbrechen.
+  // Alles Weitere im Bauteil arbeitet danach mit einfachen Strings –
+  // deshalb musste an den Anzeigestellen nichts geändert werden.
+  const posts = useMemo(() => localizeContent(rawPosts, lang), [rawPosts, lang]);
+  const tasks = useMemo(() => localizeContent(rawTasks, lang), [rawTasks, lang]);
+  const profiles = useMemo(() => localizeContent(rawProfiles, lang), [rawProfiles, lang]);
+  const dataStories = useMemo(() => localizeContent(rawDataStories, lang), [rawDataStories, lang]);
+  const guides = useMemo(() => localizeContent(rawGuides, lang), [rawGuides, lang]);
+  const contentSettings = useMemo(() => localizeContent(rawContentSettings, lang), [rawContentSettings, lang]);
   const [activeTab,setActiveTab]=useState('feed'); const [feedMode,setFeedMode]=useState('forYou'); const [visibleCount,setVisibleCount]=useState(5);
   const [activeTask,setActiveTask]=useState(null); const [activePost,setActivePost]=useState(null); const [selectedAnswers,setSelectedAnswers]=useState([]); const [reason,setReason]=useState(''); const [feedback,setFeedback]=useState(null);
   const [taskPhase,setTaskPhase]=useState('inspect'); const [usedTools,setUsedTools]=useState([]); const [openTool,setOpenTool]=useState(null); const [verdict,setVerdict]=useState(''); const [taskOrigin,setTaskOrigin]=useState('push');
