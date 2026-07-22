@@ -1,3 +1,38 @@
+/**
+ * Zweisprachige Inhalte auf eine Sprache herunterbrechen.
+ *
+ * Texte in content/ dürfen entweder ein einfacher String sein
+ *   "caption": "Schaut euch das an!"
+ * oder ein Sprachobjekt
+ *   "caption": { "de": "Schaut euch das an!", "en": "Look at this!" }
+ *
+ * Fehlt die gewünschte Sprache, wird Deutsch genommen. Ein Feld kann also
+ * nach und nach übersetzt werden, ohne dass etwas kaputtgeht.
+ *
+ * Neue Sprache hinzufügen: in translations.js ergänzen, hier ist nichts zu tun –
+ * es reicht, in den Inhaltsdateien einen weiteren Schlüssel zu setzen,
+ * z. B. { "de": "...", "en": "...", "fr": "..." }.
+ */
+const LANG_KEYS = ['de', 'en', 'fr', 'tr', 'ar'];
+
+function isLangObject(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const keys = Object.keys(value);
+  if (!keys.length) return false;
+  return keys.every(key => LANG_KEYS.includes(key));
+}
+
+export function localizeContent(value, lang = 'de') {
+  if (Array.isArray(value)) return value.map(item => localizeContent(item, lang));
+  if (isLangObject(value)) return value[lang] ?? value.de ?? value[Object.keys(value)[0]] ?? '';
+  if (value && typeof value === 'object') {
+    const out = {};
+    for (const [key, entry] of Object.entries(value)) out[key] = localizeContent(entry, lang);
+    return out;
+  }
+  return value;
+}
+
 function joinBase(path) {
   return `${import.meta.env.BASE_URL}${String(path || '').replace(/^\//, '')}`;
 }
@@ -99,6 +134,6 @@ export async function loadContentPack() {
     guides: guides.filter(item => item.enabled !== false)
   };
 
-  validateContentPack(pack);
+  validateContentPack(localizeContent(pack, 'de'));
   return pack;
 }
