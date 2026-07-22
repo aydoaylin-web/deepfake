@@ -553,7 +553,7 @@
   },
   {
     "id": "post_107",
-    "username": "noah.clips",
+    "username": "noah.clips_offical",
     "displayName": "Clip Central",
     "verified": false,
     "avatar": "",
@@ -561,7 +561,7 @@
     "mediaType": "image",
     "media": "assets/posts/Picture_8_App.png",
     "imageAlt": "Foto: Junger Mann im NoahX-Hoodie wird von zwei Polizisten festgehalten, blaue Lichter",
-    "caption": "Digga NoahX wurde angeblich verhaftet 😳 ist das echt oder nur clickbait?",
+    "caption": "⚠️🚨An alle die mir nicht geglaubt haben: NoahX wurde heute tatsächlich verhaftet❗❗",
     "source": "clip.central",
     "likes": 25400,
     "time": "1 Std.",
@@ -574,7 +574,7 @@
       },
       {
         "username": "lina_x",
-        "text": "wo ist die quelle??"
+        "text": "😳 ist das echt oder nur clickbait"
       },
       {
         "username": "maxplays",
@@ -627,7 +627,7 @@
   },
   {
     "id": "post_108",
-    "username": "newsflash.clips",
+    "username": "lisa.clips_offical",
     "displayName": "NewsFlash Clips",
     "verified": false,
     "avatar": "",
@@ -635,7 +635,7 @@
     "mediaType": "image",
     "media": "assets/posts/Picture_9_App.png",
     "imageAlt": "Videostandbild einer computeranimierten Moderatorin „Mira Lennox\" im Nachrichtenstudio",
-    "caption": "Mira Lennox über KI bei Prüfungen 😳 Im Clip fehlt aber ein Teil des Gesprächs.",
+    "caption": "Leute selbst Mira Lennox ist für KI bei Prüfungen 😳 Was haltet ihr davon?",
     "source": "newsflash.clips",
     "likes": 43281,
     "time": "2 Std.",
@@ -643,12 +643,12 @@
     "taskId": "task_post_108",
     "comments": [
       {
-        "username": "studygirl",
-        "text": "hat sie das echt so gesagt? quelle?"
+        "username": "zay.pixel",
+        "text": "die lehrer cheken ki eh nicht leute"
       },
       {
-        "username": "ki_nerd",
-        "text": "mira ist doch ne animierte figur, kein echter mensch 🤖"
+        "username": "luka_zocken23",
+        "text": "habe ich auf tiktok gesehen"
       },
       {
         "username": "lauraaa",
@@ -795,7 +795,7 @@
     "mediaType": "image",
     "media": "assets/posts/Picture_12_App.png",
     "imageAlt": "Junge Frau hält eine pinke LumiSkin-Glow-Booster-Flasche und lächelt in die Kamera",
-    "caption": "Werbung | LumiSkin Glow Booster ✨ Ich habe das Produkt zugeschickt bekommen.",
+    "caption": "Leute heute hat Amina Legendz meinen LumiSkin Glow Booster getestet ✨😍 Schaut euch selbst ihre Erfahrung an: https://Interview-lumiskin1.test/glow.de",
     "source": "lina.glow",
     "likes": 8341,
     "time": "1 Std.",
@@ -808,7 +808,7 @@
       },
       {
         "username": "kritischer_karl",
-        "text": "amina wirbt doch sonst nie für sowas.. komisch"
+        "text": "amina wirbt doch sonst nie für sowas"
       },
       {
         "username": "sophie",
@@ -820,7 +820,7 @@
       },
       {
         "username": "nope_",
-        "text": "die hand am produkt sieht voll komisch aus 🤔"
+        "text": "warum sind da zwei finger 😂 offensichtlich fake bro😂😂😂😂😂 wie schlecht fakest du hahahaha"
       }
     ],
     "profileId": "trendnow.official",
@@ -831,21 +831,21 @@
     "sourceCheck": {
       "available": true,
       "linkLabel": "Produkt ansehen",
-      "url": "https://lumiskin-shop.example/glow",
-      "domain": "lumiskin-shop.example",
+      "url": "https://Interview-lumiskin1.test/glow.de",
+      "domain": "lumiskin-shop1.interview",
       "title": "LumiSkin Glow Booster",
       "imprint": "Vorhanden",
       "author": "LumiSkin Shop",
       "published": "Werbeseite",
       "status": "ad",
       "note": "Die Seite verkauft das Produkt. Sie belegt nicht, dass die Sängerin es empfohlen hat.",
-      "pageType": "Produktseite",
-      "articleHeadline": "Werbeseite für den LumiSkin Glow Booster",
+      "pageType": "Interview",
+      "articleHeadline": "Amina Legendz zum neuen LumiSkin Glow Booster (Zusammenfassung)",
       "articleSummary": "Die Seite verkauft das Produkt. Eine unabhängige Bestätigung der angeblichen Empfehlung fehlt.",
       "keyFacts": [
-        "Bestellbutton direkt sichtbar",
-        "Hinweis auf bezahlte Werbung im Kleingedruckten",
-        "Keine unabhängige Quelle"
+        "Bessere Haut",
+        "Günstig",
+        "Umweltfreundlich"
       ]
     },
     "accountActivity": [
