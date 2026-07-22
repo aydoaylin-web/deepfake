@@ -2031,3 +2031,288 @@ body::after{
   color:#1f9e78 !important;
   fill:none !important;
 }
+
+
+
+
+/* ============================================================
+   ANS ENDE von src/styles.css anhängen.
+   Teil 1: Statistik-Panel   Teil 2: Mobil-Korrekturen (nur Prüfseite)
+   ============================================================ */
+
+/* ---------- Teil 1: Statistik-Panel ---------- */
+
+.stats-panel {
+  padding: 16px;
+  background: #ffffff;
+  color: #0b2c62;
+}
+
+.stats-title {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.stats-sub {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.stats-empty {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+}
+
+.stats-card {
+  background: #ffffff;
+  border: 1px solid #f5c2ef;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.stats-card-title {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Balken richtig/falsch */
+.stats-split-track {
+  display: flex;
+  height: 16px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #fbe1f7;
+}
+
+.stats-split-right { background: #1f9e78; }
+.stats-split-wrong { background: #f5c2ef; }
+
+.stats-split-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+.stats-split-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.dot-right { background: #1f9e78; }
+.dot-wrong { background: #f5c2ef; }
+
+/* Zeilen mit Mini-Balken */
+.stats-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.stats-row-label { font-weight: 600; }
+.stats-row-count { white-space: nowrap; opacity: 0.75; }
+
+.stats-mini {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: #fbe1f7;
+  overflow: hidden;
+}
+
+.stats-mini-fill {
+  display: block;
+  height: 100%;
+  background: #1f9e78;
+  border-radius: 999px;
+}
+
+.stats-tendency {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.stats-note {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Aktionen */
+.stats-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stats-delete,
+.stats-back {
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stats-delete {
+  background: #ffffff;
+  color: #0b2c62;
+  border: 1px solid #f5c2ef;
+}
+
+.stats-back {
+  background: #0b2c62;
+  color: #ffffff;
+  border: 1px solid #0b2c62;
+}
+
+.stats-confirm {
+  border: 1px solid #f5c2ef;
+  border-radius: 14px;
+  padding: 12px;
+  background: #fbe1f7;
+}
+
+.stats-confirm-text {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+}
+
+.stats-confirm-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stats-confirm-buttons > * { flex: 1 1 8rem; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-mini-fill { transition: none; }
+}
+
+
+/* ---------- Teil 2: Mobil — NUR die Prüfseite ---------- */
+/* Alles unter .task-sheet gekapselt: die For-You-Seite bleibt unberührt. */
+
+@media (max-width: 640px) {
+
+  .task-sheet {
+    padding: 12px 12px calc(16px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Alles darf schrumpfen — verhindert das seitliche Rausschieben */
+  .task-sheet * {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .task-sheet img,
+  .task-sheet svg,
+  .task-sheet video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Info-Box und Iris-Button untereinander statt nebeneinander */
+  .task-sheet .feed-help-row,
+  .task-sheet .feed-help-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .task-sheet .feed-help-row > *,
+  .task-sheet .feed-help-wrap > *,
+  .task-sheet .hint-resource-compact,
+  .task-sheet .feed-help-button {
+    width: 100%;
+    min-height: 44px;   /* iOS-Tippfläche */
+  }
+
+  /* Mehrspaltige Raster einspaltig */
+  .task-sheet [class*='grid'],
+  .task-sheet [class*='cols'],
+  .task-sheet [class*='row'] {
+    grid-template-columns: 1fr;
+  }
+
+  /* Urteils-Karten gestapelt, volle Breite */
+  .task-sheet .verdict-option,
+  .task-sheet [class*='verdict'] button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .task-sheet .verdict-question {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  /* Lange Wörter/URLs brechen statt zu überlaufen */
+  .task-sheet p,
+  .task-sheet li,
+  .task-sheet span,
+  .task-sheet a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* iOS zoomt bei Schrift unter 16px in Eingabefelder hinein */
+  .task-sheet input,
+  .task-sheet textarea,
+  .task-sheet select {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  /* 100vh ist auf iOS zu hoch (Adressleiste) */
+  .task-sheet,
+  .task-sheet .sheet-body {
+    min-height: auto;
+    height: auto;
+  }
+
+  /* Statistik-Zeilen einspaltig */
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .stats-row-count { justify-self: start; }
+}
