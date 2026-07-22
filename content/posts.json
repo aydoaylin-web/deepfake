@@ -466,15 +466,15 @@
   },
   {
     "id": "post_106",
-    "username": "elternrat.aktuell",
-    "displayName": "Elternrat aktuell",
+    "username": "schulnews.aktuell",
+    "displayName": "Schulnews aktuell",
     "verified": false,
     "avatar": "",
     "location": "",
     "mediaType": "image",
     "media": "assets/posts/a0bb4052-68e4-42cc-bafa-837054e4780f.png",
     "imageAlt": "Eilmeldungs-Grafik: „Eine Stadt führt Handyregeln an Schulen ein\", Klassenzimmer im Hintergrund",
-    "caption": "In unserer Stadt gelten neue Handyregeln an Schulen. Bitte prüft zusätzlich die Regelung der eigenen Schule.",
+    "caption": "❗❗In unserer Stadt gelten neue Handyregeln an Schulen. Bitte prüft zusätzlich die Regelung an eurer eigenen Schule: https://stadt.presseamt/handyregeln-schulen",
     "source": "elternrat.aktuell",
     "likes": 4200,
     "time": "1 Std.",
@@ -486,8 +486,8 @@
         "text": "nur in den pausen?? boah 😩"
       },
       {
-        "username": "frau_ott",
-        "text": "Endlich mal eine klare Regel."
+        "username": "dilari_ott",
+        "text": "wie lost is das bitte"
       },
       {
         "username": "lisa.m",
@@ -506,8 +506,8 @@
     "sourceCheck": {
       "available": true,
       "linkLabel": "Regeln nachlesen",
-      "url": "https://stadt.example/handyregeln-schulen",
-      "domain": "stadt.example",
+      "url": "https://stadt.presseamt/handyregeln-schulen",
+      "domain": "stadt.presseamt",
       "title": "Neue Handyregel an städtischen Schulen",
       "imprint": "Vorhanden",
       "author": "Presseamt der Stadt",
@@ -518,7 +518,7 @@
       "articleHeadline": "Die Stadt führt Regeln an einigen kommunalen Schulen ein.",
       "articleSummary": "Die Originalseite beschreibt die genaue Reichweite und den Starttermin der Maßnahme.",
       "keyFacts": [
-        "Regel gilt nur in dieser Stadt",
+        "Regel gilt für die gesamte Stadt",
         "Schulen können Ausnahmen festlegen",
         "Start zum kommenden Schuljahr"
       ]
