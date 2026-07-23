@@ -1,61 +1,28 @@
-# Deepfake Defender React
+# Deepfake Defender Admin Studio
 
-## Start the app
+Lokaler, regelbasierter Prototyp für die Bearbeitung und den Export einer Schüler-App.
 
-```powershell
-npm install
-npm run dev
-```
+## Start
 
-`npm run dev` starts both the Vite frontend and the local evaluation API. Open the Vite URL shown in the terminal, usually `http://localhost:5173`.
+1. ZIP entpacken.
+2. `index.html` im Browser öffnen.
+3. Beim ersten Start ein Admin-Passwort mit mindestens sechs Zeichen festlegen.
+4. Inhalte bearbeiten, testen, Versionen speichern und eine Schüler-App als ZIP exportieren.
 
-## Open-answer evaluation
+## Passwort
 
-The app no longer requires answer choices for the analysis tasks. Students may enter one relevant word, a phrase, or a short sentence.
+- Das Passwort wird nur lokal in dem verwendeten Browser gespeichert.
+- Unter `Passwort ändern` kann es geändert werden.
+- Mit `Admin sperren` wird die Admin-Oberfläche wieder gesperrt.
+- Das Passwort schützt vor normalem Zugriff. Da alles lokal läuft, ist es kein vollständiger Schutz gegen Personen mit Zugriff auf Browserdaten, Entwicklerwerkzeuge oder Projektdateien.
 
-Evaluation uses three stages:
+## Enthaltene Funktionen
 
-1. Transparent accepted-word and accepted-phrase rules from `public/tasks.json`.
-2. Local semantic similarity with Ollama embeddings.
-3. A local Ollama LLM only for unclear answers.
-
-The app still works without Ollama. In that case, clear word and phrase matches are accepted, while unclear answers ask the student to be more specific instead of immediately deducting points.
-
-## Optional free local AI with Ollama
-
-Install Ollama separately, then run these commands once:
-
-```powershell
-ollama pull nomic-embed-text
-ollama pull llama3.2:3b
-```
-
-Keep Ollama running while the app is open. No paid API key is required.
-
-Optional environment variables:
-
-```text
-OLLAMA_URL=http://127.0.0.1:11434
-OLLAMA_EMBEDDING_MODEL=nomic-embed-text
-OLLAMA_LLM_MODEL=llama3.2:3b
-EMBEDDING_ACCEPT_THRESHOLD=0.72
-EMBEDDING_REJECT_THRESHOLD=0.48
-```
-
-## Scoring
-
-The points and deductions are read directly from each task in `public/tasks.json` through `pointsCorrect` and `pointsWrong`. Completed tasks cannot award points twice.
-
-
-## Milestone 2 – Complete Game Mechanics
-
-- Randomized mission order for every new run
-- News Card, Live Check, Perspective Shift, and Reality Defense workflows
-- Open analysis answers with local rules and optional semantic evaluation
-- Exact task-specific point awards and deductions from `tasks.json`
-- Follow-up task chains
-- No duplicate scoring for completed tasks
-- Mission progress and 20-point target
-- Case archive with recorded student answers
-- Reality Defense rule archive
-- End-of-run summary and replay with a new randomized order
+- visuelle Bearbeitung ohne KI und ohne Codeeingabe
+- Analysetools und Auswertungslogik konfigurieren
+- Rückgängig und Wiederholen
+- Versionsverlauf
+- geänderte Dateien anzeigen
+- Konfiguration anzeigen und kopieren
+- Schüleransicht testen
+- lokale Schüler-App als ZIP exportieren
